@@ -6,7 +6,7 @@ function getTimeline(){
             document.getElementById('timelinePlaceholder').innerHTML = this.responseText; 
          }
          else{
-         	dcoument.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
+         	document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
          }
     };
     xhttp.open("GET", URL, true);
