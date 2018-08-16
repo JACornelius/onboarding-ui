@@ -1,15 +1,24 @@
-
 var http = require('http');
 var fs = require('fs');
-var html;
-fs.readFile('src/index.html', function read(err, data){
-	if(err){
-		throw err;
-	}
-	html = data;
+var express = require('express');
+var app = express();
+var path = require('path');
+
+app.get('/', function(req, res){
+	res.sendFile(path.join(__dirname + '/../index.html'));
+	console.log("getting index.html file");
 });
 
-http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(html);
-}).listen(9000);
+app.get('/js/timeline.js', function(req, res){
+	res.set('Content-Type', 'text/javascript');
+	fs.readFile('./src/js/timeline.js', function read(err, data){
+		console.log("reading timeline.js");
+		if(err){
+			throw err;
+		}
+		res.send(data);
+
+	});
+ });
+
+app.listen(9000);
