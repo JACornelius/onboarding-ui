@@ -8,7 +8,7 @@
 // 	datatype: 'jsonp',
 // 	cors: true,
 // 	contentType:'application/json',
-// 	url: 'http://localhost:8080/api/1.0/twitter/timeline',
+// 	url: '',
 // 	data: JSON.stringify(somejson),
 // 	async: false,
 // 	secure: true,
@@ -28,26 +28,14 @@
 // };
 
 function getTimeline(){
-	 $.ajax({
-            url: "http://localhost:8080/api/1.0/twitter/timeline",
-            type: "GET",
-            crossDomain: true,
-            data: JSON.stringify(somejson),
-            dataType: "json",
-            xhrFields: {
-        		withCredentials: true
-    		},
-            success: function (response) {
-                var resp = JSON.parse(response)
-                alert(resp.status);
-            },
-            error: function (xhr, status) {
-                alert("error");
-            }
-        });
-	 var response = HttpResponse(json.dumps('{"status" : "success"}'))
-	response.__setitem__("Content-type", "application/json")
-	response.__setitem__("Access-Control-Allow-Origin", "*")
-	doucment.getElementById("timelinePlaceholder").innerHTML = response.toString();
-	
+	var xhttp = new XMLHttpRequest();
+	var URL = "http://localhost:8080/api/1.0/twitter/timeline";
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+    xhttp.open("GET", URL, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    document.getElementById("timelinePlaceholder").innerHTML = xhttp.send();
 }
