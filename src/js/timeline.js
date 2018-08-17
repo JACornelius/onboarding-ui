@@ -1,4 +1,5 @@
 function getTimeline(){
+	
 	var xhttp = new XMLHttpRequest();
 	var URL = "http://localhost:8080/api/1.0/twitter/timeline";
     xhttp.onreadystatechange = function() {

@@ -5,6 +5,7 @@ In terminal:
 ```
 npm install express
 npm install cors
+npm install request
 ```
 
 ## Running NodeJS Version 8.11.3
