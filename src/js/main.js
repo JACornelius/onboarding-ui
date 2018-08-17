@@ -1,14 +1,11 @@
-var http = require('http');
 var fs = require('fs');
 var express = require('express');
 var app = express();
 var path = require('path');
 var request = require('request');
-var timelineBody;
+
 
 app.get('/', function(req, res){
-	//res.sendFile(path.join(__dirname + '/../index.html'));
-	//res.set('Content-Type', 'text/html');
 	fs.readFile('src/index.html', function read(err, data){
 		console.log("reading index.htmls");
 		if(err){
