@@ -1,16 +1,9 @@
 # TwitterApp NodeJS Version
 
-## Setting up package.json
-Run:
-```
-npm init
-```
-
 ## Installations
 Express and Request is required to be installed and can be done by command line:
 ```
-npm install express
-npm install requestl
+npm install
 ```
 
 ## Running NodeJS Version 8.11.3
