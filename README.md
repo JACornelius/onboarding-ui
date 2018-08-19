@@ -1,7 +1,7 @@
 # TwitterApp NodeJS Version
 
 ## Installations
-Include this in package-lock.json, for express, cors, and request dependencies:
+Include this in package-lock.json, for express and request dependencies:
 ```
     "express": {
       "version": "4.16.3",
