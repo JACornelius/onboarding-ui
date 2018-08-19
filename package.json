@@ -1,0 +1,24 @@
+{
+  "name": "onboarding-ui",
+  "version": "1.0.0",
+  "description": "A UI for a Twitter API",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node src/js/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JACornelius/onboarding-ui.git"
+  },
+  "author": "Josephine Cornelius",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JACornelius/onboarding-ui/issues"
+  },
+  "homepage": "https://github.com/JACornelius/onboarding-ui#readme"
+}
