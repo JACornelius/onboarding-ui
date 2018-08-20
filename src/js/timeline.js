@@ -6,6 +6,8 @@ function getTimeline(){
 	var para;
 	var div;
 	var element;
+	var aTag;
+	var status = "";
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
          
@@ -16,10 +18,18 @@ function getTimeline(){
             for(var i = 0; i < parsedJSON.length; i++){
               	div = document.createElement('div');
             	para = document.createElement("p");
-            	var message = document.createTextNode(parsedJSON[i].message + "\n");
+            	aTag = document.createElement('a');
+            	//var message = document.createTextNode(parsedJSON[i].message + "\n");
             	var date = document.createTextNode(new Date(parsedJSON[i].createdAt));
-            	para.appendChild(message);
+            	status = parsedJSON[i].statusId;
+            	console.log(status);
+            	aTag.setAttribute("target", "_blank");
+            	aTag.setAttribute('href',"https://twitter.com/" + parsedJSON[i].twitterHandle + "/status/" + status);
+            	aTag.innerHTML = parsedJSON[i].message ;
+            	para.append(aTag);
+            	//para.appendChild(message);
             	para.appendChild(date);
+            	
             	div.append(para);
             	element.appendChild(div)
             }
