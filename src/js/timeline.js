@@ -35,7 +35,7 @@ function getTimeline(){
             	aTag.innerHTML = parsedJSON[i].message;
             	span.append(img);
             	span.append(aTag);
-            	var date = document.createTextNode(new Date(parsedJSON[i].createdAt));
+            	date = document.createTextNode(new Date(parsedJSON[i].createdAt));
             	span.appendChild(date);
             	
             	div.append(span);
