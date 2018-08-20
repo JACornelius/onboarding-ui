@@ -3,11 +3,12 @@ function getTimeline(){
 	var xhttp = new XMLHttpRequest();
 	var URL = "http://localhost:8080/api/1.0/twitter/timeline";
 	var date;
-	var para;
 	var div;
 	var element;
 	var aTag;
-	var status = "";
+	var img;
+	var span;
+
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
          
@@ -16,21 +17,28 @@ function getTimeline(){
           	var parsedJSON = JSON.parse(this.response);
           	var element = document.getElementById('timelinePlaceholder');
             for(var i = 0; i < parsedJSON.length; i++){
+            
               	div = document.createElement('div');
-            	para = document.createElement("p");
             	aTag = document.createElement('a');
-            	//var message = document.createTextNode(parsedJSON[i].message + "\n");
-            	var date = document.createTextNode(new Date(parsedJSON[i].createdAt));
-            	status = parsedJSON[i].statusId;
-            	console.log(status);
+            	img = document.createElement('img');
+            	span = document.createElement('span');
+            	if(i % 2 == 1){
+            		div.style.backgroundColor = "lavender";
+
+            	}
+            	else{
+            		div.style.backgroundColor = "lemonchiffon";
+            	}
+            	img.setAttribute('src', parsedJSON[i].profileImageUrl);
             	aTag.setAttribute("target", "_blank");
-            	aTag.setAttribute('href',"https://twitter.com/" + parsedJSON[i].twitterHandle + "/status/" + status);
-            	aTag.innerHTML = parsedJSON[i].message ;
-            	para.append(aTag);
-            	//para.appendChild(message);
-            	para.appendChild(date);
+            	aTag.setAttribute('href',"https://twitter.com/" + parsedJSON[i].twitterHandle + "/status/" + parsedJSON[i].statusId);
+            	aTag.innerHTML = parsedJSON[i].message;
+            	span.append(img);
+            	span.append(aTag);
+            	var date = document.createTextNode(new Date(parsedJSON[i].createdAt));
+            	span.appendChild(date);
             	
-            	div.append(para);
+            	div.append(span);
             	element.appendChild(div)
             }
             
