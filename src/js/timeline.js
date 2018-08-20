@@ -1,27 +1,43 @@
+function createTweetObj(obj){
+	var img = document.createElement('img');
+	img.setAttribute('src', obj.profileImageUrl);
+	var aTag = document.createElement('a');
+	aTag.setAttribute("target", "_blank");
+	aTag.setAttribute('href', "https://twitter.com/" + obj.twitterHandle + "/status/" + obj.statusId);
+	aTag.innerHTML = obj.message;
+	var span = document.createElement('span');
+	span.append(img);
+	span.append(aTag);
+	span.appendChild(document.createTextNode(new Date(obj.createdAt)));
+	return span;
+}
+
+
+
+
 function getTimeline(){
 	
 	var xhttp = new XMLHttpRequest();
 	var URL = "http://localhost:8080/api/1.0/twitter/timeline";
-	var date;
-	var div;
-	var element;
-	var aTag;
-	var img;
-	var span;
+	
 
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-         
+	        var tweetObj;
+			var date;
+			var element;
+			var aTag;
+			var img;
+			var span;
+			var div;
          	element = document.getElementById('timelinePlaceholder');
          	element.innerHTML = "\n";
           	var parsedJSON = JSON.parse(this.response);
-          	var element = document.getElementById('timelinePlaceholder');
+
+          	element = document.getElementById('timelinePlaceholder');
             for(var i = 0; i < parsedJSON.length; i++){
-            
+       
               	div = document.createElement('div');
-            	aTag = document.createElement('a');
-            	img = document.createElement('img');
-            	span = document.createElement('span');
             	if(i % 2 == 1){
             		div.style.backgroundColor = "lavender";
 
@@ -29,16 +45,8 @@ function getTimeline(){
             	else{
             		div.style.backgroundColor = "lemonchiffon";
             	}
-            	img.setAttribute('src', parsedJSON[i].profileImageUrl);
-            	aTag.setAttribute("target", "_blank");
-            	aTag.setAttribute('href',"https://twitter.com/" + parsedJSON[i].twitterHandle + "/status/" + parsedJSON[i].statusId);
-            	aTag.innerHTML = parsedJSON[i].message;
-            	span.append(img);
-            	span.append(aTag);
-            	date = document.createTextNode(new Date(parsedJSON[i].createdAt));
-            	span.appendChild(date);
             	
-            	div.append(span);
+            	div.append(createTweetObj(parsedJSON[i]));
             	element.appendChild(div)
             }
             
