@@ -23,18 +23,11 @@ function getTimeline(){
 
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-	        var tweetObj;
-			var date;
-			var element;
-			var aTag;
-			var img;
-			var span;
+	    
 			var div;
-         	element = document.getElementById('timelinePlaceholder');
+         	var element = document.getElementById('timelinePlaceholder');
          	element.innerHTML = "\n";
           	var parsedJSON = JSON.parse(this.response);
-
-          	element = document.getElementById('timelinePlaceholder');
             for(var i = 0; i < parsedJSON.length; i++){
        
               	div = document.createElement('div');
@@ -51,8 +44,13 @@ function getTimeline(){
             }
             
          }
-         else{
+         else if(this.readyState != XMLHttpRequest.DONE){         	
+			document.getElementById('timelinePlaceholder').innerHTML = "  ";
+
+         }
+         else{         	
          	document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
+
          }
     };
     xhttp.open("GET", URL, true);
