@@ -15,8 +15,8 @@ h1{
 }
 
 div.tweet {
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	height: 100px;
 	width: 1500px;
 	border-style: solid;
@@ -25,10 +25,22 @@ div.tweet {
 }
 
 img{
+	border-radius: 50%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 
+}
+
+div.userName{
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+div.twitterHandle{
+	text-align: center;
+	font-size: 12px;
 }
 
 div.dateBlock{
@@ -46,8 +58,8 @@ div.leftColumn{
 }
 
 div.rightColumn{
-	padding-top: 50px;
-	height: 100px;
+	padding-top: 40px;
+	height: 60px;
 	width: 90%;
 	float: right;
 	margin: auto;

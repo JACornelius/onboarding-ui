@@ -1,6 +1,6 @@
 function renderTimeline(parsedJSON){
 	var element = document.getElementById('timelinePlaceholder');
-	const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
  	element.innerHTML = "\n";
     for(var i = 0; i < parsedJSON.length; i++){
     	var tweetObj = parsedJSON[i];
@@ -9,10 +9,13 @@ function renderTimeline(parsedJSON){
       	leftColumn.className = "leftColumn";
       	var rightColumn = document.createElement('div');
       	rightColumn.className = "rightColumn";
-      	var topRightColumn = document.createElement('div');
-      	topRightColumn.className = "dateBlock";
-      	var bottomRightColumn = document.createElement('div');
-      	bottomRightColumn.className = "bottomRightColumn";
+      	var dateBlock = document.createElement('div');
+      	dateBlock.className = "dateBlock";
+      	var tweetLink = document.createElement('div');
+      	var userName = document.createElement('div');
+      	userName.className = "userName";
+      	var twitterHandle = document.createElement('div');
+      	twitterHandle.className = "twitterHandle";
     	if(i % 2 == 1){
     		wholeRow.style.backgroundColor = "#e8f5fd";
 
@@ -28,12 +31,16 @@ function renderTimeline(parsedJSON){
 		aTag.setAttribute('href', "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId);
 		aTag.innerHTML = tweetObj.message;
 		leftColumn.append(img);
+		userName.append(tweetObj.userName);
+		twitterHandle.append(tweetObj.twitterHandle);
+		leftColumn.append(userName);
+		leftColumn.append(twitterHandle);
 		
 		var date = new Date(tweetObj.createdAt);
-		topRightColumn.appendChild(document.createTextNode(monthNames[date.getMonth()] + " " + date.getDate()));
-		bottomRightColumn.append(aTag);
-		rightColumn.append(topRightColumn);
-		rightColumn.append(bottomRightColumn);
+		dateBlock.appendChild(document.createTextNode(monthNames[date.getMonth()] + " " + date.getDate()));
+		tweetLink.append(aTag);
+		rightColumn.append(dateBlock);
+		rightColumn.append(tweetLink);
 		wholeRow.append(leftColumn);
 		wholeRow.append(rightColumn);
 		wholeRow.className = "tweet";
@@ -49,7 +56,7 @@ function getTimeline(){
 	var URL = "http://localhost:8080/api/1.0/twitter/timeline";
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            document.getElementById('timelinePlaceholder').innerHTML = this.responseText; 
+            renderTimeline(JSON.parse(this.responseText));
          }
          else{
          	document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
