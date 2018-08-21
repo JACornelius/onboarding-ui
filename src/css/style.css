@@ -9,9 +9,9 @@ h1{
 }
 
 button{
-	position: absolute;
-	top: 65;
-	right: 210;
+	position: relative;
+	top: -10;
+	left: 1500;
 
 }
 
@@ -23,25 +23,21 @@ button{
 }
 
 div.tweet {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px 0px 10px 0px;
 	height: 110px;
 	width: 1500px;
 	border-style: solid;
-	border-bottom-width: 1px;
-	border-top-width: 0px;
-	border-right-width: 0px;
-	border-left-width: 0px;
+	border-width: 0px 0px 1px 0px;
 	border-color: lightgrey;
 }
 
 img{
-	height: 60;
-	width: 60;
+	height: 60px;
+	width: 60px;
 	border-radius: 50%;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0px auto;
+
 
 }
 
@@ -64,10 +60,10 @@ div.dateBlock{
 }
 
 div.leftColumn{
-	padding-top: 10px;
-	padding-left: 10px;
+	padding: 10px 0px 0px 10px;
 	height: 100px;
 	width: 10%;
+	clear: both;
 	float: left;
 	margin: auto;
 	vertical-align: middle;

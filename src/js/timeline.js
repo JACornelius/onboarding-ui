@@ -58,6 +58,9 @@ function getTimeline(){
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             renderTimeline(JSON.parse(this.responseText));
          }
+         else if(this.readyState != XMLHttpRequest.DONE){         	
+			document.getElementById('timelinePlaceholder').innerHTML = "  ";
+          }
          else{
          	document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
          }
