@@ -1,17 +1,33 @@
-function createTweetObj(obj){
-	var img = document.createElement('img');
-	img.setAttribute('src', obj.profileImageUrl);
-	var aTag = document.createElement('a');
-	aTag.setAttribute("target", "_blank");
-	aTag.setAttribute('href', "https://twitter.com/" + obj.twitterHandle + "/status/" + obj.statusId);
-	aTag.innerHTML = obj.message;
-	var span = document.createElement('span');
-	span.append(img);
-	span.append(aTag);
-	span.appendChild(document.createTextNode(new Date(obj.createdAt)));
-	return span;
-}
+function createTweetObj(resp){
+	var element = document.getElementById('timelinePlaceholder');
+ 	element.innerHTML = "\n";
+  	var parsedJSON = JSON.parse(resp);
+    for(var i = 0; i < parsedJSON.length; i++){
+    	var obj = parsedJSON[i];
+      	var div = document.createElement('div');
+    	if(i % 2 == 1){
+    		div.style.backgroundColor = "lavender";
 
+    	}
+    	else{
+    		div.style.backgroundColor = "lemonchiffon";
+    	}
+    	
+    	var img = document.createElement('img');
+		img.setAttribute('src', obj.profileImageUrl);
+		var aTag = document.createElement('a');
+		aTag.setAttribute("target", "_blank");
+		aTag.setAttribute('href', "https://twitter.com/" + obj.twitterHandle + "/status/" + obj.statusId);
+		aTag.innerHTML = obj.message;
+		var span = document.createElement('span');
+		span.append(img);
+		span.append(aTag);
+		span.appendChild(document.createTextNode(new Date(obj.createdAt)));
+		div.append(span);
+    	element.appendChild(div)
+	}
+	
+}
 
 
 
@@ -23,25 +39,9 @@ function getTimeline(){
 
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-	    
-			var div;
-         	var element = document.getElementById('timelinePlaceholder');
-         	element.innerHTML = "\n";
-          	var parsedJSON = JSON.parse(this.response);
-            for(var i = 0; i < parsedJSON.length; i++){
-       
-              	div = document.createElement('div');
-            	if(i % 2 == 1){
-            		div.style.backgroundColor = "lavender";
-
-            	}
-            	else{
-            		div.style.backgroundColor = "lemonchiffon";
-            	}
-            	
-            	div.append(createTweetObj(parsedJSON[i]));
-            	element.appendChild(div)
-            }
+	    		createTweetObj(this.response);
+				
+            
             
          }
          else if(this.readyState != XMLHttpRequest.DONE){         	
