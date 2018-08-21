@@ -1,9 +1,8 @@
-function createTweetObj(resp){
+function renderTimeline(parsedJSON){
 	var element = document.getElementById('timelinePlaceholder');
  	element.innerHTML = "\n";
-  	var parsedJSON = JSON.parse(resp);
     for(var i = 0; i < parsedJSON.length; i++){
-    	var obj = parsedJSON[i];
+    	var tweetObj = parsedJSON[i];
       	var div = document.createElement('div');
     	if(i % 2 == 1){
     		div.style.backgroundColor = "lavender";
@@ -14,15 +13,15 @@ function createTweetObj(resp){
     	}
     	
     	var img = document.createElement('img');
-		img.setAttribute('src', obj.profileImageUrl);
+		img.setAttribute('src', tweetObj.profileImageUrl);
 		var aTag = document.createElement('a');
 		aTag.setAttribute("target", "_blank");
-		aTag.setAttribute('href', "https://twitter.com/" + obj.twitterHandle + "/status/" + obj.statusId);
-		aTag.innerHTML = obj.message;
+		aTag.setAttribute('href', "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId);
+		aTag.innerHTML = tweetObj.message;
 		var span = document.createElement('span');
 		span.append(img);
 		span.append(aTag);
-		span.appendChild(document.createTextNode(new Date(obj.createdAt)));
+		span.appendChild(document.createTextNode(new Date(tweetObj.createdAt)));
 		div.append(span);
     	element.appendChild(div)
 	}
@@ -39,10 +38,8 @@ function getTimeline(){
 
     xhttp.onreadystatechange = function() {
          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-	    		createTweetObj(this.response);
-				
-            
-            
+	    		renderTimeline(JSON.parse(this.response));
+
          }
          else if(this.readyState != XMLHttpRequest.DONE){         	
 			document.getElementById('timelinePlaceholder').innerHTML = "  ";
