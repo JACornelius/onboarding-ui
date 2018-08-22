@@ -4,6 +4,7 @@
 Express and Request is required to be installed and can be done by command line:
 ```
 npm install
+sudo npm install gulp -g
 ```
 
 ## Running NodeJS Version 8.11.3
