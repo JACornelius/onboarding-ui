@@ -3,9 +3,7 @@
 ## Installations
 Express and Request is required to be installed and can be done by command line:
 ```
-npm install
-sudo npm install gulp -g
-sudo npm install --save-dev gulp-connect
+sudo npm install
 ```
 
 ## Running the Server
