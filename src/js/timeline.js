@@ -24,7 +24,8 @@ function renderTimeline(parsedJSON){
     		wholeRow.style.backgroundColor = "#e9e9e9";
     	}
     	
-    	var img = document.createElement('img');
+    var img = document.createElement('img');
+    img.className = "image";
 		img.setAttribute('src', tweetObj.profileImageUrl);
 		var aTag = document.createElement('a');
 		aTag.setAttribute("target", "_blank");
@@ -44,7 +45,7 @@ function renderTimeline(parsedJSON){
 		wholeRow.append(leftColumn);
 		wholeRow.append(rightColumn);
 		wholeRow.className = "tweet";
-    	element.appendChild(wholeRow);
+    element.appendChild(wholeRow);
 	}
 	
 }
