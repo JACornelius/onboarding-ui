@@ -9,9 +9,13 @@
     "gulp-sass": "^4.0.1",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.5.0",
-    "gulp-open": "^3.0.1"
+    "gulp-open": "^3.0.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    
+  },
   "scripts": {
     "test": "node src/js/main.js"
   },
