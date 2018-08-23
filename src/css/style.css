@@ -10,9 +10,8 @@ h1{
 
 button{
 	position: relative;
-	top: -10;
-	left: 1500;
-
+    left: 1410px;
+    top: -10px;
 }
 
 #timelinePlaceholder{
