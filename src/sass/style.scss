@@ -11,14 +11,19 @@ h1{
 
 
 }
-
-
-
-button{
-	text-align: right;
-    margin-left: 73%;
-    top: 15px;
+.buttonContainer{
+	height: 25px;
+    width: 1000px;
+    margin: auto;
+    
+	button{
+			float: right;
+		    top: 15px;
+		}
 }
+
+
+
 
 #timelinePlaceholder{
 	width: 1000px;
