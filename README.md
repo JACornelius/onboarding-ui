@@ -15,7 +15,7 @@ node src/js/main.js
 ```
 ### Gulp Version 3.0.1
 ```
-gulp dev
+gulp default
 ```
 And index.html can be viewed at http://localhost:9000
 
