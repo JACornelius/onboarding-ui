@@ -1,0 +1,94 @@
+@mixin text($size){
+	text-align: center;
+	font-size: $size;
+}
+h1{
+	@include text(40px);
+	padding-top: 10px;
+	color: black;
+	font-family: verdana;
+	font-weight: bold;
+
+
+}
+
+
+
+button{
+	text-align: right;
+    margin-left: 73%;
+    top: 15px;
+}
+
+#timelinePlaceholder{
+	width: 1000px;
+	margin: auto;
+	margin-top: 10px;
+
+	border: {
+		style: solid;
+		width: 1px;
+	}
+	.tweet {
+		padding: 10px 0px 10px 0px;
+		height: 110px;
+		width: 1000px;
+		border: {
+			style: solid;
+			width: 0px 0px 1px 0px;
+			color: lightgrey;
+		}
+		.rightColumn{
+			padding-top: 30px;
+			height: 60px;
+			width: 80%;
+			float: right;
+			margin: auto;
+			text-align: left;
+			.dateBlock{
+				font-size: 12px;
+				padding-bottom: 5px;
+				font-style: italic;
+			}	
+
+			
+		
+		}
+		.leftColumn{
+			padding: 10px 0px 0px 10px;
+			height: 100px;
+			width: 15%;
+			clear: both;
+			float: left;
+			margin: auto;
+			vertical-align: middle;
+			.userName{
+				padding-top: 5px;
+				width: 150px;
+				@include text(15px);
+				font-weight: bold;
+			
+			}
+			.twitterHandle{
+				@include text(12px);
+			
+			}
+		}
+	}
+}
+	
+img{
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	display: block;
+	margin: 0px auto;
+
+
+}
+
+
+
+
+	
+

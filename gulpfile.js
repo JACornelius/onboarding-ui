@@ -14,9 +14,9 @@ gulp.task('dev', function(){
 });
 
 gulp.task('sass', function(){
-	return gulp.src('src/css/styles.css')
+	return gulp.src('./src/sass/style.scss')
 	.pipe(sass())
-	.pipe(gulp.dest('src/css'))
+	.pipe(gulp.dest('./src/css/'));
 });
 
 gulp.task('default',['sass', 'dev']);
