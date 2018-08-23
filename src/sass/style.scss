@@ -1,21 +1,25 @@
-@mixin text($size){
+@mixin text($size) {
 	text-align: center;
 	font-size: $size;
 }
-h1{
+
+@mixin size($height, $width){
+	height: $height;
+	width: $width;
+}
+
+.header{
 	@include text(40px);
 	padding-top: 10px;
 	color: black;
 	font-family: verdana;
 	font-weight: bold;
-
-
 }
+
 .buttonContainer{
-	height: 25px;
-    width: 1000px;
+	@include size(25px, 1000px)
     margin: auto;
-    
+
 	button{
 			float: right;
 		    top: 15px;
@@ -27,46 +31,53 @@ h1{
 
 #timelinePlaceholder{
 	width: 1000px;
-	margin: auto;
-	margin-top: 10px;
+	margin: 10px auto auto;
 
 	border: {
 		style: solid;
 		width: 1px;
 	}
+
 	.tweet {
-		padding: 10px 0px 10px 0px;
-		height: 110px;
-		width: 1000px;
+		padding: 10px 0px 10px;
+		@include size(110px, 1000px);
+
 		border: {
 			style: solid;
-			width: 0px 0px 1px 0px;
+			width: 0px 0px 1px;
 			color: lightgrey;
 		}
+
 		.rightColumn{
 			padding-top: 30px;
-			height: 60px;
-			width: 80%;
+			@include size(60px, 80%);
 			float: right;
 			margin: auto;
 			text-align: left;
+
 			.dateBlock{
 				font-size: 12px;
 				padding-bottom: 5px;
 				font-style: italic;
 			}	
 
-			
 		
 		}
 		.leftColumn{
 			padding: 10px 0px 0px 10px;
-			height: 100px;
-			width: 15%;
+			@include size(100px, 15%);
 			clear: both;
 			float: left;
 			margin: auto;
 			vertical-align: middle;
+
+			.image{
+				@include size(60px, 60px);
+				border-radius: 50%;
+				display: block;
+				margin: 0px auto;
+			}
+			
 			.userName{
 				padding-top: 5px;
 				width: 150px;
@@ -74,6 +85,7 @@ h1{
 				font-weight: bold;
 			
 			}
+
 			.twitterHandle{
 				@include text(12px);
 			
@@ -82,15 +94,7 @@ h1{
 	}
 }
 	
-img{
-	height: 60px;
-	width: 60px;
-	border-radius: 50%;
-	display: block;
-	margin: 0px auto;
 
-
-}
 
 
 
