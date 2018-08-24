@@ -13,6 +13,3 @@ function run(){
 if (document.readyState == XMLHttpRequest.DONE){
 	run();
 }
-else{
-	window.addEventListener('DOMContentLoaded', run, false);
-}
