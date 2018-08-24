@@ -23,7 +23,7 @@
     padding: 10px 0px;
     height: 110px;
     width: 1000px;
-    border: 0px 0px 1px solid lightgrey; }
+    border-bottom: 1px solid lightgrey; }
     #timelinePlaceholder .tweet .rightColumn {
       padding-top: 30px;
       height: 60px;
