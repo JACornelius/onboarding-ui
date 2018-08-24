@@ -6,7 +6,7 @@ gulp.task('hello', function(){
 	console.log('Hello World!');
 });
 
-gulp.task('dev', function(){
+gulp.task('server', function(){
 	connect.server({
 		root: 'src',
 		port: 9000
@@ -19,4 +19,4 @@ gulp.task('sass', function(){
 	.pipe(gulp.dest('./src/css/'));
 });
 
-gulp.task('default',['sass', 'dev']);
+gulp.task('dev',['sass', 'server']);
