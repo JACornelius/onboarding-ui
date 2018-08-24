@@ -10,6 +10,4 @@ function run(){
 	);
 }
 
-if (document.readyState == XMLHttpRequest.DONE){
-	run();
-}
+document.addEventListener('DOMContentLoaded',run);
