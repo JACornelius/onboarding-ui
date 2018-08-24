@@ -10,9 +10,7 @@ function run(){
 	);
 }
 
-const loadedStates = ['complete', 'loaded', 'interactive'];
-
-if (loadedStates.includes(document.readyState) && document.body){
+if (document.readyState == XMLHttpRequest.DONE){
 	run();
 }
 else{
