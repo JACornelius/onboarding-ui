@@ -20,8 +20,6 @@ export const getTimeline = () => {
 
 const renderTimeline = (rawTimelineData) => {
 	let timelineElem = document.getElementById('timelinePlaceholder');
-	console.log(rawTimelineData);
-	//timelineElem.innerHTML = rawTimelineData;
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 	for(let i in rawTimelineData) {
 		let tweetObj = rawTimelineData[i];

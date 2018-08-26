@@ -4,6 +4,7 @@ var sass = require('gulp-sass');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+var gutil = require('gulp-util');
 
 gulp.task('hello', function(){
 	console.log('Hello World!');
