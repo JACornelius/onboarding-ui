@@ -10,9 +10,17 @@ gulp.task('hello', function(){
 	console.log('Hello World!');
 });
 
+gulp.task('server', function () {
+  return gulp.src('./')
+    .pipe(webserver({
+      livereload: true,
+      open: true
+    }));
+});
+
 gulp.task('server', function(){
 	connect.server({
-		root: ['src', 'dist'],
+		root: 'src',
 		port: 9000
 	});
 });
@@ -36,7 +44,7 @@ const bundle = (b) => {
      // .pipe(config.production ? uglify() : gulpUtil.noop())
      .pipe(sourcemaps.write('./'))
      //.pipe(gulp.dest('./build' + config.versionPath + '/js/'));
-    .pipe(gulp.dest('./dist/js/'));
+    .pipe(gulp.dest('./src/js/'));
 }
 
 gulp.task('js', function() {
@@ -53,7 +61,7 @@ gulp.task('js', function() {
             this.emit('end');
         })
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./dist/js/'))
+        .pipe(gulp.dest('./src/js/'))
         .pipe(connect.reload());
 });
 
