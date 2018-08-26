@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 class Hello extends React.Component {
   render() {
     return React.createElement('p', null, `Hello ${this.props.toWhat}`);

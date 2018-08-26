@@ -3,7 +3,7 @@ import {run} from 'helloReact.es6.js';
 	
 window.onload = () => {
 	
-	document.addEventListener('DOMContentLoaded', run());
+	document.addEventListener('onload', run());
 	let timelineButtonObj = document.getElementById("timelineButton");
 	if(timelineButtonObj != null) {
 		timelineButton.onclick = () => getTimeline();
