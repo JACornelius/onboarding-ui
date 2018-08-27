@@ -1,4 +1,4 @@
-import {getTimeline} from 'timeline.js';
+import {getTimeline} from 'timelineReact.js';
 import {run} from 'helloReact.js';
 	
 window.onload = () => {
