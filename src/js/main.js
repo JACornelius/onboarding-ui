@@ -1,5 +1,5 @@
-import {getTimeline} from 'timeline.es6.js';
-import {run} from 'helloReact.es6.js';
+import {getTimeline} from 'timeline.js';
+import {run} from 'helloReact.js';
 	
 window.onload = () => {
 	

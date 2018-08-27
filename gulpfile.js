@@ -10,25 +10,22 @@ gulp.task('hello', function(){
 	console.log('Hello World!');
 });
 
-gulp.task('server', function () {
-  return gulp.src('./')
-    .pipe(webserver({
-      livereload: true,
-      open: true
-    }));
-});
-
 gulp.task('server', function(){
 	connect.server({
-		root: 'src',
+		root: ['dist'],
 		port: 9000
 	});
+});
+
+gulp.task('html', function() {
+    return gulp.src('./src/index.html')
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('sass', function(){
     return gulp.src('./src/sass/style.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./src/css/'));
+    .pipe(gulp.dest('./dist/css/'));
 });
 
 const bundle = (b) => {
@@ -44,7 +41,7 @@ const bundle = (b) => {
      // .pipe(config.production ? uglify() : gulpUtil.noop())
      .pipe(sourcemaps.write('./'))
      //.pipe(gulp.dest('./build' + config.versionPath + '/js/'));
-    .pipe(gulp.dest('./src/js/'));
+    .pipe(gulp.dest('./dist/js/'));
 }
 
 gulp.task('js', function() {
@@ -61,10 +58,10 @@ gulp.task('js', function() {
             this.emit('end');
         })
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./src/js/'))
+        .pipe(gulp.dest('./dist/js/'))
         .pipe(connect.reload());
 });
 
 
 
-gulp.task('dev',['sass', 'js', 'server']);
+gulp.task('dev',['html','sass', 'js', 'server']);
