@@ -1,33 +1,14 @@
-var fs = require('fs');
-var express = require('express');
-var app = express();
-var request = require('request');
-var path = require('path');
-
-
-app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname + '/../index.html'));
-});
-
-app.get('/js/timeline.js', function(req, res){
-	res.set('Content-Type', 'text/javascript');
-	fs.readFile('./src/js/timeline.js', function read(err, data){
+import {getTimeline} from 'timeline.js';
+import {run} from 'helloReact.js';
 	
-		if(err){
-			throw err;
-		}
-		res.send(data);
-	});
- });
-
-app.get('/css/style.css', function(req, res){
-	fs.readFile('./src/css/style.css', function read(err, data){
-		if(err){
-			throw err;
-		}
-		res.send(data);
-	});
-});
+window.onload = () => {
 	
+	document.addEventListener('onload', run());
+	let timelineButtonObj = document.getElementById("timelineButton");
+	if(timelineButtonObj != null) {
+		timelineButton.onclick = () => getTimeline();
+	}
+	getTimeline();
 
-app.listen(9000);
+}
+

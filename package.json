@@ -2,19 +2,24 @@
   "name": "onboarding-ui",
   "version": "1.0.0",
   "description": "A UI for a Twitter API",
-  "main": "main.js",
+  "main": "dist/js/bundle.js",
   "dependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^16.1.0",
     "express": "^4.16.3",
-    "request": "^2.88.0",
-    "gulp-sass": "^4.0.1",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.5.0",
     "gulp-open": "^3.0.1",
+    "gulp-sass": "^4.0.1",
+    "gulp-util": "^3.0.8",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "request": "^2.88.0",
+    "vinyl-source-stream": "^2.0.0"
   },
   "devDependencies": {
-    
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   },
   "scripts": {
     "test": "node src/js/main.js"
