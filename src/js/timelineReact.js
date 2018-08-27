@@ -34,22 +34,24 @@ class renderedTimeline extends React.Component {
 		//console.log(this.props.rawData);
 		for(let i in this.props.rawData) {
 			let tweetObj = this.props.rawData[i];
-			let date = new Date(tweetObj.createAt);
-
-
-		 
-				let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
-						React.createElement('div', {className: 'userName'}, tweetObj.userName),
-						React.createElement('div', {className: 'twitterHandle'}, tweetObj.twitterHandle),
-						React.createElement('img', {className: 'image', src: tweetObj.profileImageUrl}, )
-					]);
-				let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
-						React.createElement('div', {className: 'dateBlock'}, [monthNames[date.getMonth()] + " " + date.getDate()]),
-						React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
-					]);
-		
-
-			timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
+			let date = new Date(tweetObj.createdAt);
+			let dateString = monthNames[date.getMonth()] + " " + date.getDate();
+			let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
+					React.createElement('div', {className: 'userName'}, tweetObj.userName),
+					React.createElement('div', {className: 'twitterHandle'}, tweetObj.twitterHandle),
+					React.createElement('img', {className: 'image', src: tweetObj.profileImageUrl}, )
+				]);
+			let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
+					React.createElement('div', {className: 'dateBlock'}, dateString),
+					React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+				]);
+			if(i % 2 == 1) {
+				timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e8f5fd"}}, [leftColumn, rightColumn]));
+			}
+			else {
+				timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e9e9e9"}}, [leftColumn, rightColumn]));
+			}
+			
 			//console.log(wholeRow);
 			//outputTimeline.appendChild(wholeRow);
 		}
