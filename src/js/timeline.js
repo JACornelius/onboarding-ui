@@ -7,18 +7,15 @@ export const getTimeline = () => {
 	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
 	xhttp.onreadystatechange = () => {
 		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			//renderTimeline(JSON.parse(xhttp.responseText));
 			ReactDOM.render(
 				React.createElement(renderedTimeline, {rawData: JSON.parse(xhttp.responseText)}, null),
 				document.getElementById('timelinePlaceholder')
 				);
 		}
 		else if(xhttp.readyState != XMLHttpRequest.DONE){         	
-			//document.getElementById('timelinePlaceholder').innerHTML = "Pending...";
 			ReactDOM.render(" ", document.getElementById('timelinePlaceholder'));
 	    }
 	    else{
-	     	//document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
 	     	ReactDOM.render("There was a problem on the server side, please try again later.", document.getElementById('timelinePlaceholder'));
 	    }
 	}
@@ -53,9 +50,7 @@ class renderedTimeline extends React.Component {
 			else {
 				timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e9e9e9"}}, [leftColumn, rightColumn]));
 			}
-			
-			//console.log(wholeRow);
-			//outputTimeline.appendChild(wholeRow);
+		
 		}
 		return timelineArray;
 	}
