@@ -1,13 +1,20 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 
 export const getTimeline = () => {
 	let xhttp = new XMLHttpRequest();
 	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
 	xhttp.onreadystatechange = () => {
 		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			renderTimeline(JSON.parse(xhttp.responseText));
+			//renderTimeline(JSON.parse(xhttp.responseText));
+			ReactDOM.render(
+				React.createElement(renderedTimeline, {rawData: JSON.parse(xhttp.responseText)}, null),
+				document.getElementById('timelinePlaceholder')
+				);
 		}
 		else if(xhttp.readyState != XMLHttpRequest.DONE){         	
-			document.getElementById('timelinePlaceholder').innerHTML = "  ";
+			document.getElementById('timelinePlaceholder').innerHTML = "Pending...";
 	    }
 	    else{
 	     	document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
@@ -18,52 +25,37 @@ export const getTimeline = () => {
     xhttp.send();
 }
 
-const renderTimeline = (rawTimelineData) => {
-	let timelineElem = document.getElementById('timelinePlaceholder');
-	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-	for(let i in rawTimelineData) {
-		let tweetObj = rawTimelineData[i];
-		let wholeRow = document.createElement('div');
-		wholeRow.className = "tweet";
-      	let leftColumn = document.createElement('div');
-      	leftColumn.className = "leftColumn";
-      	let rightColumn = document.createElement('div');
-      	rightColumn.className = "rightColumn";
-      	let dateBlock = document.createElement('div');
-      	dateBlock.className = "dateBlock";
-      	let tweetLink = document.createElement('div');
-      	let userName = document.createElement('div');
-      	userName.className = "userName";
-      	let twitterHandle = document.createElement('div');
-      	twitterHandle.className = "twitterHandle";
-    	if(i % 2 == 1){
-    		wholeRow.style.backgroundColor = "#e8f5fd";
+class renderedTimeline extends React.Component {
+	render () {
+		let rawTimelineData = React.createElement('div', null, `${this.props.rawData}`);
+		const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
-    	}
-    	else{
-    		wholeRow.style.backgroundColor = "#e9e9e9";
-    	}
-    	
-    	let img = document.createElement('img');
-    	img.className = "image";
-		img.setAttribute('src', tweetObj.profileImageUrl);
-		let aTag = document.createElement('a');
-		aTag.setAttribute("target", "_blank");
-		aTag.setAttribute('href', "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId);
-		aTag.innerHTML = tweetObj.message;
-		leftColumn.append(img);
-		userName.append(tweetObj.userName);
-		twitterHandle.append(tweetObj.twitterHandle);
-		leftColumn.append(userName);
-		leftColumn.append(twitterHandle);
-		
-		let date = new Date(tweetObj.createdAt);
-		dateBlock.appendChild(document.createTextNode(monthNames[date.getMonth()] + " " + date.getDate()));
-		tweetLink.append(aTag);
-		rightColumn.append(dateBlock);
-		rightColumn.append(tweetLink);
-		wholeRow.append(leftColumn);
-		wholeRow.append(rightColumn);
-		    	timelineElem.appendChild(wholeRow);
+		let timelineArray = [];
+		//console.log(this.props.rawData);
+		for(let i in this.props.rawData) {
+			let tweetObj = this.props.rawData[i];
+			let date = new Date(tweetObj.createdAt);
+			let dateString = monthNames[date.getMonth()] + " " + date.getDate();
+			let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
+					React.createElement('div', {className: 'userName'}, tweetObj.userName),
+					React.createElement('div', {className: 'twitterHandle'}, tweetObj.twitterHandle),
+					React.createElement('img', {className: 'image', src: tweetObj.profileImageUrl}, )
+				]);
+			let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
+					React.createElement('div', {className: 'dateBlock'}, dateString),
+					React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+				]);
+			if(i % 2 == 1) {
+				timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e8f5fd"}}, [leftColumn, rightColumn]));
+			}
+			else {
+				timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e9e9e9"}}, [leftColumn, rightColumn]));
+			}
+			
+			//console.log(wholeRow);
+			//outputTimeline.appendChild(wholeRow);
+		}
+		return timelineArray;
 	}
 }
+
