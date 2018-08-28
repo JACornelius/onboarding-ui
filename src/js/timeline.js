@@ -14,10 +14,12 @@ export const getTimeline = () => {
 				);
 		}
 		else if(xhttp.readyState != XMLHttpRequest.DONE){         	
-			document.getElementById('timelinePlaceholder').innerHTML = "Pending...";
+			//document.getElementById('timelinePlaceholder').innerHTML = "Pending...";
+			ReactDOM.render(" ", document.getElementById('timelinePlaceholder'));
 	    }
 	    else{
-	     	document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
+	     	//document.getElementById('timelinePlaceholder').innerHTML = "There was a problem on the server side, please try again later.";
+	     	ReactDOM.render("There was a problem on the server side, please try again later.", document.getElementById('timelinePlaceholder'));
 	    }
 	}
 	xhttp.open("GET", URL, true);
