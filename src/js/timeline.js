@@ -4,20 +4,19 @@ import ReactDOM from 'react-dom';
 
 export const getTimeline = () => {
 	let xhttp = new XMLHttpRequest();
+	let renderedElement;
 	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
 	xhttp.onreadystatechange = () => {
 		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			ReactDOM.render(
-				React.createElement(renderedTimeline, {rawData: JSON.parse(xhttp.responseText)}, null),
-				document.getElementById('timelinePlaceholder')
-				);
+			renderedElement = React.createElement(renderedTimeline, {rawData: JSON.parse(xhttp.responseText)}, null);
 		}
 		else if(xhttp.readyState != XMLHttpRequest.DONE){         	
-			ReactDOM.render(" ", document.getElementById('timelinePlaceholder'));
+			renderedElement = " ";
 	    }
 	    else{
-	     	ReactDOM.render("There was a problem on the server side, please try again later.", document.getElementById('timelinePlaceholder'));
+	     	renderedElement = "There was a problem on the server side, please try again later.";
 	    }
+	    ReactDOM.render(renderedElement, document.getElementById('timelinePlaceholder'));
 	}
 	xhttp.open("GET", URL, true);
 	xhttp.setRequestHeader("Content-type", "application/json");
