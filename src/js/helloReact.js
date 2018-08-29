@@ -7,9 +7,10 @@ class Hello extends React.Component {
   }
 }
 export const run = () => {
-	ReactDOM.render(
-  	React.createElement(Hello, {toWhat: 'React'}, null),
-  	document.getElementById('reactTest')
-	);
+	// ReactDOM.render(
+ //  	React.createElement(Hello, {toWhat: 'React'}, null),
+ //  	document.getElementById('reactTest')
+	// );
+	return React.createElement(Hello, {toWhat: 'React'}, null);
 }
 

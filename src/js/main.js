@@ -25,8 +25,8 @@ class buttonAndTimeline extends React.Component {
 
 	render() {
 		return React.createElement('div', {}, 
-			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.updateTimeline)), 
-			React.createElement('div', {id: 'timelinePlaceholder'}, getTimeline())]
+			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.updateTimeline))] 
+			//React.createElement('div', {id: 'timelinePlaceholder'}, getTimeline())]
 			);
 
 	} 
@@ -38,7 +38,13 @@ export default buttonAndTimeline;
 window.onload = () => {
 	
 	document.addEventListener('onload', run());
-	ReactDOM.render(React.createElement(buttonAndTimeline, {}, null), document.getElementById('timelineButtonAndData'));
+	//let reactAndTimeline = React.createElement('div', {}, [React.createElement('div', {}, run())]);
+	//let reactAndTimeline = React.createElement(buttonAndTimeline, {}, null);
+	let reactAndTimeline = React.createElement('div', {}, [React.createElement('div', {}, getTimeline())]);
+	//ReactDOM.render(React.createElement(buttonAndTimeline, {}, null), document.getElementById('timelineButtonAndData'));
+	//ReactDOM.render(reactAndTimeline, document.getElementById('reactTest'));
+	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
+
 
 }
 
