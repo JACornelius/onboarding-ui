@@ -36,23 +36,31 @@ let timelineButton = (rawData) => {
 	return React.createElement('button', {className: 'timelineButton', onClick: rawData}, 'Get Timeline')
 }; 
 
+let httpRequest = () => {
+	let xhttp = new XMLHttpRequest();
+	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
+	xhttp.open("GET", URL, true);
+	xhttp.send();
+	return xhttp;
+
+}
+
 class timelineTest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			rawData: [],
-			updatedTimelineFunction: null
 	
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.updateTimeline = this.updateTimeline.bind(this);
 	}
 
-	httpRequest() {
-		let xhttp = new XMLHttpRequest();
-		let URL = "http://localhost:8080/api/1.0/twitter/timeline";
-		let returnElement;
+	httpResponse() {
+
+		let xhttp = httpRequest();
 		xhttp.onreadystatechange = () => {
+			let returnElement;
 			if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
 				returnElement = JSON.parse(xhttp.responseText);
 			}
@@ -68,16 +76,13 @@ class timelineTest extends React.Component {
 		    	rawData: returnElement
 		    });
 		}
-		xhttp.open("GET", URL, true);
-		xhttp.send();
 	}
 
 	updateTimeline(){
-		this.httpRequest();
-		updatedTimelineFunction: renderedTimeline(this.state.rawData)
+		this.httpResponse();
 	}
 	componentDidMount() {
-		this.httpRequest();
+		this.httpResponse();
 	
 	}
 
