@@ -27,7 +27,7 @@ export const renderedTimeline = (rawData) => {
 		}
 	
 	}
-	return React.createElement('div', null, timelineArray);
+	return timelineArray;
 
 }
 
