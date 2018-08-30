@@ -31,6 +31,7 @@
 		color: red;
 		text-align: center;
 		padding: 10px 0px;
+		border-color: black;
 	}
 
 #timelinePlaceholder{
@@ -41,7 +42,7 @@
 		style: solid;
 		width: 1px;
 	}
-	
+
 	.tweet {
 		padding: 10px 0px;
 		@include size(110px, 1000px);
