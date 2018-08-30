@@ -27,7 +27,11 @@
 }
 
 
-
+.error{
+		color: red;
+		text-align: center;
+		padding: 10px 0px;
+	}
 
 #timelinePlaceholder{
 	width: 1000px;
@@ -37,7 +41,7 @@
 		style: solid;
 		width: 1px;
 	}
-
+	
 	.tweet {
 		padding: 10px 0px;
 		@include size(110px, 1000px);

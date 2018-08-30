@@ -34,18 +34,18 @@ class TimelineTest extends React.Component {
 		let timelineResult;
 		
 		if(this.state.timeline == "Error") {
-			timelineResult = "There was a problem on the server, please try again later."
+			timelineResult = React.createElement('div', {id: 'timelinePlaceholder', className: 'error'}, "There was a problem on the server, please try again later.");
 		}
 		else if(this.state.timeline == " ") {
-			timelineResult = " ";
+			timelineResult = React.createElement('div', {id: 'timelinePlaceholder'}, " ")
 		}
 		else {
-			timelineResult = renderedTimeline(this.state.timeline);
+			timelineResult = React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.timeline));
 		}
 		return React.createElement('div', {}, 
 				[React.createElement('div', {className: 'buttonContainer'}, 
 					React.createElement(TimelineButton, {className: 'timelineButton', callback: this.timelineCallback}, 'Get Timeline')),
-				React.createElement('div', {id: 'timelinePlaceholder'}, timelineResult)]);
+				timelineResult]);
 	}
 }
 
