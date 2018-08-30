@@ -3,12 +3,12 @@
 	font-size: $size;
 }
 
-@mixin size($height, $width){
+@mixin size($height, $width) {
 	height: $height;
 	width: $width;
 }
 
-.header{
+.header {
 	@include text(40px);
 	padding-top: 10px;
 	color: black;
@@ -16,7 +16,7 @@
 	font-weight: bold;
 }
 
-.buttonContainer{
+.buttonContainer {
 	@include size(25px, 1000px)
     margin: auto;
 
@@ -27,14 +27,14 @@
 }
 
 
-.error{
+.error {
 		color: red;
 		text-align: center;
 		padding: 10px 0px;
 		border-color: black;
 	}
 
-#timelinePlaceholder{
+#timelinePlaceholder {
 	width: 1000px;
 	margin: 10px auto auto;
 
@@ -54,14 +54,14 @@
 		&:nth-child(even) {
 				background-color: #e9e9e9;
 		}
-		.rightColumn{
+		.rightColumn {
 			padding-top: 30px;
 			@include size(60px, 80%);
 			float: right;
 			margin: auto;
 			text-align: left;
 
-			.dateBlock{
+			.dateBlock {
 				font-size: 12px;
 				padding-bottom: 5px;
 				font-style: italic;
@@ -69,7 +69,7 @@
 
 		
 		}
-		.leftColumn{
+		.leftColumn {
 			padding: 10px 0px 0px 10px;
 			@include size(100px, 15%);
 			clear: both;
@@ -77,14 +77,14 @@
 			margin: auto;
 			vertical-align: middle;
 
-			.image{
+			.image {
 				@include size(60px, 60px);
 				border-radius: 50%;
 				display: block;
 				margin: 0px auto;
 			}
 			
-			.userName{
+			.userName {
 				padding-top: 5px;
 				width: 150px;
 				@include text(15px);
@@ -92,7 +92,7 @@
 			
 			}
 
-			.twitterHandle{
+			.twitterHandle {
 				@include text(12px);
 			
 			}

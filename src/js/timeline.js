@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import {getTimeline} from 'timelineRequest.js';
 
 export const renderedTimeline = (rawData) => {		
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
@@ -23,27 +24,6 @@ export const renderedTimeline = (rawData) => {
 	}
 	return timelineArray;
 
-}
-
-export const getTimeline = (callback) => {
-	let xhttp = new XMLHttpRequest();
-	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
-	xhttp.onreadystatechange = () => {
-	
-		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			callback(JSON.parse(xhttp.responseText));
-		}
-		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
-			callback(" ");
-
-	    }
-	    else{
-	    	callback("Error");
-	   
-	    }
-	}
-	xhttp.open("GET", URL, true);
-	xhttp.send();
 }
 
 

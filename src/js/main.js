@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from 'timeline.js';
 import {TimelineButton} from 'timeline.js';
-import {getTimeline} from 'timeline.js';
+import {getTimeline} from 'timelineRequest.js';
 
 
 
@@ -11,17 +11,18 @@ class TimelineTest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			timeline: null
-	
+			timeline: null,
+			error: null
 	
 		}
 		this.timelineCallback = this.timelineCallback.bind(this);
 		
 	}
 
-	timelineCallback(httpTimelineResponse) {
+	timelineCallback(httpTimelineResponse, timelineResponseError) {
 		this.setState({
-			timeline: httpTimelineResponse
+			timeline: httpTimelineResponse,
+			error: timelineResponseError
 		});
 		
 	}
@@ -33,10 +34,10 @@ class TimelineTest extends React.Component {
 	render(){
 		let timelineResult;
 		
-		if(this.state.timeline == "Error") {
+		if(this.state.error != null) {
 			timelineResult = React.createElement('div', {id: 'timelinePlaceholder', className: 'error'}, "There was a problem on the server, please try again later.");
 		}
-		else if(this.state.timeline == " ") {
+		else if(this.state.timeline == null && this.state.error == null) {
 			timelineResult = React.createElement('div', {id: 'timelinePlaceholder'}, " ")
 		}
 		else {
