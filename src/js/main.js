@@ -25,11 +25,11 @@ export const getTimeline = (callback) => {
 	xhttp.send();
 }
 
-// class TimelineButton extends React.Component {
-// 	render(){
-// 		return React.createElement('button', {className: 'timelineButton', onClick: getTimeline(this.props.callback)}, 'Get Timeline');
-// 	}
-// }
+class TimelineButton extends React.Component {
+	render(){
+		return React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.props.callback)}, 'Get Timeline');
+	}
+}
 
 class TimelineTest extends React.Component {
 	constructor(props) {
@@ -60,27 +60,21 @@ class TimelineTest extends React.Component {
 	}
 
 	render(){
-	
-			return React.createElement('div', {}, 
-			[React.createElement('div', {className: 'buttonContainer'}, 
-				React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.timelineCallback)}, 'Get Timeline')),
-			React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.timeline))]);
+		let timelineResult;
 		
-		// else if(this.state.timeline == " ") {
-		// 	return React.createElement('div', {}, 
-		// 	[React.createElement('div', {className: 'buttonContainer'}, 
-		// 		React.createElement('button', {className: 'timelineButton', onClick: getTimeline(this.timelineCallback)}, 'Get Timeline')),
-		// 	React.createElement('div', {},' ')]);
-		// }
-		// else {
-		// 	return React.createElement('div', {}, 
-		// 	[React.createElement('div', {className: 'buttonContainer'},
-		// 		React.createElement('button', {className: 'timelineButton', onClick: getTimeline(this.timelineCallback)}, 'Get Timeline')),
-		// 	React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.timeline))]);
-		// }
-		//one big element with all the same stuff
-		//in if statements have the one change
-	 
+		if(this.state.timeline == "Error") {
+			timelineResult = "There was a problem on the server, please try again later."
+		}
+		else if(this.state.timeline == " ") {
+			timelineResult = " ";
+		}
+		else {
+			timelineResult = renderedTimeline(this.state.timeline);
+		}
+		return React.createElement('div', {}, 
+				[React.createElement('div', {className: 'buttonContainer'}, 
+					React.createElement(TimelineButton, {className: 'timelineButton', callback: this.timelineCallback}, 'Get Timeline')),
+				React.createElement('div', {id: 'timelinePlaceholder'}, timelineResult)]);
 	}
 }
 
