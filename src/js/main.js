@@ -2,45 +2,66 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from 'timeline.js';
 import {timelineButton} from 'timeline.js';
-import {httpRequest} from 'timeline.js';
 
-class timelineTest extends React.Component {
+
+export const httpRequest = (callback) => {
+	let xhttp = new XMLHttpRequest();
+	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
+	xhttp.onreadystatechange = () => {
+	
+		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
+			callback(JSON.parse(xhttp.responseText));
+		}
+		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
+			callback(" ");
+
+	    }
+	    else{
+	    	callback("There was a problem on the server side, please try again later.");
+	   
+	    }
+	}
+	xhttp.open("GET", URL, true);
+	xhttp.send();
+}
+
+class TimelineTest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			httpResp: null
+			timeline: null
 	
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
-		this.httpCallback = this.httpCallback.bind(this);
+		this.timelineCallback = this.timelineCallback.bind(this);
 
 	}
 
-	httpCallback(httpResponse) {
+	timelineCallback(httpTimelineResponse) {
 		this.setState({
-			httpResp: httpResponse
+			timeline: httpTimelineResponse
 		});
 		
 	}
 
 
 	componentDidMount() {
-		httpRequest(this.httpCallback);
+		httpRequest(this.timelineCallback);
 	
 	}
 
 	render(){
 		return React.createElement('div', {}, 
 			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.componentDidMount)),
-			React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.httpResp))]);
+			React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.timeline))]);
 	 
 	}
 }
 
-export default timelineTest;
+export default TimelineTest;
 
 window.onload = () => {
-	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header'}, 'Lab for Josephine'), React.createElement(timelineTest, {}, null)]);
+	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header'}, 'Lab for Josephine'), React.createElement(TimelineTest, {}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 
 

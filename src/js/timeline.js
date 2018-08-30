@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 export const renderedTimeline = (rawData) => {		
-	let rawTimelineData = React.createElement('div', null, rawData);
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 	let timelineArray = [];
@@ -30,23 +29,4 @@ export const timelineButton = (rawData) => {
 	return React.createElement('button', {className: 'timelineButton', onClick: rawData}, 'Get Timeline')
 }; 
 
-export const httpRequest = (callback) => {
-	let xhttp = new XMLHttpRequest();
-	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
-	xhttp.onreadystatechange = () => {
-	
-		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			callback(JSON.parse(xhttp.responseText));
-		}
-		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
-			callback(" ");
 
-	    }
-	    else{
-	    	callback("There was a problem on the server side, please try again later.");
-	   
-	    }
-	}
-	xhttp.open("GET", URL, true);
-	xhttp.send();
-}
