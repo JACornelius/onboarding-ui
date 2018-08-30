@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from 'timeline.js';
-import {timelineButton} from 'timeline.js';
+//import {TimelineButton} from 'timeline.js';
 
 
 export const getTimeline = (callback) => {
@@ -25,6 +25,12 @@ export const getTimeline = (callback) => {
 	xhttp.send();
 }
 
+// class TimelineButton extends React.Component {
+// 	render(){
+// 		return React.createElement('button', {className: 'timelineButton', onClick: getTimeline(this.props.callback)}, 'Get Timeline');
+// 	}
+// }
+
 class TimelineTest extends React.Component {
 	constructor(props) {
 		super(props);
@@ -35,6 +41,7 @@ class TimelineTest extends React.Component {
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.timelineCallback = this.timelineCallback.bind(this);
+		//this.timelineButtonHandleClick = this.timelineButtonHandleClick.bind(this);
 
 	}
 
@@ -45,6 +52,7 @@ class TimelineTest extends React.Component {
 		
 	}
 
+	
 
 	componentDidMount() {
 		getTimeline(this.timelineCallback);
@@ -52,22 +60,26 @@ class TimelineTest extends React.Component {
 	}
 
 	render(){
-		if(this.state.timeline == "Error") {
+	
 			return React.createElement('div', {}, 
-			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.componentDidMount)),
-			React.createElement('div', {},'There was a problem on the server side, please try again later.')]);
-		}
-		else if(this.state.timeline == " ") {
-			return React.createElement('div', {}, 
-			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.componentDidMount)),
-			React.createElement('div', {},' ')]);
-		}
-		else {
-			return React.createElement('div', {}, 
-			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.componentDidMount)),
+			[React.createElement('div', {className: 'buttonContainer'}, 
+				React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.timelineCallback)}, 'Get Timeline')),
 			React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.timeline))]);
-		}
 		
+		// else if(this.state.timeline == " ") {
+		// 	return React.createElement('div', {}, 
+		// 	[React.createElement('div', {className: 'buttonContainer'}, 
+		// 		React.createElement('button', {className: 'timelineButton', onClick: getTimeline(this.timelineCallback)}, 'Get Timeline')),
+		// 	React.createElement('div', {},' ')]);
+		// }
+		// else {
+		// 	return React.createElement('div', {}, 
+		// 	[React.createElement('div', {className: 'buttonContainer'},
+		// 		React.createElement('button', {className: 'timelineButton', onClick: getTimeline(this.timelineCallback)}, 'Get Timeline')),
+		// 	React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.timeline))]);
+		// }
+		//one big element with all the same stuff
+		//in if statements have the one change
 	 
 	}
 }
