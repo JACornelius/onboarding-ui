@@ -25,11 +25,8 @@ export const renderedTimeline = (rawData) => {
 
 }
 
-// export const timelineButton = (rawData) => {
-// 	return React.createElement('button', {className: 'timelineButton', onClick: rawData}, 'Get Timeline')
-// }; 
-class TimelineButton extends React.Component {
+export class TimelineButton extends React.Component {
 	render(){
-		return React.createElement('button', {className: 'timelineButton', onClick: this.props.onClickFunc}, 'GetTimeline');
+		return React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.props.callback)}, 'Get Timeline');
 	}
 }

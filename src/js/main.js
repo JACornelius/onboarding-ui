@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from 'timeline.js';
-//import {TimelineButton} from 'timeline.js';
+import {TimelineButton} from 'timeline.js';
 
 
 export const getTimeline = (callback) => {
@@ -25,11 +25,7 @@ export const getTimeline = (callback) => {
 	xhttp.send();
 }
 
-class TimelineButton extends React.Component {
-	render(){
-		return React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.props.callback)}, 'Get Timeline');
-	}
-}
+
 
 class TimelineTest extends React.Component {
 	constructor(props) {
@@ -41,8 +37,7 @@ class TimelineTest extends React.Component {
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.timelineCallback = this.timelineCallback.bind(this);
-		//this.timelineButtonHandleClick = this.timelineButtonHandleClick.bind(this);
-
+		
 	}
 
 	timelineCallback(httpTimelineResponse) {
@@ -52,11 +47,8 @@ class TimelineTest extends React.Component {
 		
 	}
 
-	
-
-	componentDidMount() {
+		componentDidMount() {
 		getTimeline(this.timelineCallback);
-	
 	}
 
 	render(){
