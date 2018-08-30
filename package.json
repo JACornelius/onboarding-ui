@@ -15,11 +15,23 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "request": "^2.88.0",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-source-stream": "^2.0.0",
+    "yarn": "^1.9.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "enzyme-adapter-react-16": "^1.3.0",
+    "jest-enzyme": "^6.0.4",
+    "react-test-renderer": "^16.4.2"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   },
   "scripts": {
     "test": "node src/js/main.js"
