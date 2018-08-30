@@ -1,4 +1,3 @@
-import {run} from 'helloReact.js';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from 'timeline.js';
@@ -9,25 +8,22 @@ class timelineTest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			rawData: null
+			httpResp: null
 	
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
-		this.updateTimeline = this.updateTimeline.bind(this);
 		this.httpCallback = this.httpCallback.bind(this);
 
 	}
 
-	httpCallback(rawTimelineData) {
+	httpCallback(httpResponse) {
 		this.setState({
-			rawData: rawTimelineData
+			httpResp: httpResponse
 		});
 		
 	}
 
-	updateTimeline(){
-		httpRequest(this.httpCallback);
-	}
+
 	componentDidMount() {
 		httpRequest(this.httpCallback);
 	
@@ -35,8 +31,8 @@ class timelineTest extends React.Component {
 
 	render(){
 		return React.createElement('div', {}, 
-			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.updateTimeline)),
-			React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.rawData))]);
+			[React.createElement('div', {className: 'buttonContainer'}, timelineButton(this.componentDidMount)),
+			React.createElement('div', {id: 'timelinePlaceholder'}, renderedTimeline(this.state.httpResp))]);
 	 
 	}
 }
@@ -44,9 +40,7 @@ class timelineTest extends React.Component {
 export default timelineTest;
 
 window.onload = () => {
-	
-	document.addEventListener('onload', run());
-	let reactAndTimeline = React.createElement('div', {}, [React.createElement('div', {}, run()), React.createElement(timelineTest, {}, null)]);
+	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header'}, 'Lab for Josephine'), React.createElement(timelineTest, {}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 
 

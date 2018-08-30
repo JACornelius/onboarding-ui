@@ -19,13 +19,8 @@ export const renderedTimeline = (rawData) => {
 				React.createElement('div', {className: 'dateBlock'}, dateString),
 				React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-		if(i % 2 == 1) {
-			timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e8f5fd"}}, [leftColumn, rightColumn]));
-		}
-		else {
-			timelineArray.push(React.createElement('div', {className: 'tweet', style: {backgroundColor: "#e9e9e9"}}, [leftColumn, rightColumn]));
-		}
 	
+			timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
 	}
 	return timelineArray;
 
