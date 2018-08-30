@@ -25,6 +25,28 @@ export const renderedTimeline = (rawData) => {
 
 }
 
+export const getTimeline = (callback) => {
+	let xhttp = new XMLHttpRequest();
+	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
+	xhttp.onreadystatechange = () => {
+	
+		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
+			callback(JSON.parse(xhttp.responseText));
+		}
+		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
+			callback(" ");
+
+	    }
+	    else{
+	    	callback("Error");
+	   
+	    }
+	}
+	xhttp.open("GET", URL, true);
+	xhttp.send();
+}
+
+
 export class TimelineButton extends React.Component {
 	render(){
 		return React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.props.callback)}, 'Get Timeline');

@@ -2,28 +2,8 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from 'timeline.js';
 import {TimelineButton} from 'timeline.js';
+import {getTimeline} from 'timeline.js';
 
-
-export const getTimeline = (callback) => {
-	let xhttp = new XMLHttpRequest();
-	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
-	xhttp.onreadystatechange = () => {
-	
-		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			callback(JSON.parse(xhttp.responseText));
-		}
-		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
-			callback(" ");
-
-	    }
-	    else{
-	    	callback("Error");
-	   
-	    }
-	}
-	xhttp.open("GET", URL, true);
-	xhttp.send();
-}
 
 
 
@@ -35,7 +15,6 @@ class TimelineTest extends React.Component {
 	
 	
 		}
-		this.componentDidMount = this.componentDidMount.bind(this);
 		this.timelineCallback = this.timelineCallback.bind(this);
 		
 	}
@@ -47,7 +26,7 @@ class TimelineTest extends React.Component {
 		
 	}
 
-		componentDidMount() {
+	componentDidMount() {
 		getTimeline(this.timelineCallback);
 	}
 
