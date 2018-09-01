@@ -3,7 +3,11 @@ import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main.js';
 import {getHomeTimeline} from '../src/js/services';
+<<<<<<< HEAD
 import {HomeTimelineButton} from '../src/js/components';
+=======
+import {TimelineButton} from '../src/js/components';
+>>>>>>> only having problems with button unit testing
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
@@ -24,19 +28,11 @@ describe("TimelineResultComp", () => {
 		expect(wrapper.find("div").length).toEqual(1);
 	});
 
-	it("has id 'timelinePlaceholder", function() {
-		expect(wrapper.find("#timelinePlaceholder").length).toEqual(1);
-	});
-
 	it("passes timelineResult, className props correctly", function () {
 		wrapper = mount(React.createElement(TimelineResultComp, {className: "testClassName", timelineResult: "testTimelineResult"}, null));
 		expect(wrapper.props().timelineResult).toEqual("testTimelineResult");
 		expect(wrapper.hasClass('testClassName')).toEqual(true);
 		expect(wrapper.find("div").length).toEqual(1);
-	});
-
-	it("has id 'timelinePlaceholder'", function() {
-		expect(wrapper.find("#timelinePlaceholder").length).toEqual(1);
 	});
 
 	it("passes timelineResult, className props correctly", function () {

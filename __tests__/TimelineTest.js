@@ -3,7 +3,11 @@ import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main';
 import {getHomeTimeline} from '../src/js/services';
+<<<<<<< HEAD
 import HomeTimelineButton from '../src/js/components';
+=======
+import TimelineButton from '../src/js/components';
+>>>>>>> only having problems with button unit testing
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
@@ -16,13 +20,15 @@ describe('Timeline', () => {
 							 "statusId":"1035247174618099712",
 							 "createdAt":1535657135000}];
 
+	let mockEmptyHttpRespText = [];
+
 	beforeEach(function() {
 		wrapper = mount(React.createElement(Timeline));
 	});
 
-	it("creates TimelineButton", function() {
-		expect(wrapper.find('button').length).toEqual(1);
-		expect(wrapper.containsMatchingElement(React.createElement(HomeTimelineButton))).toEqual(true);	
+	it("creates 2 TimelineButton, one user timeline, one home timeline", function() {
+		expect(wrapper.find('button').length).toEqual(2);
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
 	});
 
 	it("creates TimelineResultComp", function() {
@@ -31,7 +37,7 @@ describe('Timeline', () => {
 
 	it("wraps the button container, button, and timeline placeholder with a div", function() {
 		expect(wrapper.children.length).toEqual(1);
-		expect(wrapper.find("div").length).toEqual(3);
+		expect(wrapper.find("div").length).toEqual(4);
 	});
 
 	it("creates pending TimelineResultComp", function() {
@@ -39,10 +45,10 @@ describe('Timeline', () => {
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "pending"}, null))).toEqual(true);
 	})
 
-	it("creates success TimelineResultComp", function() {
-		wrapper.setState({homeTimeline: mockHttpRespText, homeTimelineError: null});
+	it("creates successful Http Request, but no tweets by the user", function () {
+		wrapper.setState({userTimeline: mockHttpRespText, userTimelineError: null});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
-	});
+	})
 
 	it("creates fail TimelineResultComp", function() {
 		wrapper.setState({homeTimeline: null, homeTimelineError: "There was a problem on the server side, please try again later."});
