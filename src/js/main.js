@@ -39,11 +39,13 @@ class Timeline extends React.Component {
 		}
 		else if(this.state.timeline == null && this.state.error == null) {
 			timelineResultOutput = " ";
+			timelineResultClass = "pending";
 			
 			
 		}
 		else {
 			timelineResultOutput = renderedTimeline(this.state.timeline);
+			timelineResultClass = "successGetTimeline";
 			
 		}
 		return React.createElement('div', {className: 'Timeline'}, 

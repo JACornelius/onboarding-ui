@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {getTimeline} from './timelineRequest.js';
 
-const renderedTimeline = (rawData) => {		
+export const renderedTimeline = (rawData) => {		
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 	let timelineArray = [];
@@ -27,10 +27,9 @@ const renderedTimeline = (rawData) => {
 }
 
 
-class TimelineButton extends React.Component {
+export class TimelineButton extends React.Component {
 	render(){
 		return React.createElement('button', {className: 'timelineButton', onClick: () => getTimeline(this.props.callback)}, 'Get Timeline');
 	}
 }
 
-export {TimelineButton, renderedTimeline};

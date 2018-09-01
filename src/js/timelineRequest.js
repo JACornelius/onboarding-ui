@@ -7,6 +7,7 @@ export const getTimeline = (callback) => {
 	xhttp.onreadystatechange = () => {
 	
 		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
+			console.log(xhttp.responseText);
 			callback(JSON.parse(xhttp.responseText), null);
 		}
 		else if(xhttp.readyState != XMLHttpRequest.DONE){ 

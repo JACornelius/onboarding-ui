@@ -2,42 +2,58 @@ import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main.js';
-import getTimeline from '../src/js/timelineRequest.js';
+import {getTimeline} from '../src/js/timelineRequest.js';
 import TimelineButton from '../src/js/timeline.js';
 import {TimelineResultComp} from '../src/js/main.js';
-
-
+import {renderedTimeline}from '../src/js/timeline.js';
 
 
 describe('Timeline', () => {
 	let wrapper;
+	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
+	"userName":"Josephine Cornelius",
+	"twitterHandle":"JosephineCorn10",
+	"profileImageUrl":"http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg",
+	"statusId":"1035247174618099712",
+	"createdAt":1535657135000}];
+
 	beforeEach(function() {
 		wrapper = mount(React.createElement(Timeline));
 	});
 
-	it("creates TimelineButton", function() {
-		// const mockCallBack = jest.fn();
-		// getTimeline(mockCallBack)
+	it("creates TimelineButton, and button actually executes function on click", function() {
+		expect(wrapper.find('button').length).toEqual(1);
+		
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
 
-		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);
-		//check callback...mocking
-		// let getTimlineButton = wrapper.find('button');
-		// getTimelineButton.stimulate('click');
-		// expect(wrapper.props().timeline).toEqual();
-		// expect(wrapper.props().error).toEqual();
-		
-		
 	});
 
 	it("creates TimelineResultComp", function() {
-
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp))).toEqual(true);
 	});
 
-	it("wraps the both button container and timeline placeholder with a div", function() {
+	it("wraps the button container, button, and timeline placeholder with a div", function() {
 		expect(wrapper.children.length).toEqual(1);
 		expect(wrapper.find('div').length).toEqual(3);
-		//expect(rootElement.tagName).toEqual("DIV");
+	
 	});
+
+
+
+	it("creates success TimelineResultComp", function() {
+
+		wrapper.setState({timeline: mockHttpRespText, error: null});
+		expect(wrapper.containsMatchingElement(React.createElement(
+			TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
+	});
+
+	it("creates fail TimelineResultComp", function() {
+		wrapper.setState({timeline: null, error: 'There was a problem on the server side, please try again later.'});
+		expect(wrapper.containsMatchingElement(React.createElement(
+			TimelineResultComp, {className: 'error'}, null))).toEqual(true);
+
+	});
+
+
 });
 
