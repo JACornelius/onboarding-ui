@@ -6,13 +6,13 @@ import {getHomeTimeline, getUserTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
 
+
 let homeTimelineResultClass;
 let homeTimelineResultOutput;
 let userTimelineResultClass;
 let userTimelineResultOutput;
 
 class Timeline extends React.Component {
-	
 	constructor(props) {
 		super(props);
 		this.state = {

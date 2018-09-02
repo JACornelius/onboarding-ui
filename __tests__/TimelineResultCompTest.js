@@ -2,16 +2,8 @@ import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main.js';
-<<<<<<< HEAD
-import {getHomeTimeline} from '../src/js/services';
-<<<<<<< HEAD
-import {HomeTimelineButton} from '../src/js/components';
-=======
-=======
 import {getTimeline} from '../src/js/services';
->>>>>>> refactored
 import {TimelineButton} from '../src/js/components';
->>>>>>> only having problems with button unit testing
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
