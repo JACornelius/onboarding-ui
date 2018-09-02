@@ -19,9 +19,15 @@ describe('TimelineButton', () => {
 	});
 
 	it("onClick calls function", function() {
-		wrapper.setProps({callback: () => testCounter()});
-		wrapper.simulate('click');
-		expect(count).toEqual(1);
+		let promise = Promise.resolve();
+		promise.then(() => {
+			wrapper.update();
+			wrapper.setProps({callback: () => testCounter()});
+			wrapper.simulate('click');
+			expect(count).toEqual(1);
+
+		})
+		
 	});
 
 	it("has 'Get Timeline' as button text", function () {
