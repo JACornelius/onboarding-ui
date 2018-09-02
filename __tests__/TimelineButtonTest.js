@@ -13,15 +13,22 @@ const testCounter = () => {
 
 describe('TimelineButton', () => {
 	let wrapper;
-	
+
 	beforeEach(function() {
-		//wrapper = mount(React.createElement(TimelineButton, {onClick: testCounter, buttonText: "test button text"}, null));
+		wrapper = shallow(React.createElement(TimelineButton, {}, null));
 	});
 
 	it("onClick calls function", function() {
-		wrapper = shallow(React.createElement(TimelineButton, {onClick: () => testCounter}, null));
+		wrapper.setProps({callback: () => testCounter()});
 		wrapper.simulate('click');
-
 		expect(count).toEqual(1);
 	});
+
+	it("has 'Get Timeline' as button text", function () {
+		expect(wrapper.text()).toEqual('Get Timeline');
+	});
+
+	it("has 'timelineButton' as className", function() {
+		expect(wrapper.hasClass('timelineButton')).toEqual(true);
+	})
 });

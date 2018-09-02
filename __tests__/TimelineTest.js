@@ -23,7 +23,6 @@ describe('Timeline', () => {
 
 	it("creates TimelineButton, and button actually executes function on click", function() {
 		expect(wrapper.find('button').length).toEqual(1);
-		
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
 
 	});
@@ -38,13 +37,17 @@ describe('Timeline', () => {
 	
 	});
 
-
+	it("creates pending TimelineResultComp", function() {
+		wrapper.setState({timeline: null, error: null});
+		expect(wrapper.containsMatchingElement(React.createElement(
+			TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
+	})
 
 	it("creates success TimelineResultComp", function() {
 
 		wrapper.setState({timeline: mockHttpRespText, error: null});
 		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
+			TimelineResultComp, {className: 'successGetTimeline'}, null))).toEqual(true);
 	});
 
 	it("creates fail TimelineResultComp", function() {
