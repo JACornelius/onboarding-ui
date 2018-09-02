@@ -26,8 +26,13 @@ describe('Timeline', () => {
 		wrapper = mount(React.createElement(Timeline));
 	});
 
+<<<<<<< HEAD
 	it("creates 2 TimelineButton, one user timeline, one home timeline", function() {
 		expect(wrapper.find('button').length).toEqual(2);
+=======
+	it("creates TimelineButton, and button actually executes function on click", function() {
+		expect(wrapper.find('button').length).toEqual(1);
+>>>>>>> completed unit testing, going to rearrange to services and components folders
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
 	});
 
@@ -41,6 +46,7 @@ describe('Timeline', () => {
 	});
 
 	it("creates pending TimelineResultComp", function() {
+<<<<<<< HEAD
 		wrapper.setState({homeTimeline: null, homeTimelineError: null});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "pending"}, null))).toEqual(true);
 	})
@@ -49,6 +55,19 @@ describe('Timeline', () => {
 		wrapper.setState({userTimeline: mockHttpRespText, userTimelineError: null});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
 	})
+=======
+		wrapper.setState({timeline: null, error: null});
+		expect(wrapper.containsMatchingElement(React.createElement(
+			TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
+	})
+
+	it("creates success TimelineResultComp", function() {
+
+		wrapper.setState({timeline: mockHttpRespText, error: null});
+		expect(wrapper.containsMatchingElement(React.createElement(
+			TimelineResultComp, {className: 'successGetTimeline'}, null))).toEqual(true);
+	});
+>>>>>>> completed unit testing, going to rearrange to services and components folders
 
 	it("creates fail TimelineResultComp", function() {
 		wrapper.setState({homeTimeline: null, homeTimelineError: "There was a problem on the server side, please try again later."});

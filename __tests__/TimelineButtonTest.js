@@ -18,6 +18,7 @@ describe("TimelineButton", () => {
 	});
 
 	it("onClick calls function", function() {
+<<<<<<< HEAD
 		wrapper.setProps({onClickFunc: () => testCounter()});
 		wrapper.simulate("click");
 		expect(count).toEqual(1);
@@ -31,5 +32,18 @@ describe("TimelineButton", () => {
 	it("passes button text thru props", function() {
 		wrapper.setProps({buttonText: "testButtonText"});
 		expect(wrapper.text()).toEqual("testButtonText");
+=======
+		wrapper.setProps({callback: () => testCounter()});
+		wrapper.simulate('click');
+		expect(count).toEqual(1);
+	});
+
+	it("has 'Get Timeline' as button text", function () {
+		expect(wrapper.text()).toEqual('Get Timeline');
+	});
+
+	it("has 'timelineButton' as className", function() {
+		expect(wrapper.hasClass('timelineButton')).toEqual(true);
+>>>>>>> completed unit testing, going to rearrange to services and components folders
 	})
 });
