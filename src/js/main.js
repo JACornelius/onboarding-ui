@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {renderedTimeline} from './timeline';
-import {TimelineButton} from './timeline';
-import {getTimeline} from './timelineRequest';
+import {renderedTimeline} from './services';
+import {TimelineButton} from './components';
+import {getTimeline} from './services';
+import {TimelineResultComp} from './components';
 
 class Timeline extends React.Component {
 	constructor(props) {
@@ -64,10 +65,6 @@ window.onload = () => {
 
 }
 
-class TimelineResultComp extends React.Component {
-	render() {
-		return React.createElement('div', {id: 'timelinePlaceholder', className: `${this.props.classsName}`}, this.props.timelineResult);
-	}
-}
+
 
 export {TimelineResultComp, Timeline};

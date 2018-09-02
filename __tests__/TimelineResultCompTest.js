@@ -2,10 +2,10 @@ import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main.js';
-import {getTimeline} from '../src/js/timelineRequest.js';
-import TimelineButton from '../src/js/timeline.js';
-import {TimelineResultComp} from '../src/js/main.js';
-import {renderedTimeline} from '../src/js/timeline'
+import {getTimeline} from '../src/js/services';
+import {TimelineButton} from '../src/js/components';
+import {TimelineResultComp} from '../src/js/components';
+import {renderedTimeline} from '../src/js/services';
 
 const mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
 	"userName":"Josephine Cornelius",

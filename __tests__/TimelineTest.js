@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {Timeline} from '../src/js/main.js';
-import {getTimeline} from '../src/js/timelineRequest.js';
-import TimelineButton from '../src/js/timeline.js';
-import {TimelineResultComp} from '../src/js/main.js';
-import {renderedTimeline}from '../src/js/timeline.js';
+import {Timeline} from '../src/js/main';
+import {getTimeline} from '../src/js/services';
+import TimelineButton from '../src/js/components';
+import {TimelineResultComp} from '../src/js/components';
+import {renderedTimeline} from '../src/js/services';
 
 
 describe('Timeline', () => {
@@ -21,10 +21,9 @@ describe('Timeline', () => {
 		wrapper = mount(React.createElement(Timeline));
 	});
 
-	it("creates TimelineButton, and button actually executes function on click", function() {
+	it("creates TimelineButton", function() {
 		expect(wrapper.find('button').length).toEqual(1);
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
-
 	});
 
 	it("creates TimelineResultComp", function() {
