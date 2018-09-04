@@ -10,7 +10,7 @@ const testCounter = () => {
 		count++;
 	}
 
-describe('TimelineButton', () => {
+describe("TimelineButton", () => {
 	let wrapper;
 
 	beforeEach(function() {
@@ -19,15 +19,15 @@ describe('TimelineButton', () => {
 
 	it("onClick calls function", function() {
 		wrapper.setProps({callback: () => testCounter()});
-		wrapper.simulate('click');
+		wrapper.simulate("click");
 		expect(count).toEqual(1);
 	});
 
 	it("has 'Get Timeline' as button text", function () {
-		expect(wrapper.text()).toEqual('Get Timeline');
+		expect(wrapper.text()).toEqual("Get Timeline");
 	});
 
 	it("has 'timelineButton' as className", function() {
-		expect(wrapper.hasClass('timelineButton')).toEqual(true);
+		expect(wrapper.hasClass("timelineButton")).toEqual(true);
 	})
 });

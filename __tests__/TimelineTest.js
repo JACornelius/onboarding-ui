@@ -7,7 +7,6 @@ import TimelineButton from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
-
 describe('Timeline', () => {
 	let wrapper;
 	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
@@ -38,19 +37,19 @@ describe('Timeline', () => {
 	it("creates pending TimelineResultComp", function() {
 		wrapper.setState({timeline: null, error: null});
 		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
+			TimelineResultComp, {className: "pending"}, null))).toEqual(true);
 	})
 
 	it("creates success TimelineResultComp", function() {
 		wrapper.setState({timeline: mockHttpRespText, error: null});
 		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: 'successGetTimeline'}, null))).toEqual(true);
+			TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
 	});
 
 	it("creates fail TimelineResultComp", function() {
 		wrapper.setState({timeline: null, error: 'There was a problem on the server side, please try again later.'});
 		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: 'error'}, null))).toEqual(true);
+			TimelineResultComp, {className: "error"}, null))).toEqual(true);
 	});
 });
 
