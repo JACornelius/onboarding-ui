@@ -42,21 +42,18 @@ describe('TimelineResultComp', () => {
 	it("contains image url", function() {
 		wrapper = mount(React.createElement(TimelineResultComp, {timelineResult: renderedTimeline(mockHttpRespText)}, null));
 		expect(wrapper.find('img').length).toEqual(1);
-
+		expect(wrapper.find('img').props().src).toBe("http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg");
 	})
 
-	it("contains link to profile image URL", function() {
+	it("contains link to post URL", function() {
 		wrapper = mount(React.createElement(TimelineResultComp, {timelineResult: renderedTimeline(mockHttpRespText)}, null));
-		
 		expect(wrapper.find('a').length).toEqual(1);
+		expect(wrapper.find('a').props().href).toBe("https://twitter.com/JosephineCorn10/status/1035247174618099712");
 	})
 
 	it("contains all div components of the timeline table", function() {	
 		wrapper = mount(React.createElement(TimelineResultComp, {timelineResult: renderedTimeline(mockHttpRespText)}, null));
 		expect(wrapper.find('div').length).toEqual(7);
-
-
-		
 	});
 
 });

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 const renderedTimeline = (rawData) => {		
 	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-
 	let timelineArray = [];
 	for(let i in rawData) {
 		let tweetObj = rawData[i];
@@ -18,7 +17,6 @@ const renderedTimeline = (rawData) => {
 				React.createElement('div', {className: 'dateBlock',  key: 'dataBlock' + i}, dateString),
 				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-	
 			timelineArray.push(React.createElement('div', {className: 'tweet', key: 'tweet' + i}, [leftColumn, rightColumn]));
 	}
 	return timelineArray;
@@ -40,7 +38,6 @@ const getTimeline = (callback) => {
 	    }
 	    else{
 	    	callback(null, "There was a problem on the server side, please try again later.");
-	   
 	    }
 	}
 	xhttp.open("GET", URL, true);
