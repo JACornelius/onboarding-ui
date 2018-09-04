@@ -3,14 +3,21 @@ import ReactDOM from 'react-dom';
 import promise from 'es6-promise';
 import fetch from 'isomorphic-fetch';
 import 'babel-polyfill';
+import _ from 'lodash';
+const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+let timelineArray = [];
 
 const renderedTimeline = (rawData) => {		
-	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
-	let timelineArray = [];
-	for(let i in rawData) {
-		let tweetObj = rawData[i];
-		let date = new Date(tweetObj.createdAt);
+	_.forEach(rawData, function(tweetObj) {
+		renderTweetObj(tweetObj);
+	});
+	return timelineArray;
+
+}
+
+let renderTweetObj = (tweetObj) => {
+	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
 		let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
 				React.createElement('div', {className: 'userName'}, tweetObj.userName),
@@ -21,11 +28,8 @@ const renderedTimeline = (rawData) => {
 				React.createElement('div', {className: 'dateBlock'}, dateString),
 				React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-	
-			timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
-	}
-	return timelineArray;
-
+		console.log(tweetObj.message);
+		timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
 }
 const checkStatus = (response) => {
 	if(response.status == 200) {
