@@ -4,6 +4,7 @@ import promise from 'es6-promise';
 import fetch from 'isomorphic-fetch';
 import 'babel-polyfill';
 import _ from 'lodash';
+
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let timelineArray;
 
@@ -15,7 +16,6 @@ const renderedTimeline = (rawData) => {
 	});
 	console.log(timelineArray);
 	return timelineArray;
-
 }
 
 let renderTweetObj = (tweetObj, i) => {
@@ -46,7 +46,6 @@ const parseJSON = (response) => {
 	return response.json();
 }
 
-
 const getTimeline = (callback) => {
 	fetch('http://localhost:8080/api/1.0/twitter/timeline')
 		.then(checkStatus)
@@ -58,6 +57,5 @@ const getTimeline = (callback) => {
 			callback(null, error);
 		})
 }
-
 
 export{getTimeline, renderedTimeline};

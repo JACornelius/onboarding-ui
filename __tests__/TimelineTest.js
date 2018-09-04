@@ -7,9 +7,6 @@ import TimelineButton from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
-
-
-
 describe('Timeline', () => {
 	let wrapper;
 	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
@@ -18,7 +15,7 @@ describe('Timeline', () => {
 							 "profileImageUrl":"http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg",
 							 "statusId":"1035247174618099712",
 							 "createdAt":1535657135000}];
-
+							 
 	beforeEach(function() {
 		wrapper = mount(React.createElement(Timeline));
 	});
