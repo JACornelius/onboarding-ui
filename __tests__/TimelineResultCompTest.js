@@ -24,7 +24,6 @@ describe("TimelineResultComp", () => {
 		expect(wrapper.find("div").length).toEqual(1);
 	});
 
-
 	it("passes timelineResult, className props correctly", function () {
 		wrapper = mount(React.createElement(TimelineResultComp, {className: "testClassName", timelineResult: "testTimelineResult"}, null));
 		expect(wrapper.props().timelineResult).toEqual("testTimelineResult");
