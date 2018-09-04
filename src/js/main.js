@@ -10,19 +10,16 @@ class Timeline extends React.Component {
 		super(props);
 		this.state = {
 			timeline: null,
-			error: null
-	
+			error: null	
 		}
-		this.timelineCallback = this.timelineCallback.bind(this);
-		
+		this.timelineCallback = this.timelineCallback.bind(this);	
 	}
 
 	timelineCallback(httpTimelineResponse, timelineResponseError) {
 		this.setState({
 			timeline: httpTimelineResponse,
 			error: timelineResponseError
-		});
-		
+		});		
 	}
 
 	componentDidMount() {
@@ -31,40 +28,31 @@ class Timeline extends React.Component {
 
 	render(){
 		let timelineResultClass;
-		let timelineResultOutput;
-		
+		let timelineResultOutput;		
 		if(this.state.error != null) {
 			timelineResultOutput = "There was a problem on the server side, please try again later";
-			timelineResultClass = "error";
-			
+			timelineResultClass = "error";	
 		}
 		else if(this.state.timeline == null && this.state.error == null) {
 			timelineResultOutput = " ";
-			timelineResultClass = "pending";
-			
-			
+			timelineResultClass = "pending";	
 		}
 		else {
 			timelineResultOutput = renderedTimeline(this.state.timeline);
-			timelineResultClass = "successGetTimeline";
-			
+			timelineResultClass = "successGetTimeline";			
 		}
 		return React.createElement('div', {className: 'Timeline'}, 
-				[React.createElement('div', {className: 'buttonContainer'}, 
-					React.createElement(TimelineButton, {className: 'timelineButton', callback: this.timelineCallback}, 'Get Timeline')),
-				React.createElement(TimelineResultComp, {className: timelineResultClass, timelineResult: timelineResultOutput}, null)]);
+				[React.createElement('div', {className: 'buttonContainer', key: 'buttonCont'}, 
+					React.createElement(TimelineButton, {className: 'timelineButton', key: 'TimelineBut', callback: this.timelineCallback}, 'Get Timeline')),
+				React.createElement(TimelineResultComp, {className: timelineResultClass, key: 'TimelineResComp', timelineResult: timelineResultOutput}, null)]);
 	}
 }
 
 
-
 window.onload = () => {
-	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header'}, 'Lab for Josephine'), React.createElement(Timeline, {}, null)]);
+	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), React.createElement(Timeline, {key: 'timeline'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
-
-
 }
-
 
 
 export {TimelineResultComp, Timeline};

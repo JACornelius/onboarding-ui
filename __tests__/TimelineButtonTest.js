@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-//import Timeline from '../src/js/main';
+
 import {getTimeline} from '../src/js/services';
 import {TimelineButton} from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
@@ -11,7 +11,7 @@ const testCounter = () => {
 		count++;
 	}
 
-describe('TimelineButton', () => {
+describe("TimelineButton", () => {
 	let wrapper;
 
 	beforeEach(function() {
@@ -36,5 +36,16 @@ describe('TimelineButton', () => {
 
 	it("has 'timelineButton' as className", function() {
 		expect(wrapper.hasClass('timelineButton')).toEqual(true);
+		wrapper.setProps({callback: () => testCounter()});
+		wrapper.simulate("click");
+		expect(count).toEqual(1);
+	});
+
+	it("has 'Get Timeline' as button text", function () {
+		expect(wrapper.text()).toEqual("Get Timeline");
+	});
+
+	it("has 'timelineButton' as className", function() {
+		expect(wrapper.hasClass("timelineButton")).toEqual(true);
 	})
 });

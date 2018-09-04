@@ -9,8 +9,8 @@ let timelineArray;
 
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
-	rawData.forEach( function(tweetObj) {
-		renderTweetObj(tweetObj);
+	rawData.forEach( function(tweetObj, index) {
+		renderTweetObj(tweetObj, index);
 		console.log(tweetObj.message);
 	});
 	console.log(timelineArray);
@@ -18,20 +18,19 @@ const renderedTimeline = (rawData) => {
 
 }
 
-let renderTweetObj = (tweetObj) => {
+let renderTweetObj = (tweetObj, i) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
-				React.createElement('div', {className: 'userName'}, tweetObj.userName),
-				React.createElement('div', {className: 'twitterHandle'}, tweetObj.twitterHandle),
-				React.createElement('img', {className: 'image', src: tweetObj.profileImageUrl}, )
+		let leftColumn = React.createElement('div', {className: 'leftColumn', key: 'leftColumn' + i}, [
+				React.createElement('div', {className: 'userName', key: 'userName' + i}, tweetObj.userName),
+				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, tweetObj.twitterHandle),
+				React.createElement('img', {className: 'image', key: 'image' + i, src: tweetObj.profileImageUrl}, )
 			]);
-		let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
-				React.createElement('div', {className: 'dateBlock'}, dateString),
-				React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
+				React.createElement('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
+				React.createElement('a', {target: '_blank', key: 'linkMessage' + i,href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-		console.log(tweetObj.message);
-		timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
+		timelineArray.push(React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [leftColumn, rightColumn]));
 }
 
 const checkStatus = (response) => {
