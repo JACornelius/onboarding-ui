@@ -24,9 +24,7 @@ describe("TimelineButton", () => {
 			wrapper.setProps({callback: () => testCounter()});
 			wrapper.simulate('click');
 			expect(count).toEqual(1);
-
 		})
-		
 	});
 
 	it("has 'Get Timeline' as button text", function () {
