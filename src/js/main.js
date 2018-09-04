@@ -52,7 +52,7 @@ class Timeline extends React.Component {
 		return React.createElement('div', {className: 'Timeline'}, 
 				[React.createElement('div', {className: 'buttonContainer', key: 'buttonCont'}, 
 					React.createElement(TimelineButton, {className: 'timelineButton', callback: this.timelineCallback}, 'Get Timeline')),
-				React.createElement(TimelineResultComp, {className: 'timelineResultClass', key: 'timelineResultComp', timelineResult: timelineResultOutput}, null)]);
+				React.createElement(TimelineResultComp, {className: timelineResultClass, key: 'timelineResComp', timelineResult: timelineResultOutput}, null)]);
 	}
 }
 
