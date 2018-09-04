@@ -12,9 +12,7 @@ const renderedTimeline = (rawData) => {
 	timelineArray = [];
 	rawData.forEach( function(tweetObj, index) {
 		renderTweetObj(tweetObj, index);
-		console.log(tweetObj.message);
 	});
-	console.log(timelineArray);
 	return timelineArray;
 }
 

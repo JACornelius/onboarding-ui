@@ -43,16 +43,14 @@ class Timeline extends React.Component {
 		}
 		return React.createElement('div', {className: 'Timeline'}, 
 				[React.createElement('div', {className: 'buttonContainer', key: 'buttonCont'}, 
-					React.createElement(TimelineButton, {className: 'timelineButton', key: 'TimelineBut', callback: this.timelineCallback}, 'Get Timeline')),
-				React.createElement(TimelineResultComp, {className: timelineResultClass, key: 'TimelineResComp', timelineResult: timelineResultOutput}, null)]);
+					React.createElement(TimelineButton, {className: 'timelineButton', callback: this.timelineCallback}, 'Get Timeline')),
+				React.createElement(TimelineResultComp, {className: timelineResultClass, key: 'timelineResComp', timelineResult: timelineResultOutput}, null)]);
 	}
 }
-
 
 window.onload = () => {
 	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), React.createElement(Timeline, {key: 'timeline'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
-
 
 export {TimelineResultComp, Timeline};
