@@ -38,7 +38,7 @@ describe('Timeline', () => {
 	it("creates pending TimelineResultComp", function() {
 		wrapper.setState({timeline: null, error: null});
 		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
+		TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
 	})
 
 	it("creates success TimelineResultComp", function() {

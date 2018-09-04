@@ -7,6 +7,7 @@ import {TimelineResultComp} from './components';
 import _ from 'lodash';
 
 
+
 let homeTimelineResultClass;
 let homeTimelineResultOutput;
 let userTimelineResultClass;
@@ -36,6 +37,7 @@ class Timeline extends React.Component {
 			userTimelineError: timelineResponseError
 		});		
 	}
+
 
 	homeTimelineResult() {
 		if(this.state.homeTimelineError) {
@@ -92,3 +94,4 @@ window.onload = () => {
 }
 
 export {TimelineResultComp, Timeline};
+

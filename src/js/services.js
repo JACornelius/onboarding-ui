@@ -60,5 +60,4 @@ const getTimeline = (callback) => {
 		})
 }
 
-
 export{getTimeline, renderedTimeline};
