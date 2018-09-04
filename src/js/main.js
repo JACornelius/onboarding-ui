@@ -35,9 +35,9 @@ class Timeline extends React.Component {
 		this.setState({
 			userTimeline: httpTimelineResponse,
 			userTimelineError: timelineResponseError
-		});		
-	}
-
+		});
+	}		
+	
 
 	homeTimelineResult() {
 		if(this.state.homeTimelineError) {
@@ -84,6 +84,7 @@ class Timeline extends React.Component {
 				React.createElement(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: homeTimelineResultClass, key: 'homeTimelineResComponent', timelineResult: homeTimelineResultOutput}, null),
 				React.createElement(TimelineResultComp, {timelinePlaceholder: 'userTimelinePlaceholder', className: userTimelineResultClass, key: 'userTimelineResComponent', timelineResult: userTimelineResultOutput}, null)]
 		);
+
 	}
 }
 
