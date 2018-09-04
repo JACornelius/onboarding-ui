@@ -10,11 +10,11 @@ import {renderedTimeline} from '../src/js/services';
 describe('Timeline', () => {
 	let wrapper;
 	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
-		"userName":"Josephine Cornelius",
-		"twitterHandle":"JosephineCorn10",
-		"profileImageUrl":"http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg",
-		"statusId":"1035247174618099712",
-		"createdAt":1535657135000}];
+							"userName":"Josephine Cornelius",
+					   "twitterHandle":"JosephineCorn10",
+					 "profileImageUrl":"http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg",
+							"statusId":"1035247174618099712",
+						   "createdAt":1535657135000}];
 
 	beforeEach(function() {
 		wrapper = mount(React.createElement(Timeline));
@@ -42,14 +42,12 @@ describe('Timeline', () => {
 
 	it("creates success TimelineResultComp", function() {
 		wrapper.setState({timeline: mockHttpRespText, error: null});
-		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
 	});
 
 	it("creates fail TimelineResultComp", function() {
 		wrapper.setState({timeline: null, error: 'There was a problem on the server side, please try again later.'});
-		expect(wrapper.containsMatchingElement(React.createElement(
-			TimelineResultComp, {className: "error"}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "error"}, null))).toEqual(true);
 	});
 });
 
