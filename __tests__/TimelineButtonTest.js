@@ -8,7 +8,6 @@ import {TimelineResultComp} from '../src/js/components';
 let count = 0;	
 const testCounter = () => {
 		count++;
-		console.log("count has been incremented");
 	}
 
 describe("TimelineButton", () => {

@@ -21,15 +21,15 @@ describe("TimelineResultComp", () => {
 	});
 
 	it("has a div element", function() {
-		expect(wrapper.find('div').length).toEqual(1);
+		expect(wrapper.find("div").length).toEqual(1);
 	});
 
 	it("has id 'timelinePlaceholder", function() {
-		expect(wrapper.find('#timelinePlaceholder').length).toEqual(1);
+		expect(wrapper.find("#timelinePlaceholder").length).toEqual(1);
 	});
 
 	it("passes timelineResult, className props correctly", function () {
-		wrapper = mount(React.createElement(TimelineResultComp, {className: 'testClassName', timelineResult: 'testTimelineResult'}, null));
+		wrapper = mount(React.createElement(TimelineResultComp, {className: "testClassName", timelineResult: "testTimelineResult"}, null));
 		expect(wrapper.props().timelineResult).toEqual("testTimelineResult");
 		expect(wrapper.hasClass('testClassName')).toEqual(true);
 		expect(wrapper.find("div").length).toEqual(1);
@@ -64,7 +64,7 @@ describe("TimelineResultComp", () => {
 
 	it("contains all div components of the timeline table", function() {	
 		wrapper = mount(React.createElement(TimelineResultComp, {timelineResult: renderedTimeline(mockHttpRespText)}, null));
-		expect(wrapper.find('div').length).toEqual(7);
+		expect(wrapper.find("div").length).toEqual(7);
 	});
 
 });
