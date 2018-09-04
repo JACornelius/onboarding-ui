@@ -9,17 +9,17 @@ const renderedTimeline = (rawData) => {
 		let tweetObj = rawData[i];
 		let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
-				React.createElement('div', {className: 'userName'}, tweetObj.userName),
-				React.createElement('div', {className: 'twitterHandle'}, tweetObj.twitterHandle),
-				React.createElement('img', {className: 'image', src: tweetObj.profileImageUrl}, )
+		let leftColumn = React.createElement('div', {className: 'leftColumn', key: 'leftColumn' + i}, [
+				React.createElement('div', {className: 'userName', key: 'userName' + i}, tweetObj.userName),
+				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, tweetObj.twitterHandle),
+				React.createElement('img', {className: 'image', key: 'img' + i, src: tweetObj.profileImageUrl}, )
 			]);
-		let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
-				React.createElement('div', {className: 'dateBlock'}, dateString),
-				React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
+				React.createElement('div', {className: 'dateBlock',  key: 'dataBlock' + i}, dateString),
+				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
 	
-			timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
+			timelineArray.push(React.createElement('div', {className: 'tweet', key: 'tweet' + i}, [leftColumn, rightColumn]));
 	}
 	return timelineArray;
 
@@ -31,7 +31,7 @@ const getTimeline = (callback) => {
 	xhttp.onreadystatechange = () => {
 	
 		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-			console.log(xhttp.responseText);
+	
 			callback(JSON.parse(xhttp.responseText), null);
 		}
 		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
