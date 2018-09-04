@@ -21,7 +21,7 @@ class Timeline extends React.Component {
 			error: timelineResponseError
 		});		
 	}
-
+	
 	componentDidMount() {
 		getTimeline(this.timelineCallback);
 	}
@@ -43,7 +43,7 @@ class Timeline extends React.Component {
 		}
 		return React.createElement('div', {className: 'Timeline'}, 
 				[React.createElement('div', {className: 'buttonContainer', key: 'buttonCont'}, 
-					React.createElement(TimelineButton, {className: 'timelineButton', callback: this.timelineCallback}, 'Get Timeline')),
+					React.createElement(TimelineButton, {className: 'timelineButton', onClickFunc: () => getTimeline(this.timelineCallback)}, 'Get Timeline')),
 				React.createElement(TimelineResultComp, {className: timelineResultClass, key: 'timelineResComp', timelineResult: timelineResultOutput}, null)]);
 	}
 }
