@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
 import {TimelineButton} from './components';
+<<<<<<< HEAD
 import {getHomeTimeline, getUserTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
@@ -11,6 +12,12 @@ let homeTimelineResultOutput;
 let userTimelineResultClass;
 let userTimelineResultOutput;
 
+=======
+import {getHomeTimeline} from './services';
+import {TimelineResultComp} from './components';
+import _ from 'lodash';
+
+>>>>>>> refactored to states of Timeline Component
 class Timeline extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,7 +26,10 @@ class Timeline extends React.Component {
 			homeTimelineError: null	
 		}
 		this.homeTimelineCallback = this.homeTimelineCallback.bind(this);	
+<<<<<<< HEAD
 		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
+=======
+>>>>>>> refactored to states of Timeline Component
 	}
 
 	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
@@ -36,7 +46,6 @@ class Timeline extends React.Component {
 		});
 	}		
 	
-
 	homeTimelineResult() {
 		if(this.state.homeTimelineError) {
 			homeTimelineResultOutput = "There was a problem on the server side, please try again later";
@@ -82,7 +91,6 @@ class Timeline extends React.Component {
 				React.createElement(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: homeTimelineResultClass, key: 'homeTimelineResComponent', timelineResult: homeTimelineResultOutput}, null),
 				React.createElement(TimelineResultComp, {timelinePlaceholder: 'userTimelinePlaceholder', className: userTimelineResultClass, key: 'userTimelineResComponent', timelineResult: userTimelineResultOutput}, null)]
 		);
-
 	}
 }
 
@@ -93,4 +101,3 @@ window.onload = () => {
 }
 
 export {TimelineResultComp, Timeline};
-
