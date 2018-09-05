@@ -4,6 +4,7 @@ import {renderedTimeline} from './services';
 import {TimelineButton} from './components';
 import {getTimeline} from './services';
 import {TimelineResultComp} from './components';
+import _ from 'lodash';
 
 class Timeline extends React.Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ class Timeline extends React.Component {
 			error: timelineResponseError
 		});		
 	}
-	
+
 	componentDidMount() {
 		getTimeline(this.timelineCallback);
 	}
@@ -29,11 +30,11 @@ class Timeline extends React.Component {
 	render(){
 		let timelineResultClass;
 		let timelineResultOutput;		
-		if(this.state.error != null) {
+		if(_.isNull(this.state.error) == false) {
 			timelineResultOutput = "There was a problem on the server side, please try again later";
 			timelineResultClass = "error";	
 		}
-		else if(this.state.timeline == null && this.state.error == null) {
+		else if(_.isNull(this.state.timeline) && _.isNull(this.state.error)) {
 			timelineResultOutput = " ";
 			timelineResultClass = "pending";	
 		}
