@@ -1,13 +1,13 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {HomeTimeline} from '../src/js/main';
-import {getTimeline} from '../src/js/services';
+import {Timeline} from '../src/js/main';
+import {getHomeTimeline} from '../src/js/services';
 import TimelineButton from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
-describe('HomeTimeline', () => {
+describe('Timeline', () => {
 	let wrapper;
 	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
 							 "userName":"Josephine Cornelius",
@@ -17,7 +17,7 @@ describe('HomeTimeline', () => {
 							 "createdAt":1535657135000}];
 
 	beforeEach(function() {
-		wrapper = mount(React.createElement(HomeTimeline));
+		wrapper = mount(React.createElement(Timeline));
 	});
 
 	it("creates TimelineButton", function() {
@@ -35,17 +35,17 @@ describe('HomeTimeline', () => {
 	});
 
 	it("creates pending TimelineResultComp", function() {
-		wrapper.setState({timeline: null, error: null});
+		wrapper.setState({homeTimeline: null, homeTimelineError: null});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "pending"}, null))).toEqual(true);
 	})
 
 	it("creates success TimelineResultComp", function() {
-		wrapper.setState({timeline: mockHttpRespText, error: null});
+		wrapper.setState({homeTimeline: mockHttpRespText, homeTimelineError: null});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "successGetTimeline"}, null))).toEqual(true);
 	});
 
 	it("creates fail TimelineResultComp", function() {
-		wrapper.setState({timeline: null, error: "There was a problem on the server side, please try again later."});
+		wrapper.setState({homeTimeline: null, homeTimelineError: "There was a problem on the server side, please try again later."});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "error"}, null))).toEqual(true);
 	});
 

@@ -10,7 +10,7 @@ let timelineArray;
 
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
-	return timelineArray = _.map(rawData, (tweetObj, index) => renderTweetObj(tweetObj, index));
+	return timelineArray = _.map(rawData, renderTweetObj);
 }
 
 let renderTweetObj = (tweetObj, i) => {
@@ -41,7 +41,7 @@ const parseJSON = (response) => {
 	return response.json();
 }
 
-const getTimeline = (callback) => {
+const getHomeTimeline = (callback) => {
 	fetch('http://localhost:8080/api/1.0/twitter/timeline')
 		.then(checkStatus)
 		.then(parseJSON)
@@ -53,4 +53,4 @@ const getTimeline = (callback) => {
 		})
 }
 
-export{getTimeline, renderedTimeline};
+export{getHomeTimeline, renderedTimeline};
