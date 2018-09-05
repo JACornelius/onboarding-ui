@@ -8,10 +8,10 @@ class TimelineResultComp extends React.Component {
 	}
 }
 
-class TimelineButton extends React.Component {
+class HomeTimelineButton extends React.Component {
 	render(){
-		return React.createElement('button', {className: 'timelineButton', key: 'timelineButton', onClick: () => getTimeline(this.props.callback)}, 'Get Timeline');
+		return React.createElement('button', {className: 'timelineButton', key: 'timelineButton', onClick: this.props.onClickFunc}, 'Get Home Timeline');
 	}
 }
 
-export{TimelineResultComp, TimelineButton};
+export{TimelineResultComp, HomeTimelineButton};

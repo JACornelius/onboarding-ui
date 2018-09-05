@@ -1,47 +1,56 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import promise from 'es6-promise';
+import fetch from 'isomorphic-fetch';
+import 'babel-polyfill';
+import _ from 'lodash';
+
+const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+let timelineArray;
 
 const renderedTimeline = (rawData) => {		
-	const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-	let timelineArray = [];
-	for(let i in rawData) {
-		let tweetObj = rawData[i];
-		let date = new Date(tweetObj.createdAt);
+	timelineArray = [];
+	return timelineArray = _.map(rawData, renderTweetObj);
+}
+
+let renderTweetObj = (tweetObj, i) => {
+	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
 		let leftColumn = React.createElement('div', {className: 'leftColumn', key: 'leftColumn' + i}, [
 				React.createElement('div', {className: 'userName', key: 'userName' + i}, tweetObj.userName),
 				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, tweetObj.twitterHandle),
-				React.createElement('img', {className: 'image', key: 'img' + i, src: tweetObj.profileImageUrl}, )
+				React.createElement('img', {className: 'image', key: 'image' + i, src: tweetObj.profileImageUrl}, )
 			]);
 		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
-				React.createElement('div', {className: 'dateBlock',  key: 'dataBlock' + i}, dateString),
-				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+				React.createElement('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
+				React.createElement('a', {target: '_blank', key: 'linkMessage' + i,href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-			timelineArray.push(React.createElement('div', {className: 'tweet', key: 'tweet' + i}, [leftColumn, rightColumn]));
-	}
-	return timelineArray;
-
+		return React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [leftColumn, rightColumn]);
 }
 
-const getTimeline = (callback) => {
-	let xhttp = new XMLHttpRequest();
-	let URL = "http://localhost:8080/api/1.0/twitter/timeline";
-	xhttp.onreadystatechange = () => {
-	
-		if(xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200){
-	
-			callback(JSON.parse(xhttp.responseText), null);
-		}
-		else if(xhttp.readyState != XMLHttpRequest.DONE){ 
-			callback(null, null);
-
-	    }
-	    else{
-	    	callback(null, "There was a problem on the server side, please try again later.");
-	    }
+const checkStatus = (response) => {
+	if(response.status == 200) {
+		return Promise.resolve(response);
 	}
-	xhttp.open("GET", URL, true);
-	xhttp.send();
+	else {
+		return Promise.reject(new Error());
+	}
 }
 
-export{getTimeline, renderedTimeline};
+const parseJSON = (response) => {
+	return response.json();
+}
+
+const getHomeTimeline = (callback) => {
+	fetch('http://localhost:8080/api/1.0/twitter/timeline')
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(function(data) {
+			callback(data, null);
+		})
+		.catch(function(error) {
+			callback(null, true);
+		})
+}
+
+export{getHomeTimeline, renderedTimeline};
