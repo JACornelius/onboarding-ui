@@ -1,13 +1,13 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {Timeline} from '../src/js/main';
+import {HomeTimeline} from '../src/js/main';
 import {getTimeline} from '../src/js/services';
 import TimelineButton from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
-describe('Timeline', () => {
+describe('HomeTimeline', () => {
 	let wrapper;
 	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
 							 "userName":"Josephine Cornelius",
@@ -15,9 +15,9 @@ describe('Timeline', () => {
 							 "profileImageUrl":"http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg",
 							 "statusId":"1035247174618099712",
 							 "createdAt":1535657135000}];
-							 
+
 	beforeEach(function() {
-		wrapper = mount(React.createElement(Timeline));
+		wrapper = mount(React.createElement(HomeTimeline));
 	});
 
 	it("creates TimelineButton", function() {
@@ -31,12 +31,12 @@ describe('Timeline', () => {
 
 	it("wraps the button container, button, and timeline placeholder with a div", function() {
 		expect(wrapper.children.length).toEqual(1);
-		expect(wrapper.find('div').length).toEqual(3);
+		expect(wrapper.find("div").length).toEqual(3);
 	});
 
 	it("creates pending TimelineResultComp", function() {
 		wrapper.setState({timeline: null, error: null});
-		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "pending"}, null))).toEqual(true);
 	})
 
 	it("creates success TimelineResultComp", function() {
@@ -45,7 +45,7 @@ describe('Timeline', () => {
 	});
 
 	it("creates fail TimelineResultComp", function() {
-		wrapper.setState({timeline: null, error: 'There was a problem on the server side, please try again later.'});
+		wrapper.setState({timeline: null, error: "There was a problem on the server side, please try again later."});
 		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "error"}, null))).toEqual(true);
 	});
 

@@ -6,7 +6,7 @@ import {getTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
 
-class Timeline extends React.Component {
+class HomeTimeline extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -23,6 +23,7 @@ class Timeline extends React.Component {
 		});		
 	}
 
+
 	componentDidMount() {
 		getTimeline(this.timelineCallback);
 	}
@@ -30,7 +31,7 @@ class Timeline extends React.Component {
 	render(){
 		let timelineResultClass;
 		let timelineResultOutput;		
-		if(_.isObject(this.state.error)) {
+		if(this.state.error) {
 			timelineResultOutput = "There was a problem on the server side, please try again later";
 			timelineResultClass = "error";	
 		}
@@ -50,8 +51,8 @@ class Timeline extends React.Component {
 }
 
 window.onload = () => {
-	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), React.createElement(Timeline, {key: 'timeline'}, null)]);
+	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), React.createElement(HomeTimeline, {key: 'timeline'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export {TimelineResultComp, Timeline};
+export {TimelineResultComp, HomeTimeline};

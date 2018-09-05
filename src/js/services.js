@@ -10,10 +10,7 @@ let timelineArray;
 
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
-	timelineArray = _.map(rawData, function(tweetObj, index) {
-		return renderTweetObj(tweetObj, index);
-	});
-	return timelineArray;
+	return timelineArray = _.map(rawData, (tweetObj, index) => renderTweetObj(tweetObj, index));
 }
 
 let renderTweetObj = (tweetObj, i) => {
@@ -36,7 +33,7 @@ const checkStatus = (response) => {
 		return Promise.resolve(response);
 	}
 	else {
-		return Promise.reject(new Error("There was a problem on the server side, please try again later."));
+		return Promise.reject(new Error());
 	}
 }
 
@@ -52,7 +49,7 @@ const getTimeline = (callback) => {
 			callback(data, null);
 		})
 		.catch(function(error) {
-			callback(null, error);
+			callback(null, true);
 		})
 }
 

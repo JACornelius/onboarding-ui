@@ -19,7 +19,7 @@ describe("TimelineButton", () => {
 
 	it("onClick calls function", function() {
 		wrapper.setProps({onClickFunc: () => testCounter()});
-		wrapper.simulate('click');
+		wrapper.simulate("click");
 		expect(count).toEqual(1);
 	});
 
