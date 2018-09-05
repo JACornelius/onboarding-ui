@@ -10,8 +10,8 @@ let timelineArray;
 
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
-	_.forEach(rawData, function(tweetObj, index) {
-		renderTweetObj(tweetObj, index);
+	timelineArray = _.map(rawData, function(tweetObj, index) {
+		return renderTweetObj(tweetObj, index);
 	});
 	return timelineArray;
 }
@@ -28,8 +28,7 @@ let renderTweetObj = (tweetObj) => {
 				React.createElement('div', {className: 'dateBlock'}, dateString),
 				React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-		console.log(tweetObj.message);
-		timelineArray.push(React.createElement('div', {className: 'tweet'}, [leftColumn, rightColumn]));
+		return React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [leftColumn, rightColumn]);
 }
 
 const checkStatus = (response) => {
