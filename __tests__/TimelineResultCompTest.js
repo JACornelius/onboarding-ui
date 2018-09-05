@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {Timeline} from '../src/js/main.js';
+import {HomeTimeline} from '../src/js/main.js';
 import {getTimeline} from '../src/js/services';
 import {TimelineButton} from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';

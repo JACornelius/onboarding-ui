@@ -1,13 +1,13 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {Timeline} from '../src/js/main';
+import {HomeTimeline} from '../src/js/main';
 import {getTimeline} from '../src/js/services';
 import TimelineButton from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
-describe('Timeline', () => {
+describe('HomeTimeline', () => {
 	let wrapper;
 	let mockHttpRespText = [{"message":"mackelmorer AND WE DANCEEDDDDDe",
 							 "userName":"Josephine Cornelius",
@@ -19,7 +19,7 @@ describe('Timeline', () => {
 	let mockEmptyHttpRespText = [];
 
 	beforeEach(function() {
-		wrapper = mount(React.createElement(Timeline));
+		wrapper = mount(React.createElement(HomeTimeline));
 	});
 
 	it("creates 2 TimelineButton, one user timeline, one home timeline", function() {
@@ -37,8 +37,7 @@ describe('Timeline', () => {
 
 	it("creates pending TimelineResultComp", function() {
 		wrapper.setState({timeline: null, error: null});
-		expect(wrapper.containsMatchingElement(React.createElement(
-		TimelineResultComp, {className: 'pending'}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineResultComp, {className: "pending"}, null))).toEqual(true);
 	})
 
 	it("creates success TimelineResultComp", function() {
