@@ -3,7 +3,7 @@ import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main.js';
 import {getHomeTimeline} from '../src/js/services';
-import {TimelineButton} from '../src/js/components';
+import {HomeTimelineButton} from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 

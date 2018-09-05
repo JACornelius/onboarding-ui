@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton} from './components';
+import {HomeTimelineButton} from './components';
 import {getHomeTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
@@ -45,7 +45,7 @@ class Timeline extends React.Component {
 		}
 		return React.createElement('div', {className: 'Timeline'}, 
 				[React.createElement('div', {className: 'buttonContainer', key: 'buttonCont'}, 
-					React.createElement(TimelineButton, {className: 'timelineButton', onClickFunc: () => getHomeTimeline(this.homeTimelineCallback)}, 'Get Timeline')),
+					React.createElement(HomeTimelineButton, {className: 'timelineButton', onClickFunc: () => getHomeTimeline(this.homeTimelineCallback)}, 'Get Timeline')),
 				React.createElement(TimelineResultComp, {className: homeTimelineResultClass, key: 'timelineResComp', timelineResult: homeTimelineResultOutput}, null)]);
 	}
 }

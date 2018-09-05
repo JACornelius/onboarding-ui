@@ -3,7 +3,7 @@ import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Timeline} from '../src/js/main';
 import {getHomeTimeline} from '../src/js/services';
-import TimelineButton from '../src/js/components';
+import HomeTimelineButton from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 import {renderedTimeline} from '../src/js/services';
 
@@ -22,7 +22,7 @@ describe('Timeline', () => {
 
 	it("creates TimelineButton", function() {
 		expect(wrapper.find('button').length).toEqual(1);
-		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
+		expect(wrapper.containsMatchingElement(React.createElement(HomeTimelineButton))).toEqual(true);	
 	});
 
 	it("creates TimelineResultComp", function() {
