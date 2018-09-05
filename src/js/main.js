@@ -30,7 +30,7 @@ class Timeline extends React.Component {
 	render(){
 		let timelineResultClass;
 		let timelineResultOutput;		
-		if(_.isNull(this.state.error) == false) {
+		if(_.isObject(this.state.error)) {
 			timelineResultOutput = "There was a problem on the server side, please try again later";
 			timelineResultClass = "error";	
 		}
