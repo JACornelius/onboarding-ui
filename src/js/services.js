@@ -10,16 +10,21 @@ let timelineArray;
 
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
-	return timelineArray = _.map(rawData, renderTweetObj);
+	if(_.size(rawData) > 0) {	
+		return timelineArray = _.map(rawData, renderTweetObj);
+	}
+	else {
+		return React.createElement('div', {className: 'emptyUserTimeline'}, 'No tweets available, post a tweet!');
+	}
 }
 
 let renderTweetObj = (tweetObj) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let leftColumn = React.createElement('div', {className: 'leftColumn'}, [
-				React.createElement('div', {className: 'userName'}, tweetObj.userName),
-				React.createElement('div', {className: 'twitterHandle'}, tweetObj.twitterHandle),
-				React.createElement('img', {className: 'image', src: tweetObj.profileImageUrl}, )
+		let leftColumn = React.createElement('div', {className: 'leftColumn', key: 'leftColumn' + i}, [
+				React.createElement('img', {className: 'image', key: 'image' + i, src: tweetObj.profileImageUrl}), 
+				React.createElement('div', {className: 'userName', key: 'userName' + i}, tweetObj.userName),
+				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, tweetObj.twitterHandle)
 			]);
 		let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
 				React.createElement('div', {className: 'dateBlock'}, dateString),
@@ -46,6 +51,19 @@ const getHomeTimeline = (callback) => {
 		.then(checkStatus)
 		.then(parseJSON)
 		.then(function(data) {
+			callback(data, false);
+		})
+		.catch(function(error) {
+			callback(null, true);
+		})
+}
+
+
+const getUserTimeline = (callback) => {
+	fetch('http://localhost:8080/api/1.0/twitter/timeline/user')
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(function(data) {
 			callback(data, null);
 		})
 		.catch(function(error) {
@@ -53,4 +71,4 @@ const getHomeTimeline = (callback) => {
 		})
 }
 
-export{getHomeTimeline, renderedTimeline};
+export{getHomeTimeline, getUserTimeline, renderedTimeline};

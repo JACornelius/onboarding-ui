@@ -17,87 +17,96 @@
 }
 
 .buttonContainer {
-	@include size(25px, 1000px)
+	@include size(25px, 1500px)
     margin: auto;
-
-	button{
-			float: right;
-		    top: 15px;
-		}
+	.homeTimelineButton {
+		float: left;
+		top: 15px;
+	}
+	.userTimelineButton {
+		float: right;
+		top: 15px;
+	}
 }
 
-
 .error {
-		color: red;
-		text-align: center;
-		padding: 10px 0px;
-		border-color: black;
-	}
+	color: red;
+	text-align: center;
+	padding: 10px 0px;
+	border-color: black;
+}
 
-#timelinePlaceholder {
-	width: 1000px;
-	margin: 10px auto auto;
+#homeTimelinePlaceholder {
+	float: left;
+}
 
-	border: {
-		style: solid;
-		width: 1px;
-	}
+#userTimelinePlaceholder {
+	float: right;
+}
 
-	.tweet {
-		padding: 10px 0px;
-		@include size(110px, 1000px);
-		border-bottom: 1px solid lightgrey;
-		
-		&:nth-child(odd) {
-				background-color: #e8f5fd;
+.Timeline{
+	width: 1500px;
+	margin: auto;
+	#homeTimelinePlaceholder, #userTimelinePlaceholder {
+		width: 700px;
+		margin-top: 10px;
+		border: {
+			style: solid;
+			width: 1px;
 		}
-		&:nth-child(even) {
-				background-color: #e9e9e9;
-		}
-		.rightColumn {
-			padding-top: 30px;
-			@include size(60px, 80%);
-			float: right;
-			margin: auto;
-			text-align: left;
 
-			.dateBlock {
-				font-size: 12px;
-				padding-bottom: 5px;
-				font-style: italic;
-			}	
-
-		
-		}
-		.leftColumn {
-			padding: 10px 0px 0px 10px;
-			@include size(100px, 15%);
-			clear: both;
-			float: left;
-			margin: auto;
-			vertical-align: middle;
-
-			.image {
-				@include size(60px, 60px);
-				border-radius: 50%;
-				display: block;
-				margin: 0px auto;
-			}
+		.tweet {
+			padding: 10px 0px;
+			@include size(110px, 700px);
+			border-bottom: 1px solid lightgrey;
 			
-			.userName {
-				padding-top: 5px;
-				width: 150px;
-				@include text(15px);
-				font-weight: bold;
-			
+			&:nth-child(odd) {
+					background-color: #e8f5fd;
 			}
+			&:nth-child(even) {
+					background-color: #e9e9e9;
+			}
+			.rightColumn {
+				padding-top: 30px;
+				@include size(60px, 75%);
+				float: right;
+				margin: auto;
+				text-align: left;
 
-			.twitterHandle {
-				@include text(12px);
-			
+				.dateBlock {
+					font-size: 12px;
+					padding-bottom: 5px;
+					font-style: italic;
+				}	
+			}
+			.leftColumn {
+				padding: 10px 0px 0px 10px;
+				@include size(100px, 20%);
+				clear: both;
+				float: left;
+				margin: auto;
+				vertical-align: middle;
+
+				.image {
+					@include size(60px, 60px);
+					border-radius: 50%;
+					display: block;
+					margin: 0px auto;
+				}
+				
+				.userName {
+					padding-top: 5px;
+					@include text(15px);
+					font-weight: bold;
+				
+				}
+
+				.twitterHandle {
+					@include text(12px);
+				}
 			}
 		}
-	}
+	}	
 }
 	
 

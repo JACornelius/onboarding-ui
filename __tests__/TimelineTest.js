@@ -24,6 +24,7 @@ describe('Timeline', () => {
 
 	it("creates 2 TimelineButton, one user timeline, one home timeline", function() {
 		expect(wrapper.find('button').length).toEqual(2);
+		expect(wrapper.containsMatchingElement(React.createElement(TimelineButton))).toEqual(true);	
 	});
 
 	it("creates TimelineResultComp", function() {
