@@ -18,7 +18,7 @@ const renderedTimeline = (rawData) => {
 	}
 }
 
-let renderTweetObj = (tweetObj) => {
+let renderTweetObj = (tweetObj, i) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
 		let leftColumn = React.createElement('div', {className: 'leftColumn', key: 'leftColumn' + i}, [
@@ -26,9 +26,9 @@ let renderTweetObj = (tweetObj) => {
 				React.createElement('div', {className: 'userName', key: 'userName' + i}, tweetObj.userName),
 				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, tweetObj.twitterHandle)
 			]);
-		let rightColumn = React.createElement('div', {className: 'rightColumn'}, [
-				React.createElement('div', {className: 'dateBlock'}, dateString),
-				React.createElement('a', {target: '_blank', href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
+				React.createElement('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
+				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
 		return React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [leftColumn, rightColumn]);
 }
