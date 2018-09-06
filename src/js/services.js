@@ -10,7 +10,6 @@ let timelineArray;
 
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
-	rawData = [];
 	if(_.size(rawData) > 0) {	
 		return timelineArray = _.map(rawData, renderTweetObj);
 	}
