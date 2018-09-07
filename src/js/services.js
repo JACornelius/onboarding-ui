@@ -9,20 +9,23 @@ import {User} from './components';
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let timelineArray;
 const e = React.createElement;
-const renderedTimeline = (rawData) => {		
+const renderedTimeline = (rawData, type) => {		
 	timelineArray = [];
 	if(_.size(rawData) > 0) {	
-		return timelineArray = _.map(rawData, renderTweetObj);
+		timelineArray = _.map(rawData, function(tweetObj, i) {
+			return renderTweetObj(tweetObj, i, type);
+		});
+		return timelineArray;
 	}
 	else {
 		return e('div', {className: 'emptyUserTimeline'}, 'No tweets available, post a tweet!');
 	}
 }
 
-let renderTweetObj = (tweetObj, i) => {
+let renderTweetObj = (tweetObj, i, type) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let UserObj = e(User, {rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i}, null);
+		let UserObj = e(User, {timelineType: type, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i}, null);
 		let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
 				e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
 				e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)

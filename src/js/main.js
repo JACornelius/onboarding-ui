@@ -48,7 +48,7 @@ class Timelines extends React.Component {
 			homeTimelineResultClass = "pending";	
 		}
 		else {
-			homeTimelineResultOutput = renderedTimeline(this.state.homeTimeline);
+			homeTimelineResultOutput = renderedTimeline(this.state.homeTimeline, "home");
 			homeTimelineResultClass = "successGetTimeline";
 		}
 	}
@@ -63,7 +63,7 @@ class Timelines extends React.Component {
 			userTimelineResultClass = "pending";	
 		}
 		else {
-			userTimelineResultOutput = renderedTimeline(this.state.userTimeline);
+			userTimelineResultOutput = renderedTimeline(this.state.userTimeline, "user");
 			userTimelineResultClass = "successGetTimeline";			
 		}
 	}
