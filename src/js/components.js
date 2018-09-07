@@ -27,4 +27,23 @@ class User extends React.Component {
 	}
 }
 
-export{TimelineResultComp, TimelineButton, User};
+class TimelineComp extends React.Component {
+	render() {
+
+		if(this.props.timelineType == 'User') {
+			return React.createElement('div', {className: 'userTimelineContainer', key: 'userTimelineCont'},
+					 	[React.createElement('h2', {className: 'header', key: 'userTimelineHeader'}, 'User Timeline'),
+					 	 React.createElement(TimelineButton, {className: 'userTimelineButton', key: 'userTimelineButt',onClickFunc: this.props.buttonFunc, buttonText: 'Get User Timeline'}, null),
+					 	 React.createElement(TimelineResultComp, {timelinePlaceholder: 'userTimelinePlaceholder', className: this.props.resultClass, key: 'userTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
+		}
+		else {
+			return React.createElement('div', {className: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
+						[React.createElement('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
+						 React.createElement(TimelineButton, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: this.props.buttonFunc, buttonText: 'Get Home Timeline'}, null),
+						 React.createElement(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: this.props.resultClass, key: 'homeTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
+		}
+	}
+					 
+}
+
+export{TimelineResultComp, TimelineButton, User, TimelineComp};

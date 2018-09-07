@@ -22,7 +22,7 @@ const renderedTimeline = (rawData) => {
 let renderTweetObj = (tweetObj, i) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let UserObj = React.createElement(User, {rawUserTweetObj: tweetObj, index: i}, null);
+		let UserObj = React.createElement(User, {rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i}, null);
 		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
 				React.createElement('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
 				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)

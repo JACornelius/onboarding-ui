@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton, User} from './components';
+import {TimelineButton, User, TimelineComp} from './components';
 import {getHomeTimeline, getUserTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
@@ -11,7 +11,7 @@ let homeTimelineResultOutput;
 let userTimelineResultClass;
 let userTimelineResultOutput;
 
-class Timeline extends React.Component {
+class Timelines extends React.Component {
 	
 	constructor(props) {
 		super(props);
@@ -77,22 +77,18 @@ class Timeline extends React.Component {
 	render(){
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
-		return React.createElement('div', {className: 'Timeline'},
-					[React.createElement('div', {className: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
-						[React.createElement('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
-						 React.createElement(TimelineButton, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: () => getHomeTimeline(this.homeTimelineCallback), buttonText: 'Get Home Timeline'}, null),
-						 React.createElement(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: homeTimelineResultClass, key: 'homeTimelineResComponent', timelineResult: homeTimelineResultOutput}, null)]),
-					 React.createElement('div', {className: 'userTimelineContainer', key: 'userTimelineCont'},
-					 	[React.createElement('h2', {className: 'header', key: 'userTimelineHeader'}, 'User Timeline'),
-					 	 React.createElement(TimelineButton, {className: 'userTimelineButton', key: 'userTimelineButt',onClickFunc: () => getUserTimeline(this.userTimelineCallback), buttonText: 'Get User Timeline'}, null),
-					 	 React.createElement(TimelineResultComp, {timelinePlaceholder: 'userTimelinePlaceholder', className: userTimelineResultClass, key: 'userTimelineResComponent', timelineResult: userTimelineResultOutput}, null)]
-					 )]);
+		return React.createElement('div', {className: 'Timelines'},[
+			React.createElement(TimelineComp, {timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
+
+			React.createElement(TimelineComp, {timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);
+
+					
 	}
 }
 
 window.onload = () => {
 	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
-		React.createElement(Timeline, {key: 'timeline'}, null)]);
+		React.createElement(Timelines, {key: 'timelines'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
