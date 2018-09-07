@@ -78,9 +78,8 @@ class Timelines extends React.Component {
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
 		return React.createElement('div', {className: 'Timelines'},[
-			React.createElement(TimelineComp, {timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
-
-			React.createElement(TimelineComp, {timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);
+			React.createElement(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
+			React.createElement(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);
 
 					
 	}
@@ -92,4 +91,4 @@ window.onload = () => {
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export {TimelineResultComp, Timeline};
+export {TimelineResultComp, Timelines};

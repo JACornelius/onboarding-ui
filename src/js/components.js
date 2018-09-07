@@ -18,7 +18,6 @@ class User extends React.Component {
 	render(){
 		let userTweetObj = this.props.rawUserTweetObj;
 		let i = this.props.index;
-		console.log(this.props.rawUserTweetObj.userName);
 		return React.createElement('div', {className: 'User', key: 'User' + i}, [
 				React.createElement('img', {className: 'image', key: 'image' + i, src: userTweetObj.profileImageUrl}, null), 
 				React.createElement('div', {className: 'userName', key: 'userName' + i}, userTweetObj.userName),
@@ -29,7 +28,6 @@ class User extends React.Component {
 
 class TimelineComp extends React.Component {
 	render() {
-
 		if(this.props.timelineType == 'User') {
 			return React.createElement('div', {className: 'userTimelineContainer', key: 'userTimelineCont'},
 					 	[React.createElement('h2', {className: 'header', key: 'userTimelineHeader'}, 'User Timeline'),
