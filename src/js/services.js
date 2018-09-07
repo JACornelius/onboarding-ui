@@ -55,7 +55,6 @@ const getHomeTimeline = (callback) => {
 		})
 }
 
-
 const getUserTimeline = (callback) => {
 	fetch('http://localhost:8080/api/1.0/twitter/timeline/user')
 		.then(checkStatus)
