@@ -15,10 +15,14 @@ node src/js/main.js
 ```
 ### Gulp Version 3.0.1
 ```
-gulp default
+gulp dev
 ```
 And index.html can be viewed at http://localhost:9000
 
-
+## Running Unit Tests
+Inside the onboarding-ui folder:
+```
+npm test
+```
 
 
