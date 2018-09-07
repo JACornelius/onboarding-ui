@@ -4,7 +4,7 @@ import {getTimeline} from './services'
 
 class TimelineResultComp extends React.Component {
 	render() {
-		return React.createElement('div', {id: this.props.timelinePlaceholder, className: `${this.props.className}`, key: 'timelineResComp'}, this.props.timelineResult);
+		return React.createElement('div', {id: this.props.timelinePlaceholder, className: 'this.props.className', key: 'timelineResComp'}, this.props.timelineResult);
 	}
 }
 
