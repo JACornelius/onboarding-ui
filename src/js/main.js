@@ -21,7 +21,6 @@ class Timelines extends React.Component {
 		}
 		this.homeTimelineCallback = this.homeTimelineCallback.bind(this);	
 		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
-
 	}
 
 	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
@@ -37,7 +36,6 @@ class Timelines extends React.Component {
 			userTimelineError: timelineResponseError
 		});
 	}		
-	
 
 	homeTimelineResult() {
 		if(this.state.homeTimelineError) {
@@ -79,9 +77,7 @@ class Timelines extends React.Component {
 		{this.userTimelineResult()};
 		return React.createElement('div', {className: 'Timelines'},[
 			React.createElement(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
-			React.createElement(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);
-
-					
+			React.createElement(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
 	}
 }
 
