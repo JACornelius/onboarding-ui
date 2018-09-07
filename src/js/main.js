@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton} from './components';
+import {TimelineButton, User} from './components';
 import {getHomeTimeline, getUserTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';

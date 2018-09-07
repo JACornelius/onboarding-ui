@@ -4,6 +4,7 @@ import promise from 'es6-promise';
 import fetch from 'isomorphic-fetch';
 import 'babel-polyfill';
 import _ from 'lodash';
+import {User} from './components';
 
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let timelineArray;
@@ -21,16 +22,12 @@ const renderedTimeline = (rawData) => {
 let renderTweetObj = (tweetObj, i) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let leftColumn = React.createElement('div', {className: 'leftColumn', key: 'leftColumn' + i}, [
-				React.createElement('img', {className: 'image', key: 'image' + i, src: tweetObj.profileImageUrl}), 
-				React.createElement('div', {className: 'userName', key: 'userName' + i}, tweetObj.userName),
-				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, tweetObj.twitterHandle)
-			]);
+		let UserObj = React.createElement(User, {rawUserTweetObj: tweetObj, index: i}, null);
 		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
 				React.createElement('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
 				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-		return React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [leftColumn, rightColumn]);
+		return React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
 }
 
 const checkStatus = (response) => {

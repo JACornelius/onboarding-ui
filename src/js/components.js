@@ -14,4 +14,17 @@ class TimelineButton extends React.Component {
 	}
 }
 
-export{TimelineResultComp, TimelineButton};
+class User extends React.Component {
+	render(){
+		let userTweetObj = this.props.rawUserTweetObj;
+		let i = this.props.index;
+		console.log(this.props.rawUserTweetObj.userName);
+		return React.createElement('div', {className: 'User', key: 'User' + i}, [
+				React.createElement('img', {className: 'image', key: 'image' + i, src: userTweetObj.profileImageUrl}, null), 
+				React.createElement('div', {className: 'userName', key: 'userName' + i}, userTweetObj.userName),
+				React.createElement('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, userTweetObj.twitterHandle)
+			]);
+	}
+}
+
+export{TimelineResultComp, TimelineButton, User};
