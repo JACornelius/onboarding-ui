@@ -8,6 +8,15 @@
 	width: $width;
 }
 
+@mixin alternatingColors($oddsColor, $evensColor) {
+	&:nth-child(odd) {
+		background-color: $oddsColor;
+	}
+	&:nth-child(even) {
+		background-color: $evensColor;
+	}
+}
+
 .header {
 	@include text(40px);
 	padding-top: 10px;
@@ -33,12 +42,7 @@
 	}
 	#homeTimelinePlaceholder {
 		.tweet {
-			&:nth-child(odd) {
-					background-color: #e8f5fd;
-			}
-			&:nth-child(even) {
-					background-color: #e9e9e9;
-			}
+			@include alternatingColors(#e8f5fd, #e9e9e9)
 		}
 	}
 }
@@ -53,12 +57,7 @@
 	}
 	#userTimelinePlaceholder {
 		.tweet {
-			&:nth-child(odd) {
-					background-color: #f5f8fa;
-			}
-			&:nth-child(even) {
-					background-color: #1da1f2;
-			}
+			@include alternatingColors(#f5f8fa, #1da1f2)
 		}
 	}
 }

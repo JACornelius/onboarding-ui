@@ -8,26 +8,26 @@ import {User} from './components';
 
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let timelineArray;
-
+const e = React.createElement;
 const renderedTimeline = (rawData) => {		
 	timelineArray = [];
 	if(_.size(rawData) > 0) {	
 		return timelineArray = _.map(rawData, renderTweetObj);
 	}
 	else {
-		return React.createElement('div', {className: 'emptyUserTimeline'}, 'No tweets available, post a tweet!');
+		return e('div', {className: 'emptyUserTimeline'}, 'No tweets available, post a tweet!');
 	}
 }
 
 let renderTweetObj = (tweetObj, i) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let UserObj = React.createElement(User, {rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i}, null);
-		let rightColumn = React.createElement('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
-				React.createElement('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
-				React.createElement('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+		let UserObj = e(User, {rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i}, null);
+		let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
+				e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
+				e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
 			]);
-		return React.createElement('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
+		return e('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
 }
 
 const checkStatus = (response) => {

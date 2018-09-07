@@ -12,9 +12,9 @@ const testCounter = () => {
 
 describe("TimelineButton", () => {
 	let wrapper;
-
+	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = shallow(React.createElement(TimelineButton, {}, null));
+		wrapper = shallow(e(TimelineButton, {}, null));
 	});
 
 	it("onClick calls function", function() {

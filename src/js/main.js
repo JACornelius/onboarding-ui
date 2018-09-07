@@ -10,6 +10,7 @@ let homeTimelineResultClass;
 let homeTimelineResultOutput;
 let userTimelineResultClass;
 let userTimelineResultOutput;
+const e = React.createElement;
 
 class Timelines extends React.Component {
 	
@@ -75,15 +76,15 @@ class Timelines extends React.Component {
 	render(){
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
-		return React.createElement('div', {className: 'Timelines'},[
-			React.createElement(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
-			React.createElement(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
+		return e('div', {className: 'Timelines'},[
+			e(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
+			e(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
 	}
 }
 
 window.onload = () => {
-	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
-		React.createElement(Timelines, {key: 'timelines'}, null)]);
+	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
+		e(Timelines, {key: 'timelines'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 

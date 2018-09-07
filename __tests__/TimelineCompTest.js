@@ -5,9 +5,9 @@ import {TimelineComp, TimelineResultComp} from '../src/js/components';
 
 describe("TimelineComp", () => {
 	let wrapper;
-
+	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(React.createElement(TimelineComp));
+		wrapper = mount(e(TimelineComp));
 		wrapper.setProps({timelineType: "User"});
 	});
 
@@ -28,7 +28,7 @@ describe("TimelineComp", () => {
 		wrapper.setProps({resultOutput: "testResultOutput"});
 		wrapper.setProps({resultClass: "testResultClass"});
 		expect(wrapper.containsMatchingElement(
-			React.createElement(TimelineResultComp, {timelinePlaceholder: "userTimelinePlaceholder", className: "testResultClass", timelineResult: "testResultOutput"}, null))).toEqual(true);
+			e(TimelineResultComp, {timelinePlaceholder: "userTimelinePlaceholder", className: "testResultClass", timelineResult: "testResultOutput"}, null))).toEqual(true);
 	});
 
 })

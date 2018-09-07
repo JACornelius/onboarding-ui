@@ -11,9 +11,9 @@ describe("User", () => {
 							 "profileImageUrl":"http://pbs.twimg.com/profile_images/1031635661701308416/C0nXsZv0_normal.jpg",
 							 "statusId":"1035247174618099712",
 							 "createdAt":1535657135000};
-
+	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(React.createElement(User, {rawUserTweetObj: mockTweetObj, index: 1}, null));
+		wrapper = mount(e(User, {rawUserTweetObj: mockTweetObj, index: 1}, null));
 	});
 
 	it("creates User div", function() {
