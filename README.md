@@ -1,24 +1,22 @@
 # TwitterApp NodeJS Version
 
-## Installations
-Express and Request is required to be installed and can be done by command line:
-```
-sudo npm install
-```
+### NodeJS Version 8.11.3
+
+## Getting Started
+Have the latest npm and NodeJS installed. And install the project dependencies ```sudo npm install``` from the root directory.
 
 ## Running the Server
-Run the project TwitterApp located at https://github.com/JACornelius/TwitterApp. While TwitterApp is running, in another terminal run TwitterApp NodeJS.
-Inside the onboarding-ui folder:
-### NodeJS Version 8.11.3
-```
-node src/js/main.js
-```
-### Gulp Version 3.0.1
-```
-gulp default
-```
-And index.html can be viewed at http://localhost:9000
+Follow the READme to start the backend server at https://github.com/JACornelius/TwitterApp. 
+In another terminal run the front end from the root directory:
+* To run just the server: ```gulp server```
+* To run everything: ```gulp dev```
 
+The front end can be viewed at http://localhost:9000.
 
+## Running Unit Tests
+Inside the root directory:
+```
+npm test
+```
 
 

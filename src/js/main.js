@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {HomeTimelineButton} from './components';
-import {getHomeTimeline} from './services';
+import {TimelineButton, User, TimelineComp} from './components';
+import {getHomeTimeline, getUserTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
 
-class Timeline extends React.Component {
+let homeTimelineResultClass;
+let homeTimelineResultOutput;
+let userTimelineResultClass;
+let userTimelineResultOutput;
+const e = React.createElement;
+
+class Timelines extends React.Component {
+	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -14,6 +21,7 @@ class Timeline extends React.Component {
 			homeTimelineError: null	
 		}
 		this.homeTimelineCallback = this.homeTimelineCallback.bind(this);	
+		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
 	}
 
 	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
@@ -23,14 +31,14 @@ class Timeline extends React.Component {
 		});		
 	}
 
+	userTimelineCallback(httpTimelineResponse, timelineResponseError) {
+		this.setState({
+			userTimeline: httpTimelineResponse,
+			userTimelineError: timelineResponseError
+		});
+	}		
 
-	componentDidMount() {
-		getHomeTimeline(this.homeTimelineCallback);
-	}
-
-	render(){
-		let homeTimelineResultClass;
-		let homeTimelineResultOutput;		
+	homeTimelineResult() {
 		if(this.state.homeTimelineError) {
 			homeTimelineResultOutput = "There was a problem on the server side, please try again later";
 			homeTimelineResultClass = "error";	
@@ -40,19 +48,44 @@ class Timeline extends React.Component {
 			homeTimelineResultClass = "pending";	
 		}
 		else {
-			homeTimelineResultOutput = renderedTimeline(this.state.homeTimeline);
-			homeTimelineResultClass = "successGetTimeline";			
+			homeTimelineResultOutput = renderedTimeline(this.state.homeTimeline, true);
+			homeTimelineResultClass = "successGetTimeline";
 		}
-		return React.createElement('div', {className: 'Timeline'}, 
-				[React.createElement('div', {className: 'buttonContainer', key: 'buttonCont'}, 
-					React.createElement(HomeTimelineButton, {className: 'timelineButton', onClickFunc: () => getHomeTimeline(this.homeTimelineCallback)}, 'Get Timeline')),
-				React.createElement(TimelineResultComp, {className: homeTimelineResultClass, key: 'timelineResComp', timelineResult: homeTimelineResultOutput}, null)]);
+	}
+
+	userTimelineResult() {
+		if(this.state.userTimelineError) {
+			userTimelineResultOutput = "There was a problem on the server side, please try again later";
+			userTimelineResultClass = "error";	
+		}
+		else if(_.isNull(this.state.homeTimeline) && !this.state.userTimelineError) {
+			userTimelineResultOutput = " ";
+			userTimelineResultClass = "pending";	
+		}
+		else {
+			userTimelineResultOutput = renderedTimeline(this.state.userTimeline, false);
+			userTimelineResultClass = "successGetTimeline";			
+		}
+	}
+
+	componentDidMount() {
+		getHomeTimeline(this.homeTimelineCallback);
+		getUserTimeline(this.userTimelineCallback);
+	}
+
+	render(){
+		{this.homeTimelineResult()};
+		{this.userTimelineResult()};
+		return e('div', {className: 'Timelines'},[
+			e(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
+			e(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
 	}
 }
 
 window.onload = () => {
-	let reactAndTimeline = React.createElement('div', {}, [React.createElement('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), React.createElement(Timeline, {key: 'timeline'}, null)]);
+	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
+		e(Timelines, {key: 'timelines'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export {TimelineResultComp, Timeline};
+export {TimelineResultComp, Timelines};
