@@ -23,7 +23,7 @@ class User extends React.Component {
 		return e('div', {className: 'User', key: 'User' + i}, [
 				e('img', {className: 'image', key: 'image' + i, src: userTweetObj.profileImageUrl}, null), 
 				e('div', {className: 'userName', key: 'userName' + i}, userTweetObj.userName),
-				this.props.timelineType == "user" ? null : e('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, userTweetObj.twitterHandle)
+				this.props.twitterHandleReq ? e('div', {className: 'twitterHandle', key: 'twitterHandle' + i}, userTweetObj.twitterHandle) : null
 			]);
 	}
 }
