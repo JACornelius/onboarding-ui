@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
 import {TimelineButton, User, TimelineComp} from './components';
-import {getHomeTimeline, getUserTimeline} from './services';
+import {getHomeTimeline, getUserTimeline, getFilterTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
 
@@ -18,10 +18,12 @@ class Timelines extends React.Component {
 		super(props);
 		this.state = {
 			homeTimeline: null,
-			homeTimelineError: null	
+			homeTimelineError: null,	
+			value: ' '
 		}
 		this.homeTimelineCallback = this.homeTimelineCallback.bind(this);	
 		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
@@ -36,7 +38,13 @@ class Timelines extends React.Component {
 			userTimeline: httpTimelineResponse,
 			userTimelineError: timelineResponseError
 		});
-	}		
+	}	
+
+	handleChange(event) {
+		this.setState({
+			value: event.target.value
+		})
+	}	
 
 	homeTimelineResult() {
 		if(this.state.homeTimelineError) {
@@ -77,8 +85,9 @@ class Timelines extends React.Component {
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
 		return e('div', {className: 'Timelines'},[
-			e(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
-			e(TimelineComp, {key: 'userTimelineComp',timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
+			e('input', {type: 'text', value: this.state.value, onChange: this.handleChange}, null),
+			e(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
+			e(TimelineComp, {key: 'userTimelineComp', timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
 	}
 }
 

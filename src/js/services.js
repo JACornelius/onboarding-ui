@@ -63,11 +63,24 @@ const getUserTimeline = (callback) => {
 		.then(checkStatus)
 		.then(parseJSON)
 		.then(function(data) {
-			callback(data, null);
+			callback(data, false);
 		})
 		.catch(function(error) {
 			callback(null, true);
 		})
 }
 
-export{getHomeTimeline, getUserTimeline, renderedTimeline};
+const getFilterTimeline = (callback, filter) => {
+	fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(function(data) {
+			console.log(data);
+			callback(data, false);
+		})
+		.catch(function(error) {
+			callback(null, true);
+		})
+}
+
+export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline};

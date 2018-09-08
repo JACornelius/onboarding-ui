@@ -39,6 +39,7 @@ class TimelineComp extends React.Component {
 		else {
 			return e('div', {className: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
 						[e('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
+						 e(TimelineButton, {onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
 						 e(TimelineButton, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: this.props.buttonFunc, buttonText: 'Get Home Timeline'}, null),
 						 e(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: this.props.resultClass, key: 'homeTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
 		}
