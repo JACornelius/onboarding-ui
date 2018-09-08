@@ -92,9 +92,20 @@ class Timelines extends React.Component {
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
 		return e('div', {className: 'Timelines'},[
-			e('input', {type: 'text', value: this.state.value, onKeyPress: this.handleKeyPress, onChange: this.handleChange}, null),
-			e(TimelineComp, {disableFilter: !this.state.value, key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
-			e(TimelineComp, {key: 'userTimelineComp', timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
+			e(TimelineComp, {onKeyPressButton: this.handleKeyPress, 
+							 onChangeButton: this.handleChange, 
+							 filter: this.state.value, 
+							 key: 'homeTimelineComp', 
+							 timelineType: 'Home', 
+							 buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), 
+							 filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), 
+							 resultClass: homeTimelineResultClass, 
+							 resultOutput:homeTimelineResultOutput}, null),
+			e(TimelineComp, {key: 'userTimelineComp', 
+							 timelineType: 'User', 
+							 buttonFunc: () => getUserTimeline(this.userTimelineCallback), 
+							 resultClass: userTimelineResultClass, 
+							 resultOutput:userTimelineResultOutput}, null)]);			
 	}
 }
 

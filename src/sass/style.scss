@@ -36,8 +36,16 @@
 	width: 55%;
 	float: left;
 	.homeTimelineButton {
-		position: absolute;
 		left: 0px;
+	}	
+	.filter {
+		right: 90px;
+	}	
+	.filterButton {
+		right: 40px;
+	}
+	.filter, .filterButton, .homeTimelineButton {
+		position: absolute;
 		top: 100px
 	}
 	#homeTimelinePlaceholder {
