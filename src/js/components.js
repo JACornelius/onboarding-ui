@@ -12,13 +12,7 @@ class TimelineResultComp extends React.Component {
 
 class TimelineButton extends React.Component {
 	render(){
-		return e('button', {className: this.props.className, key: 'timelineButton', onClick: this.props.onClickFunc}, this.props.buttonText);
-	}
-}
-
-class FilterButton extends React.Component {
-	render() {
-		return e('button')
+		return e('button', {className: this.props.className, key: 'timelineButton', onClick: this.props.onClickFunc, disabled: this.props.disabledFil}, this.props.buttonText);
 	}
 }
 
@@ -45,7 +39,7 @@ class TimelineComp extends React.Component {
 		else {
 			return e('div', {className: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
 						[e('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
-						 e(TimelineButton, {id: 'filterButton', onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
+						 e(TimelineButton, {disabledFil: this.props.disableFilter, id: 'filterButton', onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
 						 e(TimelineButton, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: this.props.buttonFunc, buttonText: 'Get Home Timeline'}, null),
 						 e(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: this.props.resultClass, key: 'homeTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
 		}
