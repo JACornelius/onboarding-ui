@@ -17,7 +17,7 @@ class TimelineButton extends React.Component {
 }
 class FilterInputBox extends React.Component {
 	render() {
-		return 	e('input', {className: 'filter', type: 'text', value: this.props.filterState, onKeyPress: this.props.onEnter, onChange: this.props.onChangeFilter, value: this.props.filterState}, null);
+		return 	e('input', {className: 'filter', type: 'text', value: this.props.filterState, onKeyPress: this.props.onEnter, onChange: this.props.onChangeFilter}, null);
 
 	}
 }

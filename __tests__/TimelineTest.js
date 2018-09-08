@@ -22,7 +22,7 @@ describe('Timelines', () => {
 	});
 
 	it("creates 2 TimelineButton, one user timeline, one home timeline", function() {
-		expect(wrapper.find('button').length).toEqual(2);
+		expect(wrapper.find('button').length).toEqual(3);
 		expect(wrapper.containsMatchingElement(e(TimelineButton))).toEqual(true);	
 	});
 
