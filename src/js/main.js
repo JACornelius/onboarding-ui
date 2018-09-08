@@ -24,6 +24,7 @@ class Timelines extends React.Component {
 		this.homeTimelineCallback = this.homeTimelineCallback.bind(this);	
 		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
 		this.handleChange = this.handleChange.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
 
 	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
@@ -44,6 +45,12 @@ class Timelines extends React.Component {
 		this.setState({
 			value: event.target.value
 		})
+	}
+
+	handleKeyPress(event) {
+		if(event.key == 'Enter' && this.state.value != ' ') {
+			getFilterTimeline(this.homeTimelineCallback, this.state.value);
+		}
 	}	
 
 	homeTimelineResult() {
@@ -85,10 +92,14 @@ class Timelines extends React.Component {
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
 		return e('div', {className: 'Timelines'},[
-			e('input', {type: 'text', value: this.state.value, onChange: this.handleChange}, null),
+			e('input', {type: 'text', value: this.state.value, onKeyPress: this.handleKeyPress, onChange: this.handleChange}, null),
 			e(TimelineComp, {key: 'homeTimelineComp', timelineType: 'Home', buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), resultClass: homeTimelineResultClass, resultOutput:homeTimelineResultOutput}, null),
 			e(TimelineComp, {key: 'userTimelineComp', timelineType: 'User', buttonFunc: () => getUserTimeline(this.userTimelineCallback), resultClass: userTimelineResultClass, resultOutput:userTimelineResultOutput}, null)]);			
 	}
+}
+
+class filterInputBox extends React.Component {
+
 }
 
 window.onload = () => {
