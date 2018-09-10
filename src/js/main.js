@@ -21,43 +21,59 @@ class Timelines extends React.Component {
 			homeTimelineError: null,	
 			value: ''
 		}
-		this.homeTimelineCallback = this.homeTimelineCallback.bind(this);	
-		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
 		this.handleChange = this.handleChange.bind(this);
 		this.handleKeyPress = this.handleKeyPress.bind(this);
 		this.handleGetUserTimeline = this.handleGetUserTimeline.bind(this);
+		this.handleGetFilterTimeline = this.handleGetFilterTimeline.bind(this);
+		this.handleGetHomeTimeline = this.handleGetHomeTimeline.bind(this);
 	}
 
-	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
-		this.setState({
-			homeTimeline: httpTimelineResponse,
-			homeTimelineError: timelineResponseError
-		});		
+	handleGetHomeTimeline() {
+		getHomeTimeline().then(response => response.json())
+					     .then(data => {
+					   	  	this.setState({
+					   			homeTimeline: data,
+					   			homeTimelineError: false
+					   		})
+					     })
+					     .catch(error => {
+					   		this.setState({
+					   			homeTimeline: null,
+					   			homeTimelineError: true
+					   		})
+					     });
 	}
-
-	userTimelineCallback(httpTimelineResponse, timelineResponseError) {
-		this.setState({
-			userTimeline: httpTimelineResponse,
-			userTimelineError: timelineResponseError
-		});
-	}	
+	
+	handleGetFilterTimeline(filter) {
+		getFilterTimeline(filter).then(response => response.json())
+					     .then(data => {
+					   	  	this.setState({
+					   			homeTimeline: data,
+					   			homeTimelineError: false
+					   		})
+					     })
+					     .catch(error => {
+					   		this.setState({
+					   			homeTimeline: null,
+					   			homeTimelineError: true
+					   		})
+					     });
+	}
 
 	handleGetUserTimeline() {
-		//Promise promise = getUserTimeline()
 		getUserTimeline().then(response => response.json())
-			   .then(data => {
-			   		this.setState({
-			   			userTimeline: data,
-			   			userTimelineError: false
-			   		})
-			   })
-			   .catch(error => {
-			   		this.setState({
-			   			userTimeline: null,
-			   			userTimelineError: true
-			   		})
-			   });
-
+					     .then(data => {
+					   	  	this.setState({
+					   			userTimeline: data,
+					   			userTimelineError: false
+					   		})
+					     })
+					     .catch(error => {
+					   		this.setState({
+					   			userTimeline: null,
+					   			userTimelineError: true
+					   		})
+					     });
 	}
 
 	handleChange(event) {
@@ -68,7 +84,7 @@ class Timelines extends React.Component {
 
 	handleKeyPress(event) {
 		if(event.key == 'Enter' && this.state.value != ' ') {
-			getFilterTimeline(this.homeTimelineCallback, this.state.value);
+			{this.handleGetFilterTimeline(this.state.value);}			
 		}
 	}	
 
@@ -104,7 +120,7 @@ class Timelines extends React.Component {
 
 	componentDidMount() {
 		{this.handleGetUserTimeline()};
-		getHomeTimeline(this.homeTimelineCallback);
+		{this.handleGetHomeTimeline()};
 		
 	}
 
@@ -117,13 +133,13 @@ class Timelines extends React.Component {
 								  filter: this.state.value, 
 								  key: 'homeTimelineComp', 
 							 	  timelineType: 'Home', 
-								  buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), 
-								  filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), 
+								  buttonFunc: () => {this.handleGetHomeTimeline()}, 
+								  filterButtonFunc: () => {this.handleGetFilterTimeline(this.state.value)}, 
 								  resultClass: homeTimelineResultClass, 
 								  resultOutput:homeTimelineResultOutput}, null),
 			e(TimelineComponent, {key: 'userTimelineComp', 
 							 	  timelineType: 'User', 
-								  buttonFunc: () => this.handleGetUserTimeline, 
+								  buttonFunc: () => {this.handleGetUserTimeline()}, 
 							 	  resultClass: userTimelineResultClass, 
 							 	  resultOutput:userTimelineResultOutput}, null)]);			
 	}

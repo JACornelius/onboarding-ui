@@ -33,26 +33,16 @@ let renderTweetObj = (tweetObj, i, needTwitterHandle) => {
 		return e('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
 }
 
-
 const getUserTimeline = () => {
 	return fetch('http://localhost:8080/api/1.0/twitter/timeline/user');
 }
 
-const getHomeTimeline = (callback) => {
+const getHomeTimeline = () => {
 	return fetch('http://localhost:8080/api/1.0/twitter/timeline')
-		.then(response => response.json())
-		.then(data => callback(data, false))
-		.catch(error => callback(null, true))
-	
 }
 
-const getFilterTimeline = (callback, filter) => {
-	new Promise((resolve, reject) => {
-		return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
-			.then(response => response.json())
-			.then(data => callback(data, false))
-			.catch(error => callback(null, true))
-	})
+const getFilterTimeline = (filter) => {
+	return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
 }
 
 export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline};
