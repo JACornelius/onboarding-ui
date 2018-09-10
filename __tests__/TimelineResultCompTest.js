@@ -56,7 +56,17 @@ describe("TimelineResultComp", () => {
 
 	it("contains all div components of the timeline table", function() {	
 		wrapper = mount(e(TimelineResultComp, {timelineResult: renderedTimeline(mockHttpRespText)}, null));
-		expect(wrapper.find("div").length).toEqual(7);
+		expect(wrapper.find("div").length).toEqual(6);
+	});
+
+	it("contains userTimeline", function() {
+		wrapper.setProps({timelinePlaceholder: "userTimelinePlaceholder"});
+		expect(wrapper.find("#userTimelinePlaceholder").length).toEqual(1);
+	});
+
+	it("contains homeTimeline", function() {
+		wrapper.setProps({timelinePlaceholder: "homeTimelinePlaceholder"});
+		expect(wrapper.find("#homeTimelinePlaceholder").length).toEqual(1);
 	});
 
 });

@@ -1,13 +1,13 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {TimelineComp, TimelineResultComp} from '../src/js/components';
+import {TimelineComponent, TimelineResultComp, TimelineButton, FilterInputButton} from '../src/js/components';
 
-describe("TimelineComp", () => {
+describe("TimelineComponent", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(TimelineComp));
+		wrapper = mount(e(TimelineComponent));
 		wrapper.setProps({timelineType: "User"});
 	});
 
@@ -30,5 +30,13 @@ describe("TimelineComp", () => {
 		expect(wrapper.containsMatchingElement(
 			e(TimelineResultComp, {timelinePlaceholder: "userTimelinePlaceholder", className: "testResultClass", timelineResult: "testResultOutput"}, null))).toEqual(true);
 	});
+
+	it("creates filter input box and filter button for home timeline", function() {
+		wrapper.setProps({timelineType: "Home"});
+		expect(wrapper.containsMatchingElement(
+			e(FilterInputButton, {}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(
+			e(TimelineButton, {className: "filterButton", id: "filterButton", buttonText: "Filter"}, null))).toEqual(true);
+	})
 
 })

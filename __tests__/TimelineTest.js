@@ -21,10 +21,22 @@ describe('Timelines', () => {
 		wrapper = mount(e(Timelines));
 	});
 
-	it("creates 2 TimelineButton, one user timeline, one home timeline", function() {
-		expect(wrapper.find('button').length).toEqual(2);
+	it("creates 3 TimelineButton, one user timeline, one home timeline", function() {
+		expect(wrapper.find("button").length).toEqual(3);
 		expect(wrapper.containsMatchingElement(e(TimelineButton))).toEqual(true);	
 	});
+
+	it("creates home timeline with home timeline button and filter button", function() {
+		wrapper.setState({value: "testFilter"});
+		expect(wrapper.containsMatchingElement(e(TimelineResultComp, {key: "homeTimelineComp"}, null))).toEqual(true);
+		expect(wrapper.find("button").at(0).hasClass("filterButton")).toEqual(true);
+		expect(wrapper.find("button").at(1).hasClass("homeTimelineButton")).toEqual(true);
+	});
+
+	it("creates user timeline with user timeline button", function() {
+		expect(wrapper.containsMatchingElement(e(TimelineResultComp, {key: "userTimelineComp"}, null))).toEqual(true);
+		expect(wrapper.find("button").at(2).hasClass("userTimelineButton")).toEqual(true);
+	})
 
 	it("creates TimelineResultComp", function() {
 		expect(wrapper.containsMatchingElement(e(TimelineResultComp))).toEqual(true);

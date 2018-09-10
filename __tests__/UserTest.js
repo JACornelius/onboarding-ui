@@ -27,6 +27,7 @@ describe("User", () => {
 	});
 
 	it("creates Twitter Handle", function() {
+		wrapper.setProps({twitterHandleReq: true});
 		expect(wrapper.find("div").at(2).hasClass("twitterHandle")).toBe(true);
 	})
 

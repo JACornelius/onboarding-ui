@@ -11,13 +11,18 @@ class TimelineResultComp extends React.Component {
 }
 
 class TimelineButton extends React.Component {
-	render(){
-		return e('button', {className: this.props.className, key: 'timelineButton', onClick: this.props.onClickFunc}, this.props.buttonText);
+	render() {
+		return e('button', {className: this.props.className, key: 'timelineButton', onClick: this.props.onClickFunc, disabled: this.props.disabledFilter}, this.props.buttonText);
 	}
 }
+class FilterInputBox extends React.Component {
+	render() {
+		return 	e('input', {className: 'filter', type: 'text', value: this.props.filterState, onKeyPress: this.props.onEnter, onChange: this.props.onChangeFilter}, null);
 
+	}
+}
 class User extends React.Component {
-	render(){
+	render() {
 		let userTweetObj = this.props.rawUserTweetObj;
 		let i = this.props.index;
 		return e('div', {className: 'User', key: 'User' + i}, [
@@ -28,7 +33,7 @@ class User extends React.Component {
 	}
 }
 
-class TimelineComp extends React.Component {
+class TimelineComponent extends React.Component {
 	render() {
 		if(this.props.timelineType == 'User') {
 			return e('div', {className: 'userTimelineContainer', key: 'userTimelineCont'},
@@ -39,6 +44,8 @@ class TimelineComp extends React.Component {
 		else {
 			return e('div', {className: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
 						[e('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
+						 e(TimelineButton, {className: 'filterButton', disabledFilter: !this.props.filter, id: 'filterButton', onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
+						 e(FilterInputBox, {onEnter: this.props.onKeyPressButton, onChangeFilter: this.props.onChangeButton, filterState: this.props.filter}, null),
 						 e(TimelineButton, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: this.props.buttonFunc, buttonText: 'Get Home Timeline'}, null),
 						 e(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: this.props.resultClass, key: 'homeTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
 		}
@@ -46,4 +53,4 @@ class TimelineComp extends React.Component {
 					
 }
 
-export{TimelineResultComp, TimelineButton, User, TimelineComp};
+export{TimelineResultComp, TimelineButton, User, TimelineComponent, FilterInputBox};
