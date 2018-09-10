@@ -1,13 +1,13 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {TimelineComp, TimelineResultComp, TimelineButton, FilterInputButton} from '../src/js/components';
+import {TimelineComponent, TimelineResultComp, TimelineButton, FilterInputButton} from '../src/js/components';
 
-describe("TimelineComp", () => {
+describe("TimelineComponent", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(TimelineComp));
+		wrapper = mount(e(TimelineComponent));
 		wrapper.setProps({timelineType: "User"});
 	});
 

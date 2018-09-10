@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton, User, TimelineComp} from './components';
+import {TimelineButton, User, TimelineComponent} from './components';
 import {getHomeTimeline, getUserTimeline, getFilterTimeline} from './services';
 import {TimelineResultComp} from './components';
 import _ from 'lodash';
@@ -25,6 +25,7 @@ class Timelines extends React.Component {
 		this.userTimelineCallback = this.userTimelineCallback.bind(this);	
 		this.handleChange = this.handleChange.bind(this);
 		this.handleKeyPress = this.handleKeyPress.bind(this);
+		this.handleGetUserTimeline = this.handleGetUserTimeline.bind(this);
 	}
 
 	homeTimelineCallback(httpTimelineResponse, timelineResponseError) {
@@ -40,6 +41,24 @@ class Timelines extends React.Component {
 			userTimelineError: timelineResponseError
 		});
 	}	
+
+	handleGetUserTimeline() {
+		//Promise promise = getUserTimeline()
+		getUserTimeline().then(response => response.json())
+			   .then(data => {
+			   		this.setState({
+			   			userTimeline: data,
+			   			userTimelineError: false
+			   		})
+			   })
+			   .catch(error => {
+			   		this.setState({
+			   			userTimeline: null,
+			   			userTimelineError: true
+			   		})
+			   });
+
+	}
 
 	handleChange(event) {
 		this.setState({
@@ -84,28 +103,29 @@ class Timelines extends React.Component {
 	}
 
 	componentDidMount() {
+		{this.handleGetUserTimeline()};
 		getHomeTimeline(this.homeTimelineCallback);
-		getUserTimeline(this.userTimelineCallback);
+		
 	}
 
 	render(){
 		{this.homeTimelineResult()};
 		{this.userTimelineResult()};
 		return e('div', {className: 'Timelines'},[
-			e(TimelineComp, {onKeyPressButton: this.handleKeyPress, 
-							 onChangeButton: this.handleChange, 
-							 filter: this.state.value, 
-							 key: 'homeTimelineComp', 
-							 timelineType: 'Home', 
-							 buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), 
-							 filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), 
-							 resultClass: homeTimelineResultClass, 
-							 resultOutput:homeTimelineResultOutput}, null),
-			e(TimelineComp, {key: 'userTimelineComp', 
-							 timelineType: 'User', 
-							 buttonFunc: () => getUserTimeline(this.userTimelineCallback), 
-							 resultClass: userTimelineResultClass, 
-							 resultOutput:userTimelineResultOutput}, null)]);			
+			e(TimelineComponent, {onKeyPressButton: this.handleKeyPress, 
+							 	  onChangeButton: this.handleChange, 
+								  filter: this.state.value, 
+								  key: 'homeTimelineComp', 
+							 	  timelineType: 'Home', 
+								  buttonFunc: () => getHomeTimeline(this.homeTimelineCallback), 
+								  filterButtonFunc: () => getFilterTimeline(this.homeTimelineCallback, this.state.value), 
+								  resultClass: homeTimelineResultClass, 
+								  resultOutput:homeTimelineResultOutput}, null),
+			e(TimelineComponent, {key: 'userTimelineComp', 
+							 	  timelineType: 'User', 
+								  buttonFunc: () => this.handleGetUserTimeline, 
+							 	  resultClass: userTimelineResultClass, 
+							 	  resultOutput:userTimelineResultOutput}, null)]);			
 	}
 }
 
