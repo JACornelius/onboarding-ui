@@ -59,4 +59,14 @@ describe("TimelineResultComp", () => {
 		expect(wrapper.find("div").length).toEqual(6);
 	});
 
+	it("contains userTimeline", function() {
+		wrapper.setProps({timelinePlaceholder: "userTimelinePlaceholder"});
+		expect(wrapper.find("#userTimelinePlaceholder").length).toEqual(1);
+	});
+
+	it("contains homeTimeline", function() {
+		wrapper.setProps({timelinePlaceholder: "homeTimelinePlaceholder"});
+		expect(wrapper.find("#homeTimelinePlaceholder").length).toEqual(1);
+	});
+
 });

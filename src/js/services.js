@@ -33,54 +33,31 @@ let renderTweetObj = (tweetObj, i, needTwitterHandle) => {
 		return e('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
 }
 
-const checkStatus = (response) => {
-	if(response.status == 200) {
-		return Promise.resolve(response);
-	}
-	else {
-		return Promise.reject(new Error());
-	}
-}
-
-const parseJSON = (response) => {
-	return response.json();
-}
-
 const getHomeTimeline = (callback) => {
-	fetch('http://localhost:8080/api/1.0/twitter/timeline')
-		.then(checkStatus)
-		.then(parseJSON)
-		.then(function(data) {
-			callback(data, false);
-		})
-		.catch(function(error) {
-			callback(null, true);
-		})
+	new Promise((resolve, reject) => {
+		return fetch('http://localhost:8080/api/1.0/twitter/timeline')
+			.then(response => response.json())
+			.then(data => callback(data, false))
+			.catch(error => callback(null, true))
+	})
 }
 
 const getUserTimeline = (callback) => {
-	fetch('http://localhost:8080/api/1.0/twitter/timeline/user')
-		.then(checkStatus)
-		.then(parseJSON)
-		.then(function(data) {
-			callback(data, false);
-		})
-		.catch(function(error) {
-			callback(null, true);
-		})
+	new Promise((resolve, reject) => {
+		return fetch('http://localhost:8080/api/1.0/twitter/timeline/user')
+			.then(response => response.json())
+			.then(data => callback(data, false))
+			.catch(error => callback(null, true))
+	})
 }
 
 const getFilterTimeline = (callback, filter) => {
-	fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
-		.then(checkStatus)
-		.then(parseJSON)
-		.then(function(data) {
-			console.log(data);
-			callback(data, false);
-		})
-		.catch(function(error) {
-			callback(null, true);
-		})
+	new Promise((resolve, reject) => {
+		return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
+			.then(response => response.json())
+			.then(data => callback(data, false))
+			.catch(error => callback(null, true))
+	})
 }
 
 export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline};

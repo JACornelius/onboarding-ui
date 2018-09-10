@@ -109,10 +109,6 @@ class Timelines extends React.Component {
 	}
 }
 
-class filterInputBox extends React.Component {
-
-}
-
 window.onload = () => {
 	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
 		e(Timelines, {key: 'timelines'}, null)]);
