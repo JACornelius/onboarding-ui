@@ -35,7 +35,7 @@ describe('Timelines', () => {
 
 	it("creates user timeline with user timeline button", function() {
 		expect(wrapper.containsMatchingElement(e(TimelineResultComp, {key: "userTimelineComp"}, null))).toEqual(true);
-		expect(warpper.find("button").at(2).hasClass("userTimelineButton")).toEqual(true);
+		expect(wrapper.find("button").at(2).hasClass("userTimelineButton")).toEqual(true);
 	})
 
 	it("creates TimelineResultComp", function() {
