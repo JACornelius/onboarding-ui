@@ -126,7 +126,7 @@ class PostTweet extends React.Component {
 	}
 	
 	handlePostTweet(message) {
-		postTweet(message).then(response => JSON.parse(response))
+		postTweet(message).then(response => response.json())
 						  .then(data => {
 						  	this.setState ({
 						  		postTweetMessage: data.message,
@@ -148,21 +148,24 @@ class PostTweet extends React.Component {
 	}
 
 	postTweetResult() {
-		if(this.postTweetError) {
+		if(this.state.postTweetError) {
 			postTweetResultClass = "error";
 			postTweetResultOutput = "There was problem on the server side, please try again later.";
 		}
-		else if(_.isNull(this.postTweetMessage) && _.isNull(this.postTweetError)) {
+		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.postTweetError)) {
+			console.log(this.postTweetMessage);
+			console.log(this.postTweetError);
 			postTweetResultClass = "pending";
 			postTweetResultOutput = "";
 		}
 		else {
 			postTweetResultClass = "successPostTweet";
-			postTweetResultOutput = "Tweet (" + this.postTweetMessage + ") was successfully posted";
+			postTweetResultOutput = "Tweet (" + this.state.postTweetMessage + ") was successfully posted";
 		}
 	}
 
 	render() {
+		{this.postTweetResult()}
 		return e(PostTweetComponent, {onKeyPressButton: this.handleKeyPress,
 									  onChangeButton: this.handleChange,
 									  tweet: this.state.value,
@@ -170,6 +173,7 @@ class PostTweet extends React.Component {
 									  buttonFunc: () => this.handlePostTweet(this.state.value),
 									  resultMessage: postTweetResultOutput}, null);
 	}
+	
 }
 
 class UserTimeline extends React.Component {
