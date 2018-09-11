@@ -70,66 +70,69 @@
 	}
 }
 
-.Timelines{
+.tabContent {
+	display: none;
+}
+	
+.homeTimelineContainer, .userTimelineContainer {
+	position: relative;
 	width: 1500px;
 	margin: auto;
-	.homeTimelineContainer, .userTimelineContainer {
-		position: relative;
-		#homeTimelinePlaceholder, #userTimelinePlaceholder {
-			margin-top: 10px;
-			width: 95%;
-			border: {
-				style: solid;
-				width: 1px;
+	#homeTimelinePlaceholder, #userTimelinePlaceholder {
+		margin-top: 10px;
+		width: 95%;
+		border: {
+			style: solid;
+			width: 1px;
+		}
+
+		.tweet {
+			padding: 10px 0px;
+			height: 110px;
+			border-bottom: 1px solid lightgrey;
+			.rightColumn {
+				padding-top: 30px;
+				@include size(60px, 70%);
+				float: right;
+				margin: auto;
+				text-align: left;
+
+				.dateBlock {
+					font-size: 12px;
+					padding-bottom: 5px;
+					font-style: italic;
+				}	
 			}
+			.User {
+				padding: 10px 0px 0px 10px;
+				@include size(100px, 25%);
+				clear: both;
+				float: left;
+				margin: auto;
+				vertical-align: middle;
 
-			.tweet {
-				padding: 10px 0px;
-				height: 110px;
-				border-bottom: 1px solid lightgrey;
-				.rightColumn {
-					padding-top: 30px;
-					@include size(60px, 70%);
-					float: right;
-					margin: auto;
-					text-align: left;
-
-					.dateBlock {
-						font-size: 12px;
-						padding-bottom: 5px;
-						font-style: italic;
-					}	
+				.image {
+					@include size(60px, 60px);
+					border-radius: 50%;
+					display: block;
+					margin: 0px auto;
 				}
-				.User {
-					padding: 10px 0px 0px 10px;
-					@include size(100px, 25%);
-					clear: both;
-					float: left;
-					margin: auto;
-					vertical-align: middle;
+				
+				.userName {
+					padding-top: 5px;
+					@include text(15px);
+					font-weight: bold;
+				
+				}
 
-					.image {
-						@include size(60px, 60px);
-						border-radius: 50%;
-						display: block;
-						margin: 0px auto;
-					}
-					
-					.userName {
-						padding-top: 5px;
-						@include text(15px);
-						font-weight: bold;
-					
-					}
-
-					.twitterHandle {
-						@include text(12px);
-					}
+				.twitterHandle {
+					@include text(12px);
 				}
 			}
 		}
-	}	
-}
+	}
+}	
+
 	
 
 

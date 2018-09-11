@@ -12,7 +12,7 @@ let userTimelineResultClass;
 let userTimelineResultOutput;
 const e = React.createElement;
 
-class Timelines extends React.Component {
+class HomeTimeline extends React.Component {
 	
 	constructor(props) {
 		super(props);
@@ -23,7 +23,6 @@ class Timelines extends React.Component {
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleKeyPress = this.handleKeyPress.bind(this);
-		this.handleGetUserTimeline = this.handleGetUserTimeline.bind(this);
 		this.handleGetFilterTimeline = this.handleGetFilterTimeline.bind(this);
 		this.handleGetHomeTimeline = this.handleGetHomeTimeline.bind(this);
 	}
@@ -60,22 +59,6 @@ class Timelines extends React.Component {
 					     });
 	}
 
-	handleGetUserTimeline() {
-		getUserTimeline().then(response => response.json())
-					     .then(data => {
-					   	  	this.setState({
-					   			userTimeline: data,
-					   			userTimelineError: false
-					   		})
-					     })
-					     .catch(error => {
-					   		this.setState({
-					   			userTimeline: null,
-					   			userTimelineError: true
-					   		})
-					     });
-	}
-
 	handleChange(event) {
 		this.setState({
 			value: event.target.value
@@ -103,6 +86,52 @@ class Timelines extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		{this.handleGetHomeTimeline()};
+	}
+
+	render() {
+		{this.homeTimelineResult()};
+		return e(TimelineComponent, {onKeyPressButton: this.handleKeyPress, 
+							 	  onChangeButton: this.handleChange, 
+								  filter: this.state.value, 
+								  key: 'homeTimelineComp', 
+							 	  timelineType: 'Home', 
+								  buttonFunc: () => {this.handleGetHomeTimeline()}, 
+								  filterButtonFunc: () => {this.handleGetFilterTimeline(this.state.value)}, 
+								  resultClass: homeTimelineResultClass, 
+								  resultOutput:homeTimelineResultOutput}, null)
+	}
+}
+
+class UserTimeline extends React.Component {
+	
+	constructor(props) {
+		super(props);
+		this.state = {
+			userTimeline: null,
+			userTimelineError: null,	
+			value: ''
+		}
+		this.handleGetUserTimeline = this.handleGetUserTimeline.bind(this);
+	}
+
+	handleGetUserTimeline() {
+		getUserTimeline().then(response => response.json())
+					     .then(data => {
+					   	  	this.setState({
+					   			userTimeline: data,
+					   			userTimelineError: false
+					   		})
+					     })
+					     .catch(error => {
+					   		this.setState({
+					   			userTimeline: null,
+					   			userTimelineError: true
+					   		})
+					     });
+	}
+
 	userTimelineResult() {
 		if(this.state.userTimelineError) {
 			userTimelineResultOutput = "There was a problem on the server side, please try again later";
@@ -120,35 +149,54 @@ class Timelines extends React.Component {
 
 	componentDidMount() {
 		{this.handleGetUserTimeline()};
-		{this.handleGetHomeTimeline()};
-		
 	}
 
-	render(){
-		{this.homeTimelineResult()};
+	render() {
 		{this.userTimelineResult()};
-		return e('div', {className: 'Timelines'},[
-			e(TimelineComponent, {onKeyPressButton: this.handleKeyPress, 
-							 	  onChangeButton: this.handleChange, 
-								  filter: this.state.value, 
-								  key: 'homeTimelineComp', 
-							 	  timelineType: 'Home', 
-								  buttonFunc: () => {this.handleGetHomeTimeline()}, 
-								  filterButtonFunc: () => {this.handleGetFilterTimeline(this.state.value)}, 
-								  resultClass: homeTimelineResultClass, 
-								  resultOutput:homeTimelineResultOutput}, null),
-			e(TimelineComponent, {key: 'userTimelineComp', 
+		return e(TimelineComponent, {key: 'userTimelineComp', 
 							 	  timelineType: 'User', 
 								  buttonFunc: () => {this.handleGetUserTimeline()}, 
 							 	  resultClass: userTimelineResultClass, 
-							 	  resultOutput:userTimelineResultOutput}, null)]);			
+							 	  resultOutput: userTimelineResultOutput}, null);	
 	}
 }
 
+let openTab = (evt, tabName) => {
+	let i, tabContents, tabLinks;
+	tabContents = document.getElementsByClassName("tabContent");
+	for(i = 0; i < tabContents.length; i++) {
+			tabContents[i].style.display = "none";
+		}
+	// tabLinks = document.getElementsByClassName("tabLink")
+	// for(i = 0; i < tabLinks.length; i++) {
+	// 	tabLinks[i].className =  tabLinks[i].className.replace(" active", "");
+	// }
+	document.getElementById(tabName).style.display = "block";	
+	
+	evt.currentTarget.className += " active";
+}
+
+class TabButton extends React.Component {
+	render() {
+		return e('button', {className: 'tabLink', onClick: this.props.buttonFunc}, this.props.tabName);
+	}
+}
+
+class TabMenu extends React.Component {
+	render() {
+		return e('div', {className: 'tabMenu'}, [
+			e(TabButton, {buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
+			e(TabButton, {buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
+			e(TabButton, {buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
+	}
+}
 window.onload = () => {
 	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
-		e(Timelines, {key: 'timelines'}, null)]);
+		e(TabMenu, {key: 'tabMenu'}, null),
+		e('div', {key: 'homeTimeline', className: 'tabContent', id: 'homeTimeline'}, e(HomeTimeline, {}, null)),
+		e('div', {key: 'userTimeline', className: 'tabContent', id: 'userTimeline'}, e(UserTimeline, {}, null))
+		]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export {TimelineResultComp, Timelines};
+export {TimelineResultComp};

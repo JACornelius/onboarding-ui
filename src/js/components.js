@@ -36,13 +36,13 @@ class User extends React.Component {
 class TimelineComponent extends React.Component {
 	render() {
 		if(this.props.timelineType == 'User') {
-			return e('div', {className: 'userTimelineContainer', key: 'userTimelineCont'},
+			return e('div', {id: 'userTimelineContainer', key: 'userTimelineCont'},
 								 	[e('h2', {className: 'header', key: 'userTimelineHeader'}, 'User Timeline'),
 									 e(TimelineButton, {className: 'userTimelineButton', key: 'userTimelineButt',onClickFunc: this.props.buttonFunc, buttonText: 'Get User Timeline'}, null),
 									 e(TimelineResultComp, {timelinePlaceholder: 'userTimelinePlaceholder', className: this.props.resultClass, key: 'userTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
 		}
 		else {
-			return e('div', {className: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
+			return e('div', {id: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
 						[e('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
 						 e(TimelineButton, {className: 'filterButton', disabledFilter: !this.props.filter, id: 'filterButton', onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
 						 e(FilterInputBox, {onEnter: this.props.onKeyPressButton, onChangeFilter: this.props.onChangeButton, filterState: this.props.filter}, null),
