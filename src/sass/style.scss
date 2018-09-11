@@ -32,7 +32,7 @@
 	border-color: black;
 }
 
-.homeTimelineContainer {
+#homeTimelineContainer {
 	width: 55%;
 	float: left;
 	.homeTimelineButton {
@@ -55,7 +55,7 @@
 	}
 }
 
-.userTimelineContainer {
+#userTimelineContainer {
 	width: 45%;
 	float: right;
 	.userTimelineButton {
@@ -74,7 +74,7 @@
 	display: none;
 }
 	
-.homeTimelineContainer, .userTimelineContainer {
+#homeTimelineContainer, #userTimelineContainer {
 	position: relative;
 	width: 1500px;
 	margin: auto;

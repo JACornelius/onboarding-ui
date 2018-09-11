@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton, User, TimelineComponent} from './components';
-import {getHomeTimeline, getUserTimeline, getFilterTimeline} from './services';
-import {TimelineResultComp} from './components';
+import {TimelineButton, User, TimelineComponent, PostTweetComponent} from './components';
+import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet} from './services';
 import _ from 'lodash';
 
 let homeTimelineResultClass;
 let homeTimelineResultOutput;
 let userTimelineResultClass;
 let userTimelineResultOutput;
+let postTweetResultClass;
+let postTweetResultOutput;
+
 const e = React.createElement;
 
 class HomeTimeline extends React.Component {
@@ -104,6 +106,72 @@ class HomeTimeline extends React.Component {
 	}
 }
 
+class PostTweet extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			postTweetMessage: null,
+			postTweetError: null,
+			value: ''
+		}
+		this.handleChange = this.handleChange.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
+		this.handlePostTweet = this.handlePostTweet.bind(this);
+	}
+
+	handleChange(event) {
+		this.setState({
+			value: event.target.value
+		})
+	}
+	
+	handlePostTweet(message) {
+		postTweet(message).then(response => JSON.parse(response))
+						  .then(data => {
+						  	this.setState ({
+						  		postTweetMessage: data.message,
+						  		postTweetError: false
+						  	})
+						  })
+						  .catch(error => {
+						  	this.setState ({
+						  		postTweetMessage: null,
+						  		postTweetError: true
+						  	})
+						  })
+	}
+
+	handleKeyPress(event) {
+		if(event.key == 'Enter' && this.state.value != ' ') {
+			{this.handlePostTweet(this.state.value);}			
+		}
+	}
+
+	postTweetResult() {
+		if(this.postTweetError) {
+			postTweetResultClass = "error";
+			postTweetResultOutput = "There was problem on the server side, please try again later.";
+		}
+		else if(_.isNull(this.postTweetMessage) && _.isNull(this.postTweetError)) {
+			postTweetResultClass = "pending";
+			postTweetResultOutput = "";
+		}
+		else {
+			postTweetResultClass = "successPostTweet";
+			postTweetResultOutput = "Tweet (" + this.postTweetMessage + ") was successfully posted";
+		}
+	}
+
+	render() {
+		return e(PostTweetComponent, {onKeyPressButton: this.handleKeyPress,
+									  onChangeButton: this.handleChange,
+									  tweet: this.state.value,
+									  key: 'postTweetComp',
+									  buttonFunc: () => this.handlePostTweet(this.state.value),
+									  resultMessage: postTweetResultOutput}, null);
+	}
+}
+
 class UserTimeline extends React.Component {
 	
 	constructor(props) {
@@ -167,10 +235,6 @@ let openTab = (evt, tabName) => {
 	for(i = 0; i < tabContents.length; i++) {
 			tabContents[i].style.display = "none";
 		}
-	// tabLinks = document.getElementsByClassName("tabLink")
-	// for(i = 0; i < tabLinks.length; i++) {
-	// 	tabLinks[i].className =  tabLinks[i].className.replace(" active", "");
-	// }
 	document.getElementById(tabName).style.display = "block";	
 	
 	evt.currentTarget.className += " active";
@@ -194,9 +258,9 @@ window.onload = () => {
 	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
 		e(TabMenu, {key: 'tabMenu'}, null),
 		e('div', {key: 'homeTimeline', className: 'tabContent', id: 'homeTimeline'}, e(HomeTimeline, {}, null)),
-		e('div', {key: 'userTimeline', className: 'tabContent', id: 'userTimeline'}, e(UserTimeline, {}, null))
+		e('div', {key: 'userTimeline', className: 'tabContent', id: 'userTimeline'}, e(UserTimeline, {}, null)),
+		e('div', {key: 'postTweet', className: 'tabContent', id: 'postTweet'}, e(PostTweet, {}, null))
 		]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export {TimelineResultComp};

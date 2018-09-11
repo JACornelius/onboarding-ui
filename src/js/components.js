@@ -4,20 +4,20 @@ import {getTimeline} from './services'
 
 const e = React.createElement;
 
-class TimelineResultComp extends React.Component {
+class TimelineResultComponent extends React.Component {
 	render() {
 		return e('div', {id: this.props.timelinePlaceholder, className: this.props.className, key: 'timelineResComp'}, this.props.timelineResult);
 	}
 }
 
-class TimelineButton extends React.Component {
+class ButtonComponent extends React.Component {
 	render() {
-		return e('button', {className: this.props.className, key: 'timelineButton', onClick: this.props.onClickFunc, disabled: this.props.disabledFilter}, this.props.buttonText);
+		return e('button', {className: this.props.className, key: 'button', onClick: this.props.onClickFunc, disabled: this.props.disabledButton}, this.props.buttonText);
 	}
 }
-class FilterInputBox extends React.Component {
+class InputBox extends React.Component {
 	render() {
-		return 	e('input', {className: 'filter', type: 'text', value: this.props.filterState, onKeyPress: this.props.onEnter, onChange: this.props.onChangeFilter}, null);
+		return 	e('input', {className: 'inputBox', type: 'text', value: this.props.inputValue, onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
 
 	}
 }
@@ -32,25 +32,34 @@ class User extends React.Component {
 			]);
 	}
 }
-
+class PostTweetComponent extends React.Component {
+	render() {
+		return e('div', {id: 'postTweetContainer', key: 'postTweetCont'},
+					[e('h2', {className: 'header', key: 'postTweetHeader'}, 'Post Tweet'),
+					 e(InputBox, {diabledButton: !this.props.tweet, onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}, null),
+					 e(ButtonComponent, {className: 'postTweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: 'Post Tweet'}, null),
+					 e('div', {id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage)
+					]);
+	}	
+}
 class TimelineComponent extends React.Component {
 	render() {
 		if(this.props.timelineType == 'User') {
 			return e('div', {id: 'userTimelineContainer', key: 'userTimelineCont'},
-								 	[e('h2', {className: 'header', key: 'userTimelineHeader'}, 'User Timeline'),
-									 e(TimelineButton, {className: 'userTimelineButton', key: 'userTimelineButt',onClickFunc: this.props.buttonFunc, buttonText: 'Get User Timeline'}, null),
-									 e(TimelineResultComp, {timelinePlaceholder: 'userTimelinePlaceholder', className: this.props.resultClass, key: 'userTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
+					 	[e('h2', {className: 'header', key: 'userTimelineHeader'}, 'User Timeline'),
+						 e(ButtonComponent, {className: 'userTimelineButton', key: 'userTimelineButt',onClickFunc: this.props.buttonFunc, buttonText: 'Get User Timeline'}, null),
+						 e(TimelineResultComponent, {timelinePlaceholder: 'userTimelinePlaceholder', className: this.props.resultClass, key: 'userTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
 		}
 		else {
 			return e('div', {id: 'homeTimelineContainer', key: 'homeTimelineCont'}, 
 						[e('h2', {className: 'header', key: 'homeTimelineHeader'}, 'Home Timeline'),
-						 e(TimelineButton, {className: 'filterButton', disabledFilter: !this.props.filter, id: 'filterButton', onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
-						 e(FilterInputBox, {onEnter: this.props.onKeyPressButton, onChangeFilter: this.props.onChangeButton, filterState: this.props.filter}, null),
-						 e(TimelineButton, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: this.props.buttonFunc, buttonText: 'Get Home Timeline'}, null),
-						 e(TimelineResultComp, {timelinePlaceholder: 'homeTimelinePlaceholder', className: this.props.resultClass, key: 'homeTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
+						 e(ButtonComponent, {className: 'filterButton', disabledButton: !this.props.filter, id: 'filterButton', onClickFunc: this.props.filterButtonFunc, buttonText: 'Filter'}, null),
+						 e(InputBox, {onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.filter}, null),
+						 e(ButtonComponent, {className: 'homeTimelineButton', key: 'homeTimeLineButt', onClickFunc: this.props.buttonFunc, buttonText: 'Get Home Timeline'}, null),
+						 e(TimelineResultComponent, {timelinePlaceholder: 'homeTimelinePlaceholder', className: this.props.resultClass, key: 'homeTimelineResComponent', timelineResult: this.props.resultOutput}, null)]);
 		}
 	}
 					
 }
 
-export{TimelineResultComp, TimelineButton, User, TimelineComponent, FilterInputBox};
+export{TimelineResultComponent, ButtonComponent, User, PostTweetComponent, TimelineComponent, InputBox};

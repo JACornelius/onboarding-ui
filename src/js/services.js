@@ -45,4 +45,15 @@ const getFilterTimeline = (filter) => {
 	return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
 }
 
-export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline};
+const postTweet = (tweet) => {
+	let data = {"name": "mojo", "message": tweet};
+	return fetch("http://localhost:8080/api/1.0/twitter/tweet", {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+}
+
+export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline, postTweet};
