@@ -1,8 +1,24 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {getTimeline} from './services'
+import {getTimeline, openTab} from './services'
 
 const e = React.createElement;
+
+
+class TabButton extends React.Component {
+	render() {
+		return e('button', {id: this.props.tabID, className: "tabLink", onClick: this.props.buttonFunc}, this.props.tabName);
+	}
+}
+
+class TabMenu extends React.Component {
+	render() {
+		return e('div', {className: 'tabMenu'}, [
+			e(TabButton, {tabID: "userTimelineTab", buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
+			e(TabButton, {tabID: "homeTimelineTab", buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
+			e(TabButton, {tabID: "postTweetTab", buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
+	}
+}
 
 class TimelineResultComponent extends React.Component {
 	render() {
@@ -71,4 +87,4 @@ class TimelineComponent extends React.Component {
 					
 }
 
-export{TimelineResultComponent, ButtonComponent, User, PostTweetComponent, TimelineComponent, InputBox};
+export{TimelineResultComponent, ButtonComponent, User, TabButton, TabMenu, PostTweetComponent, TimelineComponent, InputBox};

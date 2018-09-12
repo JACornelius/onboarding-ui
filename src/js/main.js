@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton, User, TimelineComponent, PostTweetComponent} from './components';
-import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet} from './services';
+import {TimelineButton, User, TimelineComponent, PostTweetComponent, TabButton, TabMenu} from './components';
+import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet, openTab} from './services';
 import _ from 'lodash';
 
 let homeTimelineResultClass;
@@ -231,37 +231,8 @@ class UserTimeline extends React.Component {
 	}
 }
 
-let openTab = (evt, tabName) => {
-	let i, tabContents, tabLinks;
-	tabContents = document.getElementsByClassName("tabContent");
-	for(i = 0; i < tabContents.length; i++) {
-			tabContents[i].style.display = "none";
-		}
-	tabLinks = document.getElementsByClassName("tabLink");
-    for (i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-       	console.log(tabLinks[i].className);
-     
-    }
-	document.getElementById(tabName).style.display = "block";	
-	
-	evt.currentTarget.className += " active";
-}
 
-class TabButton extends React.Component {
-	render() {
-		return e('button', {id: this.props.tabID, className: "tabLink", onClick: this.props.buttonFunc}, this.props.tabName);
-	}
-}
 
-class TabMenu extends React.Component {
-	render() {
-		return e('div', {className: 'tabMenu'}, [
-			e(TabButton, {tabID: "userTimelineTab", buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
-			e(TabButton, {tabID: "homeTimelineTab", buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
-			e(TabButton, {tabID: "postTweetTab", buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
-	}
-}
 window.onload = () => {
 	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
 		e(TabMenu, {key: 'tabMenu'}, null),
@@ -272,3 +243,4 @@ window.onload = () => {
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
+export{HomeTimeline, UserTimeline, PostTweet}

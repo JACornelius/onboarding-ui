@@ -56,4 +56,21 @@ const postTweet = (tweet) => {
 	})
 }
 
-export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline, postTweet};
+let openTab = (evt, tabName) => {
+	let i, tabContents, tabLinks;
+	tabContents = document.getElementsByClassName("tabContent");
+	for(i = 0; i < tabContents.length; i++) {
+			tabContents[i].style.display = "none";
+		}
+	tabLinks = document.getElementsByClassName("tabLink");
+    for (i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+       	console.log(tabLinks[i].className);
+     
+    }
+	document.getElementById(tabName).style.display = "block";	
+	
+	evt.currentTarget.className += " active";
+}
+
+export{openTab, getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline, postTweet};
