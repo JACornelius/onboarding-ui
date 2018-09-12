@@ -4,6 +4,7 @@ import {renderedTimeline} from './services';
 import {TimelineButton, User, TimelineComponent, PostTweetComponent, TabButton, TabMenu} from './components';
 import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet, openTab} from './services';
 import _ from 'lodash';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 let homeTimelineResultClass;
 let homeTimelineResultOutput;
@@ -207,7 +208,7 @@ class UserTimeline extends React.Component {
 			userTimelineResultOutput = "There was a problem on the server side, please try again later";
 			userTimelineResultClass = "error";	
 		}
-		else if(_.isNull(this.state.homeTimeline) && !this.state.userTimelineError) {
+		else if(_.isNull(this.state.userTimeline) && !this.state.userTimelineError) {
 			userTimelineResultOutput = " ";
 			userTimelineResultClass = "pending";	
 		}
@@ -231,15 +232,24 @@ class UserTimeline extends React.Component {
 	}
 }
 
-
+class TabsAndTabPages extends React.Component {
+	render() {
+		return e(Tabs, {}, [
+					e(TabList, {},[
+						e(Tab, {}, "Home Timeline"),
+						e(Tab, {}, "User Timeline"),
+						e(Tab, {}, "Post Tweet")]),
+					e(TabPanel, {}, e(HomeTimeline, {}, null)),
+					e(TabPanel, {}, e(UserTimeline, {}, null)),
+					e(TabPanel, {}, e(PostTweet, {}, null))
+					]
+				);
+	}
+}
 
 window.onload = () => {
 	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
-		e(TabMenu, {key: 'tabMenu'}, null),
-		e('div', {key: 'homeTimeline', className: 'tabContent', id: 'homeTimeline'}, e(HomeTimeline, {}, null)),
-		e('div', {key: 'userTimeline', className: 'tabContent', id: 'userTimeline'}, e(UserTimeline, {}, null)),
-		e('div', {key: 'postTweet', className: 'tabContent', id: 'postTweet'}, e(PostTweet, {}, null))
-		]);
+		e(TabsAndTabPages, {key: 'tabMenu'}, null)]);
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 

@@ -75,20 +75,6 @@ textarea {
 	top: 60px;
 }
 
-.tabContent {
-	display: none;
-}
-
-.tabMenu {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    button {
-    	float: left;
-    	width: 33.33%;
-    }
-}
-
 button:hover {
 	background-color: #ddd;
 }
@@ -97,10 +83,41 @@ button:hover {
 	display: block;
 }
 
-.tabMenu button.active {
-	background-color: #e8f5fd;
-}
+.react-tabs {
+	&__tab-list {
+		margin: 0 0 10px;
+		padding: 0;
+	}
 
+	&__tab {
+		text-align: center;
+		width: 31%;
+		display: inline-block;
+		border: 1px solid;
+		bottom: -1px;
+		position: relative;
+		list-style: none;
+		padding: 6px 12px;
+		cursor: pointer;
+		&:hover {
+					background-color: #eee;
+				}
+		&--selected {
+			background: lightBlue;
+			color: black;
+		}
+
+		
+	}
+
+	&__tab-panel {
+		display: none;
+
+	&--selected {
+	 	display: block;
+	}
+	}
+}
 #postTweetContainer {
 	@include containerSizing()
 	.postTweetButton {
