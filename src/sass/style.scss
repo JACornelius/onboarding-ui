@@ -17,6 +17,12 @@
 	}
 }
 
+@mixin containerSizing() {
+	position: relative;
+	width: 1000px;
+	margin: auto;
+}
+
 .header {
 	@include text(40px);
 	padding-top: 10px;
@@ -35,8 +41,6 @@
 #homeTimelineContainer {	
 	.inputBox {
 		right: 45px;
-		rows: 5;
-		cols: 80;
 	}	
 	.filterButton {
 		right: 0px;
@@ -60,6 +64,11 @@
 	}
 }
 
+textarea {
+	@include size(200px, 1000px);
+	resize: none;
+}
+
 .userTimelineButton, .homeTimelineButton {
 	position: absolute;
 	left: 0px;
@@ -77,7 +86,6 @@
     button {
     	float: left;
     	width: 33.33%;
-    	
     }
 }
 
@@ -93,10 +101,21 @@ button:hover {
 	background-color: #e8f5fd;
 }
 
+#postTweetContainer {
+	@include containerSizing()
+	.postTweetButton {
+		position: absolute;
+		right: 0px;
+	}
+	#charCount {
+		position: absolute;
+		right: 0px;
+		bottom: 5px;
+	}
+}
+
 #homeTimelineContainer, #userTimelineContainer {
-	position: relative;
-	width: 1500px;
-	margin: auto;
+	@include containerSizing()
 	#homeTimelinePlaceholder, #userTimelinePlaceholder {
 		margin-top: 10px;
 		width: 100%;

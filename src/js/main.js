@@ -153,8 +153,6 @@ class PostTweet extends React.Component {
 			postTweetResultOutput = "There was problem on the server side, please try again later.";
 		}
 		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.postTweetError)) {
-			console.log(this.postTweetMessage);
-			console.log(this.postTweetError);
 			postTweetResultClass = "pending";
 			postTweetResultOutput = "";
 		}
