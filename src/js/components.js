@@ -44,7 +44,7 @@ class PostTweetComponent extends React.Component {
 					[e('h2', {className: 'header', key: 'postTweetHeader'}, 'Post Tweet'),
 					 e(TweetInput, {key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}, null),
 					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'postTweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: 'Post Tweet'}, null),
-					 e('div', {id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
+					 e('div', {className: this.props.resultClass, id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
 					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length)
 					]);
 	}	

@@ -150,7 +150,7 @@ class PostTweet extends React.Component {
 
 	postTweetResult() {
 		if(this.state.postTweetError) {
-			postTweetResultClass = "error";
+			postTweetResultClass = "errorPost";
 			postTweetResultOutput = "There was problem on the server side, please try again later.";
 		}
 		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.postTweetError)) {
@@ -169,6 +169,7 @@ class PostTweet extends React.Component {
 									  onChangeButton: this.handleChange,
 									  tweet: this.state.value,
 									  key: 'postTweetComp',
+									  resultClass: postTweetResultClass,
 									  buttonFunc: () => this.handlePostTweet(this.state.value),
 									  resultMessage: postTweetResultOutput}, null);
 	}

@@ -31,6 +31,17 @@
 	font-weight: bold;
 }
 
+.successPostTweet {
+	color: green;
+	position: absolute;
+	right: 70px;
+}
+
+.errorPost {
+	color: red;
+	position: absolute;
+	right: 80px;
+}
 .error, .emptyUserTimeline {
 	color: red;
 	text-align: center;
@@ -67,6 +78,7 @@
 textarea {
 	@include size(200px, 1000px);
 	resize: none;
+	position: relative;
 }
 
 .userTimelineButton, .homeTimelineButton {
@@ -120,12 +132,12 @@ button:hover {
 	@include containerSizing()
 	.postTweetButton {
 		position: absolute;
-		right: 0px;
+		right: -8px;
 	}
 	#charCount {
 		position: absolute;
 		right: 0px;
-		bottom: 5px;
+		top: 270px;
 	}
 }
 
