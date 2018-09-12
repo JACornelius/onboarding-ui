@@ -4,7 +4,6 @@ import {getTimeline, openTab} from './services'
 
 const e = React.createElement;
 
-
 class TabButton extends React.Component {
 	render() {
 		return e('button', {id: this.props.tabID, className: "tabLink", onClick: this.props.buttonFunc}, this.props.tabName);
@@ -14,9 +13,9 @@ class TabButton extends React.Component {
 class TabMenu extends React.Component {
 	render() {
 		return e('div', {className: 'tabMenu'}, [
-			e(TabButton, {tabID: "userTimelineTab", buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
-			e(TabButton, {tabID: "homeTimelineTab", buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
-			e(TabButton, {tabID: "postTweetTab", buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
+			e(TabButton, {tabID: "userTimelineTab", key: "userTimelineTab", buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
+			e(TabButton, {tabID: "homeTimelineTab", key: "homeTimelineTab", buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
+			e(TabButton, {tabID: "postTweetTab", key: "postTweetTab", buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
 	}
 }
 
@@ -33,15 +32,13 @@ class ButtonComponent extends React.Component {
 }
 class InputBox extends React.Component {
 	render() {
-		return e('input', {className: 'inputBox', type: 'text', value: this.props.inputValue, onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
-
+		return e('input', {key: 'inputBox', className: 'inputBox', type: 'text', value: this.props.inputValue, onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
 	}
 }
 
 class TweetInput extends React.Component {
 	render() {
-		return e('textarea', {value: this.props.inputValue, id: 'tweetInput', onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
-
+		return e('textarea', {key: 'tweetInput', value: this.props.inputValue, id: 'tweetInput', onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
 	}
 }
 
@@ -60,7 +57,7 @@ class PostTweetComponent extends React.Component {
 	render() {
 		return e('div', {id: 'postTweetContainer', key: 'postTweetCont'},
 					[e('h2', {className: 'header', key: 'postTweetHeader'}, 'Post Tweet'),
-					 e(TweetInput, {onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}, null),
+					 e(TweetInput, {key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}, null),
 					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'postTweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: 'Post Tweet'}, null),
 					 e('div', {id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
 					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length)
@@ -87,4 +84,4 @@ class TimelineComponent extends React.Component {
 					
 }
 
-export{TimelineResultComponent, ButtonComponent, User, TabButton, TabMenu, PostTweetComponent, TimelineComponent, InputBox};
+export{TimelineResultComponent, ButtonComponent, User, TabButton, TabMenu, PostTweetComponent, TimelineComponent, TweetInput, InputBox};

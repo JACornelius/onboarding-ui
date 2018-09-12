@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {TimelineComponent, TimelineResultComp, TimelineButton, FilterInputButton} from '../src/js/components';
+import {TimelineComponent, TimelineResultComponent, ButtonComponent, InputBox} from '../src/js/components';
 
 describe("TimelineComponent", () => {
 	let wrapper;
@@ -28,15 +28,15 @@ describe("TimelineComponent", () => {
 		wrapper.setProps({resultOutput: "testResultOutput"});
 		wrapper.setProps({resultClass: "testResultClass"});
 		expect(wrapper.containsMatchingElement(
-			e(TimelineResultComp, {timelinePlaceholder: "userTimelinePlaceholder", className: "testResultClass", timelineResult: "testResultOutput"}, null))).toEqual(true);
+			e(TimelineResultComponent, {timelinePlaceholder: "userTimelinePlaceholder", className: "testResultClass", timelineResult: "testResultOutput"}, null))).toEqual(true);
 	});
 
 	it("creates filter input box and filter button for home timeline", function() {
 		wrapper.setProps({timelineType: "Home"});
 		expect(wrapper.containsMatchingElement(
-			e(FilterInputButton, {}, null))).toEqual(true);
+			e(InputBox, {}, null))).toEqual(true);
 		expect(wrapper.containsMatchingElement(
-			e(TimelineButton, {className: "filterButton", id: "filterButton", buttonText: "Filter"}, null))).toEqual(true);
+			e(ButtonComponent, {className: "filterButton"}, null))).toEqual(true);
 	})
 
 })
