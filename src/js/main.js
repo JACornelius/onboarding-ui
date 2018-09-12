@@ -236,9 +236,9 @@ class TabsAndTabPages extends React.Component {
 	render() {
 		return e(Tabs, {}, [
 					e(TabList, {},[
-						e(Tab, {}, "Home Timeline"),
-						e(Tab, {}, "User Timeline"),
-						e(Tab, {}, "Post Tweet")]),
+						e(Tab, {label: "homeTimelineTab"}, "Home Timeline"),
+						e(Tab, {label: "userTimelineTab"}, "User Timeline"),
+						e(Tab, {label: "postTweetTab"}, "Post Tweet")]),
 					e(TabPanel, {}, e(HomeTimeline, {}, null)),
 					e(TabPanel, {}, e(UserTimeline, {}, null)),
 					e(TabPanel, {}, e(PostTweet, {}, null))
@@ -253,4 +253,4 @@ window.onload = () => {
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export{HomeTimeline, UserTimeline, PostTweet}
+export{HomeTimeline, UserTimeline, PostTweet, TabsAndTabPages}
