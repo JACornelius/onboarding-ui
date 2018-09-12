@@ -17,10 +17,11 @@ class ButtonComponent extends React.Component {
 }
 class InputBox extends React.Component {
 	render() {
-		return 	e('input', {className: 'inputBox', type: 'text', value: this.props.inputValue, onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
+		return e('input', {className: 'inputBox', type: 'text', value: this.props.inputValue, onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue}, null);
 
 	}
 }
+
 class User extends React.Component {
 	render() {
 		let userTweetObj = this.props.rawUserTweetObj;
@@ -38,7 +39,8 @@ class PostTweetComponent extends React.Component {
 					[e('h2', {className: 'header', key: 'postTweetHeader'}, 'Post Tweet'),
 					 e(InputBox, {diabledButton: !this.props.tweet, onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}, null),
 					 e(ButtonComponent, {className: 'postTweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: 'Post Tweet'}, null),
-					 e('div', {id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage)
+					 e('div', {id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
+					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length)
 					]);
 	}	
 }

@@ -32,21 +32,18 @@
 	border-color: black;
 }
 
-#homeTimelineContainer {
-	width: 55%;
-	float: left;
-	.homeTimelineButton {
-		left: 0px;
-	}	
-	.filter {
-		right: 90px;
+#homeTimelineContainer {	
+	.inputBox {
+		right: 45px;
+		rows: 5;
+		cols: 80;
 	}	
 	.filterButton {
-		right: 40px;
+		right: 0px;
 	}
-	.filter, .filterButton, .homeTimelineButton {
+	.inputBox, .filterButton, .homeTimelineButton {
 		position: absolute;
-		top: 100px
+		top: 60px;
 	}
 	#homeTimelinePlaceholder {
 		.tweet {
@@ -56,13 +53,6 @@
 }
 
 #userTimelineContainer {
-	width: 45%;
-	float: right;
-	.userTimelineButton {
-		position: absolute;
-		right: 33px;
-		top: 100px;
-	}
 	#userTimelinePlaceholder {
 		.tweet {
 			@include alternatingColors(#f5f8fa, #1da1f2)
@@ -70,21 +60,46 @@
 	}
 }
 
+.userTimelineButton, .homeTimelineButton {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+}
+
 .tabContent {
 	display: none;
+}
+
+.tabMenu {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    button {
+    	float: left;
+    	width: 33.33%;
+    	
+    }
+}
+
+button:hover {
+	background-color: #ddd;
 }
 
 #homeTimeline {
 	display: block;
 }
-	
+
+.tabMenu button.active {
+	background-color: #e8f5fd;
+}
+
 #homeTimelineContainer, #userTimelineContainer {
 	position: relative;
 	width: 1500px;
 	margin: auto;
 	#homeTimelinePlaceholder, #userTimelinePlaceholder {
 		margin-top: 10px;
-		width: 95%;
+		width: 100%;
 		border: {
 			style: solid;
 			width: 1px;

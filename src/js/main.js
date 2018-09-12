@@ -239,6 +239,12 @@ let openTab = (evt, tabName) => {
 	for(i = 0; i < tabContents.length; i++) {
 			tabContents[i].style.display = "none";
 		}
+	tabLinks = document.getElementsByClassName("tabLink");
+    for (i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+       	console.log(tabLinks[i].className);
+     
+    }
 	document.getElementById(tabName).style.display = "block";	
 	
 	evt.currentTarget.className += " active";
@@ -246,16 +252,16 @@ let openTab = (evt, tabName) => {
 
 class TabButton extends React.Component {
 	render() {
-		return e('button', {className: 'tabLink', onClick: this.props.buttonFunc}, this.props.tabName);
+		return e('button', {id: this.props.tabID, className: "tabLink", onClick: this.props.buttonFunc}, this.props.tabName);
 	}
 }
 
 class TabMenu extends React.Component {
 	render() {
 		return e('div', {className: 'tabMenu'}, [
-			e(TabButton, {buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
-			e(TabButton, {buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
-			e(TabButton, {buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
+			e(TabButton, {tabID: "userTimelineTab", buttonFunc: () => openTab(event, "userTimeline"), tabName: "User Timeline"}, null),
+			e(TabButton, {tabID: "homeTimelineTab", buttonFunc: () => openTab(event, "homeTimeline"), tabName: "Home Timeline"}, null),
+			e(TabButton, {tabID: "postTweetTab", buttonFunc: () => openTab(event, "postTweet"), tabName: "Post Tweet"}, null)])	
 	}
 }
 window.onload = () => {
