@@ -14,7 +14,7 @@ class HomeTimeline extends React.Component {
 		super(props);
 		this.state = {
 			homeTimeline: null,
-			homeTimelineError: null,	
+			isHomeTimelineError: null,	
 			value: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -30,13 +30,13 @@ class HomeTimeline extends React.Component {
 					     .then(data => {
 					   	  	this.setState({
 					   			homeTimeline: data,
-					   			homeTimelineError: false
+					   			isHomeTimelineError: false
 					   		})
 					     })
 					     .catch(error => {
 					   		this.setState({
 					   			homeTimeline: null,
-					   			homeTimelineError: true
+					   			isHomeTimelineError: true
 					   		})
 					     });
 	}
@@ -46,13 +46,13 @@ class HomeTimeline extends React.Component {
 					     .then(data => {
 					   	  	this.setState({
 					   			homeTimeline: data,
-					   			homeTimelineError: false
+					   			isHomeTimelineError: false
 					   		})
 					     })
 					     .catch(error => {
 					   		this.setState({
 					   			homeTimeline: null,
-					   			homeTimelineError: true
+					   			isHomeTimelineError: true
 					   		})
 					     });
 	}
@@ -70,10 +70,10 @@ class HomeTimeline extends React.Component {
 	}	
 
 	homeTimelineResultOutput() {
-		if(this.state.homeTimelineError) {
+		if(this.state.isHomeTimelineError) {
 			return "There was a problem on the server side, please try again later";
 		}
-		else if(_.isNull(this.state.homeTimeline) && _.isNull(this.state.homeTimelineError)) {
+		else if(_.isNull(this.state.homeTimeline) && _.isNull(this.state.isHomeTimelineError)) {
 			return " ";
 		}
 		else {
@@ -82,10 +82,10 @@ class HomeTimeline extends React.Component {
 	}
 
 	homeTimelineResultClass() {
-		if(this.state.homeTimelineError) {
+		if(this.state.isHomeTimelineError) {
 			return "error";	
 		}
-		else if(_.isNull(this.state.homeTimeline) && _.isNull(this.state.homeTimelineError)) {
+		else if(_.isNull(this.state.homeTimeline) && _.isNull(this.state.isHomeTimelineError)) {
 			return "pending";	
 		}
 		else {
@@ -117,7 +117,7 @@ class PostTweet extends React.Component {
 		super(props);
 		this.state = {
 			postTweetMessage: null,
-			postTweetError: null,
+			isPostTweetError: null,
 			value: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -138,13 +138,13 @@ class PostTweet extends React.Component {
 						  .then(data => {
 						  	this.setState ({
 						  		postTweetMessage: data.message,
-						  		postTweetError: false
+						  		isPostTweetError: false
 						  	})
 						  })
 						  .catch(error => {
 						  	this.setState ({
 						  		postTweetMessage: null,
-						  		postTweetError: true
+						  		isPostTweetError: true
 						  	})
 						  })
 	}
@@ -156,10 +156,10 @@ class PostTweet extends React.Component {
 	}
 
 	postTweetResultOutput() {
-		if(this.state.postTweetError) {
+		if(this.state.isPostTweetError) {
 			return "There was problem on the server side, please try again later.";
 		}
-		else if (_.isNull(this.state.postTweetMessage) && _.isNull(this.state.postTweetError)) {
+		else if (_.isNull(this.state.postTweetMessage) && _.isNull(this.state.isPostTweetError)) {
 			return  "";
 		}
 		else {
@@ -168,10 +168,10 @@ class PostTweet extends React.Component {
 	}
 
 	postTweetResultClass() {
-		if(this.state.postTweetError) {
+		if(this.state.isPostTweetError) {
 			return "errorPost";
 		}
-		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.postTweetError)) {
+		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.isPostTweetError)) {
 			return "pending";
 		}
 		else {
@@ -198,7 +198,7 @@ class UserTimeline extends React.Component {
 		super(props);
 		this.state = {
 			userTimeline: null,
-			userTimelineError: null,	
+			isUserTimelineError: null,	
 			value: ''
 		}
 		this.handleGetUserTimeline = this.handleGetUserTimeline.bind(this);
@@ -211,22 +211,22 @@ class UserTimeline extends React.Component {
 					     .then(data => {
 					   	  	this.setState({
 					   			userTimeline: data,
-					   			userTimelineError: false
+					   			isUserTimelineError: false
 					   		})
 					     })
 					     .catch(error => {
 					   		this.setState({
 					   			userTimeline: null,
-					   			userTimelineError: true
+					   			isUserTimelineError: true
 					   		})
 					     });
 	}
 
 	userTimelineResultClass() {
-		if(this.state.userTimelineError) {
+		if(this.state.isUserTimelineError) {
 			return "error";	
 		}
-		else if(_.isNull(this.state.userTimeline) && !this.state.userTimelineError) {
+		else if(_.isNull(this.state.userTimeline) && !this.state.isUserTimelineError) {
 			return "pending";	
 		}
 		else {
@@ -235,10 +235,10 @@ class UserTimeline extends React.Component {
 	}
 
 	userTimelineResultOutput() {
-		if(this.state.userTimelineError) {
+		if(this.state.isUserTimelineError) {
 			return "There was a problem on the server side, please try again later";
 		}
-		else if(_.isNull(this.state.userTimeline) && !this.state.userTimelineError) {
+		else if(_.isNull(this.state.userTimeline) && !this.state.isUserTimelineError) {
 			return " ";
 		}
 		else {

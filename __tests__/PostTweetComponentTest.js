@@ -3,16 +3,11 @@ import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {PostTweetComponent, TweetInput, ButtonComponent} from '../src/js/components';
 
-let count = 0;	
-const testCounter = () => {
-	count++;
-}
-
 describe("PostTweetComponent", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(PostTweetComponent, {resultMessage: "test result msg", tweet: "testTweet", onChangeButton: () => testCounter(), onKeyPressButton: () => testCounter()}));
+		wrapper = mount(e(PostTweetComponent, {resultMessage: "test result msg", tweet: "testTweet"}));
 	});
 
 	it("creates a header saying 'Post Tweet'", function() {
