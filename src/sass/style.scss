@@ -42,8 +42,8 @@
 .successPostTweet, .errorPost {
 	position: absolute;
 	right: 80px;
-
 }
+
 .error, .emptyUserTimeline {
 	color: red;
 	text-align: center;
@@ -126,10 +126,9 @@ button:hover {
 
 	&__tab-panel {
 		display: none;
-
-	&--selected {
-	 	display: block;
-	}
+		&--selected {
+		 	display: block;
+		}
 	}
 }
 #postTweetContainer {
@@ -191,7 +190,6 @@ button:hover {
 					padding-top: 5px;
 					@include text(15px);
 					font-weight: bold;
-				
 				}
 
 				.twitterHandle {
