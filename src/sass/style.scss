@@ -33,14 +33,16 @@
 
 .successPostTweet {
 	color: green;
-	position: absolute;
-	right: 74px;
 }
 
 .errorPost {
 	color: red;
+}
+
+.successPostTweet, .errorPost {
 	position: absolute;
 	right: 80px;
+
 }
 .error, .emptyUserTimeline {
 	color: red;

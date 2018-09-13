@@ -264,13 +264,13 @@ class UserTimeline extends React.Component {
 class TabsAndTabPages extends React.Component {
 	render() {
 		return e(Tabs, {}, [
-					e(TabList, {},[
+					e(TabList, {}, [
 						e(Tab, {label: "homeTimelineTab"}, "Home Timeline"),
 						e(Tab, {label: "userTimelineTab"}, "User Timeline"),
 						e(Tab, {label: "postTweetTab"}, "Post Tweet")]),
-					e(TabPanel, {}, e(HomeTimeline, {})),
-					e(TabPanel, {}, e(UserTimeline, {})),
-					e(TabPanel, {}, e(PostTweet, {}))
+					e(TabPanel, {}, e(HomeTimeline)),
+					e(TabPanel, {}, e(UserTimeline)),
+					e(TabPanel, {}, e(PostTweet))
 					]
 				);
 	}

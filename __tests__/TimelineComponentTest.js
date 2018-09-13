@@ -34,7 +34,7 @@ describe("TimelineComponent", () => {
 	it("creates filter input box and filter button for home timeline", function() {
 		wrapper.setProps({timelineType: "Home"});
 		expect(wrapper.containsMatchingElement(
-			e(InputBox, {}))).toEqual(true);
+			e(InputBox))).toEqual(true);
 		expect(wrapper.containsMatchingElement(
 			e(ButtonComponent, {className: "filterButton"}))).toEqual(true);
 	})
