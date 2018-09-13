@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {TimelineButton, User, TimelineComponent, PostTweetComponent, TabButton, TabMenu} from './components';
+import {TimelineButton, User, TimelineComponent, PostTweetComponent, TabButton, TweetInput, TabMenu} from './components';
 import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet, openTab} from './services';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -112,9 +112,25 @@ class HomeTimeline extends React.Component {
 								  resultOutput: this.homeTimelineResultOutput()})
 	}
 }
+
 class ReplyTweetModal extends React.Component {
+	constructor (props) {
+	    super(props);
+	    this.state = {
+	      value: ''
+	    };
+	    this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange(event) {
+		this.setState({
+			value: event.target.value
+		})
+	}
+
 	render() {
 		return e(ReactModal, {isOpen: this.props.showMod}, [
+				e(TweetInput, {inputValue: this.state.vaue, onChangeValue: this.handleChange}),
 				e('button', {onClick: this.props.onClickFunc}, 'Close')]);
 	}
 }
