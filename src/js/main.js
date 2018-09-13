@@ -5,6 +5,7 @@ import {TimelineButton, User, TimelineComponent, PostTweetComponent, TabButton, 
 import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet, openTab} from './services';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import ReactModal from 'react-modal';
 
 const e = React.createElement;
 
@@ -110,6 +111,40 @@ class HomeTimeline extends React.Component {
 								  resultClass: this.homeTimelineResultClass(), 
 								  resultOutput: this.homeTimelineResultOutput()})
 	}
+}
+class ReplyTweetModal extends React.Component {
+	render() {
+		return e(ReactModal, {isOpen: this.props.showMod}, [
+				e('button', {onClick: this.props.onClickFunc}, 'Close')]);
+	}
+}
+class OpenReplyTweetWindowButton extends React.Component {
+	constructor () {
+    super();
+    this.state = {
+      showModal: false
+    };
+    
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+  
+  handleOpenModal () {
+    this.setState({ showModal: true });
+  }
+  
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+  
+  render () {
+    return e('div', {}, [
+    			e('button', {onClick: this.handleOpenModal}, 'Reply Tweet'),
+    			e(ReplyTweetModal, {showMod: this.state.showModal, onClickFunc: () => {this.handleCloseModal()}})
+    			]
+    		)
+    
+  }
 }
 
 class PostTweet extends React.Component {
@@ -282,4 +317,4 @@ window.onload = () => {
 	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
-export{HomeTimeline, UserTimeline, PostTweet, TabsAndTabPages}
+export{HomeTimeline, UserTimeline, PostTweet, TabsAndTabPages, ReplyTweetModal, OpenReplyTweetWindowButton}

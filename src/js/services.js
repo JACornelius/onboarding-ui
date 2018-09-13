@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch';
 import 'babel-polyfill';
 import _ from 'lodash';
 import {User} from './components';
+import {ReplyTweetModal, OpenReplyTweetWindowButton} from './main';
 
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let timelineArray;
@@ -28,7 +29,8 @@ let renderTweetObj = (tweetObj, i, needTwitterHandle) => {
 		let UserObj = e(User, {twitterHandleReq: needTwitterHandle, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i});
 		let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
 				e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
-				e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
+				e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message),
+				e(OpenReplyTweetWindowButton)
 			]);
 		return e('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
 }
@@ -48,6 +50,17 @@ const getFilterTimeline = (filter) => {
 const postTweet = (tweet) => {
 	let data = {"message": tweet};
 	return fetch("http://localhost:8080/api/1.0/twitter/tweet", {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+}
+
+const replyTweet = (tweet, replyId) => {
+	let data = {"message": tweet, "replyTweetID": replyId};
+	return fetch("http://localhost:8080/api/1.0/twitter/tweet/reply", {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: {
