@@ -2,19 +2,19 @@ import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {getHomeTimeline} from '../src/js/services';
-import {TimelineButton} from '../src/js/components';
+import {ButtonComponent} from '../src/js/components';
 import {TimelineResultComp} from '../src/js/components';
 
 let count = 0;	
 const testCounter = () => {
-		count++;
-	}
+	count++;
+}
 
-describe("TimelineButton", () => {
+describe("ButtonComponent", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = shallow(e(TimelineButton, {}, null));
+		wrapper = shallow(e(ButtonComponent, {}, null));
 	});
 
 	it("onClick calls function", function() {

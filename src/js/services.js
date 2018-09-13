@@ -25,7 +25,7 @@ const renderedTimeline = (rawData, needTwitterHandle) => {
 let renderTweetObj = (tweetObj, i, needTwitterHandle) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let UserObj = e(User, {twitterHandleReq: needTwitterHandle, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i}, null);
+		let UserObj = e(User, {twitterHandleReq: needTwitterHandle, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i});
 		let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
 				e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
 				e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message)
@@ -45,4 +45,15 @@ const getFilterTimeline = (filter) => {
 	return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?filter=' + filter)
 }
 
-export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline};
+const postTweet = (tweet) => {
+	let data = {"message": tweet};
+	return fetch("http://localhost:8080/api/1.0/twitter/tweet", {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+}
+
+export{getHomeTimeline, getUserTimeline, getFilterTimeline, renderedTimeline, postTweet};

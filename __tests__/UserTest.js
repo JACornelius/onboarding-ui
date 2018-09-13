@@ -13,12 +13,12 @@ describe("User", () => {
 							 "createdAt":1535657135000};
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(User, {rawUserTweetObj: mockTweetObj, index: 1}, null));
+		wrapper = mount(e(User, {rawUserTweetObj: mockTweetObj, index: 1}));
 	});
 
 	it("creates User div", function() {
 		expect(wrapper.children.length).toEqual(1);
-		expect(wrapper.find("div").at(0).hasClass("User")).toBe(true);
+		expect(wrapper.find("div").at(0).hasClass("user")).toBe(true);
 	});
 
 	it("contains img div", function() {
