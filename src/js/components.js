@@ -23,7 +23,7 @@ class InputBox extends React.Component {
 
 class TweetInput extends React.Component {
 	render() {
-		return e('textarea', {className: 'tweetInput', key: 'tweetInput', value: this.props.inputValue, id: 'tweetInput', onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue});
+		return e('textarea', {maxlength: "280", className: 'tweetInput', key: 'tweetInput', value: this.props.inputValue, id: 'tweetInput', onKeyPress: this.props.onEnter, onChange: this.props.onChangeValue});
 	}
 }
 
