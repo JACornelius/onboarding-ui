@@ -46,7 +46,7 @@ const getFilterTimeline = (filter) => {
 }
 
 const postTweet = (tweet) => {
-	let data = {"name": "mojo", "message": tweet};
+	let data = {"message": tweet};
 	return fetch("http://localhost:8080/api/1.0/twitter/tweet", {
 		method: 'POST',
 		body: JSON.stringify(data),
