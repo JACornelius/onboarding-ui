@@ -12,7 +12,7 @@ describe("PostTweetComponent", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(PostTweetComponent, {resultMessage: "test result msg", tweet: "testTweet", onChangeButton: () => testCounter(), onKeyPressButton: () => testCounter()}, null));
+		wrapper = mount(e(PostTweetComponent, {resultMessage: "test result msg", tweet: "testTweet", onChangeButton: () => testCounter(), onKeyPressButton: () => testCounter()}));
 	});
 
 	it("creates a header saying 'Post Tweet'", function() {
@@ -21,12 +21,12 @@ describe("PostTweetComponent", () => {
 
 	it("has TweetInput component", function() {
 		expect(wrapper.containsMatchingElement(
-			e(TweetInput, {}, null))).toEqual(true);
+			e(TweetInput))).toEqual(true);
 	});
 
 	it("has button component", function() {
 		expect(wrapper.containsMatchingElement(
-			e(ButtonComponent, {disabledButton:!"testTweet", buttonText: "Post Tweet"}, null))).toEqual(true);
+			e(ButtonComponent, {disabledButton:!"testTweet", buttonText: "Post Tweet"}))).toEqual(true);
 	});
 
 	it("has feedback message", function() {

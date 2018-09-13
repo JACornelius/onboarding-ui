@@ -13,7 +13,7 @@ describe("User", () => {
 							 "createdAt":1535657135000};
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(User, {rawUserTweetObj: mockTweetObj, index: 1}, null));
+		wrapper = mount(e(User, {rawUserTweetObj: mockTweetObj, index: 1}));
 	});
 
 	it("creates User div", function() {

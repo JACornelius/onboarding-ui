@@ -12,6 +12,6 @@ describe("UserTimeline", () =>  {
 	});
 
 	it("contains TimelineComponent", function() {
-		expect(wrapper.containsMatchingElement(e(TimelineComponent, {timelineType: "User", key: "userTimelineComp"}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(e(TimelineComponent, {timelineType: "User", key: "userTimelineComp"}))).toEqual(true);
 	})
 })

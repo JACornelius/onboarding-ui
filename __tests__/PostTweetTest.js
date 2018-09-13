@@ -12,6 +12,6 @@ describe("PostTweet", () => {
 	})
 
 	it("contains PostTweetComponent", function() {
-		expect(wrapper.containsMatchingElement(PostTweetComponent, {}, null)).toEqual(true);
+		expect(wrapper.containsMatchingElement(PostTweetComponent)).toEqual(true);
 	});
 })

@@ -75,7 +75,7 @@
 	}
 }
 
-textarea {
+.tweetInput {
 	@include size(200px, 1000px);
 	resize: none;
 	position: relative;
@@ -170,7 +170,7 @@ button:hover {
 					font-style: italic;
 				}	
 			}
-			.User {
+			.user {
 				padding: 10px 0px 0px 10px;
 				@include size(100px, 25%);
 				clear: both;

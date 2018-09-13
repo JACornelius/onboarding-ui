@@ -8,7 +8,7 @@ const e = React.createElement;
 describe("InputBox", () => {
 	let wrapper;
 	beforeEach(function() {
-		wrapper = shallow(e(InputBox, {}, null));
+		wrapper = shallow(e(InputBox));
 	});
 
 	it("creates an input box", function() {

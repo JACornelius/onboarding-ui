@@ -12,6 +12,6 @@ describe("HomeTimeline", () =>  {
 	});
 
 	it("contains TimelineComponent", function() {
-		expect(wrapper.containsMatchingElement(e(TimelineComponent, {timelineType: "Home", key: "homeTimelineComp"}, null))).toEqual(true);
+		expect(wrapper.containsMatchingElement(e(TimelineComponent, {timelineType: "Home", key: "homeTimelineComp"}))).toEqual(true);
 	});
 })

@@ -8,12 +8,11 @@ describe("TabsAndTabPages", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(Tabs));
+		wrapper = mount(e(TabsAndTabPages));
 	});
 
 	it("has tab list", function() {
-		expect(wrapper.containsMatchingElement(
-			e(Tabs, {}, null))).toEqual(true);
+		expect(wrapper.find("Tabs").length).toEqual(1);
 	});
 
 })
