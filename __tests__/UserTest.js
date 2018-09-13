@@ -18,7 +18,7 @@ describe("User", () => {
 
 	it("creates User div", function() {
 		expect(wrapper.children.length).toEqual(1);
-		expect(wrapper.find("div").at(0).hasClass("User")).toBe(true);
+		expect(wrapper.find("div").at(0).hasClass("user")).toBe(true);
 	});
 
 	it("contains img div", function() {
