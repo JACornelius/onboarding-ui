@@ -176,7 +176,19 @@ button:hover {
 			width: 1px;
 		}
 
-		.tweet {
+		
+	}
+}	
+
+.inReplyToTweet {
+	background: lavender;
+	margin-bottom: 20px;
+	button {
+		display: none;
+	}
+}
+
+.tweet {
 			padding: 10px 0px;
 			height: 110px;
 			border-bottom: 1px solid lightgrey;
@@ -218,11 +230,7 @@ button:hover {
 					@include text(12px);
 				}
 			}
-		}
-	}
-}	
-
-	
+		}	
 
 
 

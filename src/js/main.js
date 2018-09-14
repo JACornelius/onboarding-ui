@@ -198,7 +198,7 @@ class ReplyTweetModal extends React.Component {
 							  shouldCloseOnOverlayClick: true,
 							  onRequestClose: this.props.onCloseFunc,
 							  className: 'replyTweetModal'}, [
-					e('div', {}, this.renderingInReplyToTweet(this.props.tweetObject)),
+					e('div', {className: 'inReplyToTweet'}, this.renderingInReplyToTweet(this.props.tweetObject)),
 					e('div', {className: 'replyTweetContainer'},[
 							e(TweetInput, {inputValue: this.state.value, 
 										   onChangeValue: this.handleChange, 
@@ -235,7 +235,11 @@ class OpenReplyTweetWindowButton extends React.Component {
   render () {
     return e('div', {}, [
     			e('button', {onClick: this.handleOpenModal}, 'Reply Tweet'),
-    			e(ReplyTweetModal, {replyTweetId: this.props.replyId, tweetObject: this.props.tweetObject, showMod: this.state.showModal, onCloseFunc: () => {this.handleCloseModal()}})
+    			e(ReplyTweetModal, {replyTweetId: this.props.replyId, 
+    								tweetObject: this.props.tweetObject, 
+    								showMod: this.state.showModal, 
+    								onCloseFunc: () => {this.handleCloseModal()}
+    							})
     			]
     		)
     
