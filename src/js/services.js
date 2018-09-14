@@ -26,7 +26,6 @@ const renderedTimeline = (rawData, needTwitterHandle) => {
 let renderTweetObj = (tweetObj, i, needTwitterHandle) => {
 	let date = new Date(tweetObj.createdAt);
 		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		console.log(tweetObj);
 		let UserObj = e(User, {twitterHandleReq: needTwitterHandle, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i});
 		let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
 				e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),

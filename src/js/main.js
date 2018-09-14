@@ -122,6 +122,7 @@ class ReplyTweetModal extends React.Component {
 	      isReplyTweetError: null
 	    };
 	    this.handleChange = this.handleChange.bind(this);
+	    this.handleKeyPress = this.handleKeyPress.bind(this);
 	    this.handleReplyTweet = this.handleReplyTweet.bind(this);
 	    this.replyTweetResultOutput = this.replyTweetResultOutput.bind(this);
 	    this.replyTweetResultClass = this.replyTweetResultClass.bind(this);
@@ -147,6 +148,12 @@ class ReplyTweetModal extends React.Component {
 		this.setState({
 			value: event.target.value
 		})
+	}
+
+	handleKeyPress(event) {
+		if(event.key == 'Enter' && this.state.value != ' ') {
+			{this.handleReplyTweet(this.state.value, this.props.replyTweetId);}			
+		}
 	}
 
 	replyTweetResultOutput() {
@@ -177,9 +184,13 @@ class ReplyTweetModal extends React.Component {
 		{this.replyTweetResultClass()}
 		{this.replyTweetResultOutput()}
 		return e(ReactModal, {isOpen: this.props.showMod}, [
-				e(TweetInput, {inputValue: this.state.value, onChangeValue: this.handleChange}),
-				e(ButtonComponent, {disabledButton: !this.state.value, buttonText: 'Reply', onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)}),
-				e('button', {onClick: this.props.onCloseFunc}, 'Close')]);
+					e(TweetInput, {inputValue: this.state.value, 
+								   onChangeValue: this.handleChange, 
+								   onEnter: this.handleKeyPress}),
+					e(ButtonComponent, {disabledButton: !this.state.value, 
+										buttonText: 'Reply', 
+										onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)}),
+					e('button', {onClick: this.props.onCloseFunc}, 'Close')]);
 		
 	}
 }
