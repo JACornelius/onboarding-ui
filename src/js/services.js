@@ -25,14 +25,14 @@ const renderedTimeline = (rawData, needTwitterHandle) => {
 
 let renderTweetObj = (tweetObj, i, needTwitterHandle) => {
 	let date = new Date(tweetObj.createdAt);
-		let dateString = monthNames[date.getMonth()] + " " + date.getDate();
-		let UserObj = e(User, {twitterHandleReq: needTwitterHandle, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i});
-		let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
-				e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
-				e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message),
-				e(OpenReplyTweetWindowButton, {replyId: tweetObj.statusId})
-			]);
-		return e('div', {className: 'tweet', key: 'tweetObj' + i}, [UserObj, rightColumn]);
+	let dateString = monthNames[date.getMonth()] + " " + date.getDate();
+	let UserObj = e(User, {twitterHandleReq: needTwitterHandle, rawUserTweetObj: tweetObj, index: i, key: 'userObj' + i});
+	let rightColumn = e('div', {className: 'rightColumn', key: 'rightColumn' + i}, [
+			e('div', {className: 'dateBlock', key: 'dataBlock' + i}, dateString),
+			e('a', {target: '_blank', key: 'link' + i, href: "https://twitter.com/" + tweetObj.twitterHandle + "/status/" + tweetObj.statusId}, tweetObj.message),
+			e(OpenReplyTweetWindowButton, {replyId: tweetObj.statusId, tweetObject: tweetObj})
+		]);
+	return e('div', {className: 'tweet', key: 'tweetObj' + i, id: tweetObj.statusId}, [UserObj, rightColumn]);
 }
 
 const getUserTimeline = () => {
@@ -69,4 +69,4 @@ const replyTweet = (tweet, replyId) => {
 	})
 }
 
-export{getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, renderedTimeline, postTweet};
+export{getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, renderedTimeline, renderTweetObj, postTweet};

@@ -96,6 +96,28 @@ button:hover {
 #homeTimeline {
 	display: block;
 }
+.replyButton {
+	float: right;
+}
+.replyTweetModal {
+	position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    width: 35%;
+    text-align: center;
+    .replyTweetContainer {
+    	display: inline-block;
+    	width: 75%;
+    	.tweetInput {
+    		@include size(200px, 98%);
+    	}
+    }
+}
 
 .react-tabs {
 	&__tab-list {

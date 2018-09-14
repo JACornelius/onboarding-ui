@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
 import {User, TimelineComponent, PostTweetComponent, TabButton, TweetInput, ButtonComponent, TabMenu} from './components';
-import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet, openTab} from './services';
+import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet, renderTweetObj, openTab} from './services';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ReactModal from 'react-modal';
@@ -126,6 +126,7 @@ class ReplyTweetModal extends React.Component {
 	    this.handleReplyTweet = this.handleReplyTweet.bind(this);
 	    this.replyTweetResultOutput = this.replyTweetResultOutput.bind(this);
 	    this.replyTweetResultClass = this.replyTweetResultClass.bind(this);
+	    this.renderingInReplyToTweet = this.renderingInReplyToTweet.bind(this);
 	}
 
 	handleReplyTweet(tweet, replyId) {
@@ -150,9 +151,19 @@ class ReplyTweetModal extends React.Component {
 		})
 	}
 
+	renderingInReplyToTweet(tweetObj) {
+		return renderTweetObj(tweetObj, 0, true);
+	}
+
 	handleKeyPress(event) {
 		if(event.key == 'Enter' && this.state.value != ' ') {
 			{this.handleReplyTweet(this.state.value, this.props.replyTweetId);}			
+		}
+	}
+
+	handleClickOutside(event) {
+		if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+			this.props.onCloseFunc;
 		}
 	}
 
@@ -183,14 +194,22 @@ class ReplyTweetModal extends React.Component {
 	render() {
 		{this.replyTweetResultClass()}
 		{this.replyTweetResultOutput()}
-		return e(ReactModal, {isOpen: this.props.showMod}, [
-					e(TweetInput, {inputValue: this.state.value, 
-								   onChangeValue: this.handleChange, 
-								   onEnter: this.handleKeyPress}),
-					e(ButtonComponent, {disabledButton: !this.state.value, 
-										buttonText: 'Reply', 
-										onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)}),
-					e('button', {onClick: this.props.onCloseFunc}, 'Close')]);
+		return e(ReactModal, {isOpen: this.props.showMod, 
+							  shouldCloseOnOverlayClick: true,
+							  onRequestClose: this.props.onCloseFunc,
+							  className: 'replyTweetModal'}, [
+					e('div', {}, this.renderingInReplyToTweet(this.props.tweetObject)),
+					e('div', {className: 'replyTweetContainer'},[
+							e(TweetInput, {inputValue: this.state.value, 
+										   onChangeValue: this.handleChange, 
+										   onEnter: this.handleKeyPress}),
+							e(ButtonComponent, {disabledButton: !this.state.value, 
+												buttonText: 'Reply', 
+												className: 'replyButton',
+												onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)})
+						])
+					
+					]);
 		
 	}
 }
@@ -216,7 +235,7 @@ class OpenReplyTweetWindowButton extends React.Component {
   render () {
     return e('div', {}, [
     			e('button', {onClick: this.handleOpenModal}, 'Reply Tweet'),
-    			e(ReplyTweetModal, {replyTweetId: this.props.replyId, showMod: this.state.showModal, onCloseFunc: () => {this.handleCloseModal()}})
+    			e(ReplyTweetModal, {replyTweetId: this.props.replyId, tweetObject: this.props.tweetObject, showMod: this.state.showModal, onCloseFunc: () => {this.handleCloseModal()}})
     			]
     		)
     
