@@ -234,7 +234,9 @@ class OpenReplyTweetWindowButton extends React.Component {
   
   render () {
     return e('div', {}, [
-    			e('button', {onClick: this.handleOpenModal}, 'Reply Tweet'),
+    			e('button', {className: 'fas fa-reply', 
+    						 id: 'replyButton',
+    						 onClick: this.handleOpenModal}),
     			e(ReplyTweetModal, {replyTweetId: this.props.replyId, 
     								tweetObject: this.props.tweetObject, 
     								showMod: this.state.showModal, 

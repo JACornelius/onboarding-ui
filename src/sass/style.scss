@@ -96,9 +96,17 @@ button:hover {
 #homeTimeline {
 	display: block;
 }
+
 .replyButton {
 	float: right;
 }
+
+#replyButton{
+	background-color: Transparent;
+	outline: none;
+	border-width: 0px;
+}
+
 .replyTweetModal {
 	position: absolute;
     top: 0px;
