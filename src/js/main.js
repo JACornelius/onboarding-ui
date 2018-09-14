@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
 import {User, TimelineComponent, PostTweetComponent, TabButton, TweetInput, ButtonComponent, TabMenu} from './components';
-import {getHomeTimeline, getUserTimeline, getFilterTimeline, postTweet, openTab} from './services';
+import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet, openTab} from './services';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ReactModal from 'react-modal';
@@ -117,9 +117,30 @@ class ReplyTweetModal extends React.Component {
 	constructor (props) {
 	    super(props);
 	    this.state = {
-	      value: ''
+	      value: '',
+	      replyTweetMessage: null,
+	      isReplyTweetError: null
 	    };
 	    this.handleChange = this.handleChange.bind(this);
+	    this.handleReplyTweet = this.handleReplyTweet.bind(this);
+	    this.replyTweetResultOutput = this.replyTweetResultOutput.bind(this);
+	    this.replyTweetResultClass = this.replyTweetResultClass.bind(this);
+	}
+
+	handleReplyTweet(tweet, replyId) {
+		replyTweet(tweet, replyId).then(response => response.json())
+						  .then(data => {
+						  	this.setState ({
+						  		replyTweetMessage: data.message,
+						  		isReplyTweetError: false
+						  	})
+						  })
+						  .catch(error => {
+						  	this.setState ({
+						  		replyTweetMessage: null,
+						  		isReplyTweetError: true
+						  	})
+						  })
 	}
 
 	handleChange(event) {
@@ -128,16 +149,43 @@ class ReplyTweetModal extends React.Component {
 		})
 	}
 
+	replyTweetResultOutput() {
+		if(this.state.isReplyTweetError) {
+			return "There was problem on the server side, please try again later.";
+		}
+		else if (_.isNull(this.state.replyTweetMessage) && _.isNull(this.state.isReplyTweetError)) {
+			return  "";
+		}
+		else {
+			return "Tweet (" + this.state.replyTweetMessage + ") was successfully posted";
+		}
+	}
+
+	replyTweetResultClass() {
+		if(this.state.isPostTweetError) {
+			return "errorReply";
+		}
+		else if(_.isNull(this.state.replyTweetMessage) && _.isNull(this.state.isReplyTweetError)) {
+			return "pending";
+		}
+		else {
+			return "successReplyTweet";
+		}
+	}
+
 	render() {
+		{this.replyTweetResultClass()}
+		{this.replyTweetResultOutput()}
 		return e(ReactModal, {isOpen: this.props.showMod}, [
 				e(TweetInput, {inputValue: this.state.value, onChangeValue: this.handleChange}),
-				e(ButtonComponent, {disabledButton: !this.state.value, buttonText: 'Reply'}),
-				e('button', {onClick: this.props.onClickFunc}, 'Close')]);
+				e(ButtonComponent, {disabledButton: !this.state.value, buttonText: 'Reply', onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)}),
+				e('button', {onClick: this.props.onCloseFunc}, 'Close')]);
+		
 	}
 }
 class OpenReplyTweetWindowButton extends React.Component {
-	constructor () {
-    super();
+	constructor(props) {
+    super(props);
     this.state = {
       showModal: false
     };
@@ -157,7 +205,7 @@ class OpenReplyTweetWindowButton extends React.Component {
   render () {
     return e('div', {}, [
     			e('button', {onClick: this.handleOpenModal}, 'Reply Tweet'),
-    			e(ReplyTweetModal, {showMod: this.state.showModal, onClickFunc: () => {this.handleCloseModal()}})
+    			e(ReplyTweetModal, {replyTweetId: this.props.replyId, showMod: this.state.showModal, onCloseFunc: () => {this.handleCloseModal()}})
     			]
     		)
     
