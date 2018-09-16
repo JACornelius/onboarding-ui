@@ -31,17 +31,22 @@
 	font-weight: bold;
 }
 
-.successPostTweet {
+.successPostTweet, .successReplyTweet {
 	color: green;
 }
 
-.errorPost {
+.errorPost, .errorReply {
 	color: red;
 }
 
-.successPostTweet, .errorPost {
+.successPostTweet, .errorPost, .errorReply, .successReplyTweet {
 	position: absolute;
-	right: 80px;
+	right: 90px;
+}
+
+.errorReply, .successReplyTweet {
+	position: absolute;
+	right: 50px;
 }
 
 .error, .emptyUserTimeline {

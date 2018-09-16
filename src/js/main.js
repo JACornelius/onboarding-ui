@@ -199,15 +199,6 @@ class ReplyTweetModal extends React.Component {
 							  onRequestClose: this.props.onCloseFunc,
 							  className: 'replyTweetModal'}, [
 					e('div', {className: 'inReplyToTweet'}, this.renderingInReplyToTweet(this.props.tweetObject)),
-					// e('div', {className: 'replyTweetContainer'},[
-					// 		e(TweetInput, {inputValue: this.state.value, 
-					// 					   onChangeValue: this.handleChange, 
-					// 					   onEnter: this.handleKeyPress}),
-					// 		e(ButtonComponent, {disabledButton: !this.state.value, 
-					// 							buttonText: 'Reply', 
-					// 							className: 'replyButton',
-					// 							onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)})
-					// 	])
 					 e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
 								  onChangeButton: this.handleChange,
 								  tweet: this.state.value,
