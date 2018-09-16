@@ -38,12 +38,12 @@ class User extends React.Component {
 			]);
 	}
 }
-class PostTweetComponent extends React.Component {
+class TweetComponent extends React.Component {
 	render() {
-		return e('div', {id: 'postTweetContainer', key: 'postTweetCont'},
-					[e('h2', {className: 'header', key: 'postTweetHeader'}, 'Post Tweet'),
+		return e('div', {classname: 'TweetContainer', id: this.props.container,  key: 'TweetCont'},
+					[e('h2', {className: 'header', key: 'tweetHeader'}, this.props.header),
 					 e(TweetInput, {className: 'tweetInput', key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}),
-					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'postTweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: 'Post Tweet'}),
+					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'tweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: this.props.buttonTxt}),
 					 e('div', {className: this.props.resultClass, id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
 					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length)
 					]);
@@ -69,4 +69,4 @@ class TimelineComponent extends React.Component {
 					
 }
 
-export{TimelineResultComponent, ButtonComponent, User, PostTweetComponent, TimelineComponent, TweetInput, InputBox};
+export{TimelineResultComponent, ButtonComponent, User, TweetComponent, TimelineComponent, TweetInput, InputBox};

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {renderedTimeline} from './services';
-import {User, TimelineComponent, PostTweetComponent, TabButton, TweetInput, ButtonComponent, TabMenu} from './components';
+import {User, TimelineComponent, TweetComponent, TabButton, TweetInput, ButtonComponent, TabMenu} from './components';
 import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet, renderTweetObj, openTab} from './services';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -199,15 +199,24 @@ class ReplyTweetModal extends React.Component {
 							  onRequestClose: this.props.onCloseFunc,
 							  className: 'replyTweetModal'}, [
 					e('div', {className: 'inReplyToTweet'}, this.renderingInReplyToTweet(this.props.tweetObject)),
-					e('div', {className: 'replyTweetContainer'},[
-							e(TweetInput, {inputValue: this.state.value, 
-										   onChangeValue: this.handleChange, 
-										   onEnter: this.handleKeyPress}),
-							e(ButtonComponent, {disabledButton: !this.state.value, 
-												buttonText: 'Reply', 
-												className: 'replyButton',
-												onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)})
-						])
+					// e('div', {className: 'replyTweetContainer'},[
+					// 		e(TweetInput, {inputValue: this.state.value, 
+					// 					   onChangeValue: this.handleChange, 
+					// 					   onEnter: this.handleKeyPress}),
+					// 		e(ButtonComponent, {disabledButton: !this.state.value, 
+					// 							buttonText: 'Reply', 
+					// 							className: 'replyButton',
+					// 							onClickFunc: () => this.handleReplyTweet(this.state.value,this.props.replyTweetId)})
+					// 	])
+					 e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
+								  onChangeButton: this.handleChange,
+								  tweet: this.state.value,
+								  key: 'replyTweetComp',
+								  resultClass: this.replyTweetResultClass(),
+								  buttonFunc: () => this.handleReplyTweet(this.state.value, this.props.replyTweetId),
+								  resultMessage: this.replyTweetResultOutput(),
+								  buttonTxt: 'Reply',
+								  container: 'replyTweetContainer'})
 					
 					]);
 		
@@ -318,13 +327,16 @@ class PostTweet extends React.Component {
 	render() {
 		{this.postTweetResultOutput()}
 		{this.postTweetResultClass()}
-		return e(PostTweetComponent, {onKeyPressButton: this.handleKeyPress,
-									  onChangeButton: this.handleChange,
-									  tweet: this.state.value,
-									  key: 'postTweetComp',
-									  resultClass: this.postTweetResultClass(),
-									  buttonFunc: () => this.handlePostTweet(this.state.value),
-									  resultMessage: this.postTweetResultOutput()});
+		return e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
+								  onChangeButton: this.handleChange,
+								  tweet: this.state.value,
+								  key: 'postTweetComp',
+								  resultClass: this.postTweetResultClass(),
+								  buttonFunc: () => this.handlePostTweet(this.state.value),
+								  resultMessage: this.postTweetResultOutput(),
+								  buttonTxt: 'Post Tweet',
+								  header: 'Post Tweet',
+								  container: 'postTweetContainer'});
 	}
 }
 

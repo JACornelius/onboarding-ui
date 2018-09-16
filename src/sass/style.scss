@@ -77,12 +77,6 @@
 	}
 }
 
-.tweetInput {
-	@include size(200px, 1000px);
-	resize: none;
-	position: relative;
-}
-
 .userTimelineButton, .homeTimelineButton {
 	position: absolute;
 	left: 0px;
@@ -118,13 +112,13 @@ button:hover {
     border-radius: 4px;
     width: 35%;
     text-align: center;
-    .replyTweetContainer {
+   /* .replyTweetContainer {
     	display: inline-block;
     	width: 75%;
     	.tweetInput {
     		@include size(200px, 98%);
     	}
-    }
+    }*/
 }
 
 .react-tabs {
@@ -161,16 +155,40 @@ button:hover {
 		}
 	}
 }
+
 #postTweetContainer {
-	@include containerSizing()
-	.postTweetButton {
+	width: 40%;
+	height: 300px;
+	.tweetButton {
+		right: 6px;
+	}
+}
+
+#replyTweetContainer {
+	width: 85%;
+	height: 250px;
+	.tweetButton {
+		right: 0px;
+	}
+}
+
+#postTweetContainer, #replyTweetContainer {
+	margin: auto;
+	position: relative;
+	
+	.tweetInput {
+		resize: none;
+		position: relative;
+		@include size(200px, 98.5%)
+	}
+	.tweetButton {
 		position: absolute;
-		right: -8px;
+		bottom: -20px;
 	}
 	#charCount {
 		position: absolute;
-		right: 5px;
-		top: 273px;
+		right: 10px;
+		bottom: 5px;
 	}
 }
 
