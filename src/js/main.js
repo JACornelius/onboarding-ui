@@ -197,17 +197,19 @@ class ReplyTweetModal extends React.Component {
 		return e(ReactModal, {isOpen: this.props.showMod, 
 							  shouldCloseOnOverlayClick: true,
 							  onRequestClose: this.props.onCloseFunc,
-							  className: 'replyTweetModal'}, [
-					e('div', {className: 'inReplyToTweet'}, this.renderingInReplyToTweet(this.props.tweetObject)),
-					 e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
-								  onChangeButton: this.handleChange,
-								  tweet: this.state.value,
-								  key: 'replyTweetComp',
-								  resultClass: this.replyTweetResultClass(),
-								  buttonFunc: () => this.handleReplyTweet(this.state.value, this.props.replyTweetId),
-								  resultMessage: this.replyTweetResultOutput(),
-								  buttonTxt: 'Reply',
-								  container: 'replyTweetContainer'})
+							  className: 'replyTweetModal',
+							  key: 'replyTweetModal'}, [
+					e('div', {className: 'inReplyToTweet', key: 'inReplyToTweet'}, this.renderingInReplyToTweet(this.props.tweetObject)),
+					e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
+									   onChangeButton: this.handleChange,
+									   tweet: this.state.value,
+									   key: 'replyTweetComp',
+									   resultClass: this.replyTweetResultClass(),
+									   buttonFunc: () => this.handleReplyTweet(this.state.value, this.props.replyTweetId),
+									   resultMessage: this.replyTweetResultOutput(),
+									   buttonTxt: 'Reply',
+									   container: 'replyTweetContainer',
+									  })
 					
 					]);
 		
@@ -236,7 +238,8 @@ class OpenReplyTweetWindowButton extends React.Component {
     return e('div', {}, [
     			e('button', {className: 'fas fa-reply', 
     						 id: 'replyButton',
-    						 onClick: this.handleOpenModal}),
+    						 onClick: this.handleOpenModal,
+    						 key: 'replyTimelineButton'}),
     			e(ReplyTweetModal, {replyTweetId: this.props.replyId, 
     								tweetObject: this.props.tweetObject, 
     								showMod: this.state.showModal, 
@@ -403,13 +406,13 @@ class UserTimeline extends React.Component {
 class TabsAndTabPages extends React.Component {
 	render() {
 		return e(Tabs, {}, [
-					e(TabList, {}, [
-						e(Tab, {label: "homeTimelineTab"}, "Home Timeline"),
-						e(Tab, {label: "userTimelineTab"}, "User Timeline"),
-						e(Tab, {label: "postTweetTab"}, "Post Tweet")]),
-					e(TabPanel, {}, e(HomeTimeline)),
-					e(TabPanel, {}, e(UserTimeline)),
-					e(TabPanel, {}, e(PostTweet))
+					e(TabList, {key: "tabList"}, [
+						e(Tab, {label: "homeTimelineTab", key: "homeTimelineTab"}, "Home Timeline"),
+						e(Tab, {label: "userTimelineTab", key: "userTimelineTab"}, "User Timeline"),
+						e(Tab, {label: "postTweetTab", key: "postTweetTab"}, "Post Tweet")]),
+					e(TabPanel, {key: "homeTabPanel"}, e(HomeTimeline)),
+					e(TabPanel, {key: "userTabPanel"}, e(UserTimeline)),
+					e(TabPanel, {key: "postTabPanel"}, e(PostTweet))
 					]
 				);
 	}

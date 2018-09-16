@@ -40,7 +40,7 @@ class User extends React.Component {
 }
 class TweetComponent extends React.Component {
 	render() {
-		return e('div', {classname: 'TweetContainer', id: this.props.container,  key: 'TweetCont'},
+		return e('div', {className: 'TweetContainer', key: 'TweetCont', id: this.props.container},
 					[e('h2', {className: 'header', key: 'tweetHeader'}, this.props.header),
 					 e(TweetInput, {className: 'tweetInput', key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}),
 					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'tweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunc, buttonText: this.props.buttonTxt}),

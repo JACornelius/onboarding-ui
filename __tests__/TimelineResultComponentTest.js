@@ -56,7 +56,7 @@ describe("TimelineResultComponent", () => {
 
 	it("contains all div components of the timeline table", function() {	
 		wrapper = mount(e(TimelineResultComponent, {timelineResult: renderedTimeline(mockHttpRespText)}));
-		expect(wrapper.find("div").length).toEqual(6);
+		expect(wrapper.find("div").length).toEqual(7);
 	});
 
 	it("contains userTimeline", function() {
