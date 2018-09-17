@@ -112,6 +112,8 @@ button:hover {
 	background-color: Transparent;
 	outline: none;
 	border-width: 0px;
+	padding: 0px;
+	cursor: pointer;
 }
 
 .replyTweetModal {
@@ -179,6 +181,7 @@ button:hover {
 
 	.tweetButton {
 		right: 0px;
+		cursor: pointer;
 	}
 }
 
@@ -245,7 +248,7 @@ button:hover {
 					font-style: italic;
 				}	
 			}
-			
+
 			.user {
 				padding: 10px 0px 0px 10px;
 				@include size(100px, 25%);

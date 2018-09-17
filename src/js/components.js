@@ -23,7 +23,7 @@ class InputBox extends React.Component {
 
 class TweetInput extends React.Component {
 	render() {
-		return e('textarea', {maxLength: "280", className: 'tweetInput', key: 'tweetInput', value: this.props.inputValue, id: 'tweetInput', onChange: this.props.onChangeValue});
+		return e('textarea', {autoFocus: this.props.autoFocus, maxLength: "280", className: 'tweetInput', key: 'tweetInput', value: this.props.inputValue, id: 'tweetInput', onChange: this.props.onChangeValue});
 	}
 }
 
@@ -42,7 +42,7 @@ class TweetComponent extends React.Component {
 	render() {
 		return e('div', {className: 'TweetContainer ' + this.props.container, key: 'TweetCont'},
 					[e('h2', {className: 'header', key: 'tweetHeader'}, this.props.header),
-					 e(TweetInput, {className: 'tweetInput', key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}),
+					 e(TweetInput, {autoFocus: this.props.autofocus, className: 'tweetInput', key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}),
 					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'tweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunction, buttonText: this.props.buttonTxt}),
 					 e('div', {className: this.props.resultClass, id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
 					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length)

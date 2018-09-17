@@ -119,13 +119,20 @@ class ReplyTweetModal extends React.Component {
 	    this.state = {
 	      value: '',
 	      replyTweetMessage: null,
-	      isReplyTweetError: null
+	      isReplyTweetError: null,
+	      focus: null
 	    };
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleReplyTweet = this.handleReplyTweet.bind(this);
 	    this.replyTweetResultOutput = this.replyTweetResultOutput.bind(this);
 	    this.replyTweetResultClass = this.replyTweetResultClass.bind(this);
 	    this.renderingInReplyToTweet = this.renderingInReplyToTweet.bind(this);
+	}
+
+	componentDidMount() {
+		this.setState({
+			focus: true
+		})
 	}
 
 	handleReplyTweet(tweet, replyId) {
@@ -201,6 +208,7 @@ class ReplyTweetModal extends React.Component {
 									   resultMessage: this.replyTweetResultOutput(),
 									   buttonTxt: 'Reply',
 									   container: 'replyTweetContainer',
+									   autofocus: this.state.focus
 									  })
 					
 					]);
@@ -405,7 +413,7 @@ class TabsAndTabPages extends React.Component {
 window.onload = () => {
 	let reactAndTimeline = e('div', {}, [e('h1', {className: 'header', key: 'header'}, 'Lab for Josephine'), 
 		e(TabsAndTabPages, {key: 'tabMenu'})]);
-	ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
+		ReactDOM.render(reactAndTimeline, document.getElementById('timelineButtonAndData'));
 }
 
 export{HomeTimeline, UserTimeline, PostTweet, TabsAndTabPages, ReplyTweetModal, OpenReplyTweetWindowButton}
