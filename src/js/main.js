@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {User, TimelineComponent, TweetComponent, TabButton, TweetInput, ButtonComponent, TabMenu} from './components';
+import {User, TimelineComponent, TweetComponent, TabButton, TabMenu} from './components';
 import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet} from './services';
 import {renderTweetObj, renderedTimeline} from './elements';
 import _ from 'lodash';

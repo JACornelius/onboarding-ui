@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount, render} from 'enzyme';
+import {mount} from 'enzyme';
 import {HomeTimeline} from '../src/js/main';
 import {TimelineComponent} from '../src/js/components';
 
