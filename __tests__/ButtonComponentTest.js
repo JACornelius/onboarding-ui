@@ -1,9 +1,6 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {getHomeTimeline} from '../src/js/services';
 import {ButtonComponent} from '../src/js/components';
-import {TimelineResultComp} from '../src/js/components';
 
 let count = 0;	
 const testCounter = () => {

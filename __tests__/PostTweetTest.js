@@ -1,6 +1,5 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
 import {PostTweet} from '../src/js/main';
 import {TweetComponent} from '../src/js/components';
 

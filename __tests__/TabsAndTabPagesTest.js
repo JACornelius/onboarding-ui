@@ -1,8 +1,6 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {TabsAndTabPages, HomeTimeline} from '../src/js/main';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {TabsAndTabPages} from '../src/js/main';
 
 describe("TabsAndTabPages", () => {
 	let wrapper;

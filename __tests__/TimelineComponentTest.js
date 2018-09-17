@@ -1,6 +1,5 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
 import {TimelineComponent, TimelineResultComponent, ButtonComponent, InputBox} from '../src/js/components';
 
 describe("TimelineComponent", () => {
