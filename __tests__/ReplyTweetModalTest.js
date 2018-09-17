@@ -1,6 +1,5 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
-import {ReactModal} from 'react-modal';
 import {ReplyTweetModal} from '../src/js/main';
 import {TweetComponent} from '../src/js/components';
 

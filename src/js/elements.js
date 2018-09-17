@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {User} from './components';
 import _ from 'lodash';
-import {ReplyTweetModal, OpenReplyTweetWindowButton} from './main';
+import {OpenReplyTweetWindowButton} from './main';
 
 const monthNames = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 let timelineArray;

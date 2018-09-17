@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {getTimeline, openTab} from './services'
 
 const e = React.createElement;
 
