@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {renderedTimeline} from './services';
 import {User, TimelineComponent, TweetComponent, TabButton, TweetInput, ButtonComponent, TabMenu} from './components';
-import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet, renderTweetObj, openTab} from './services';
+import {getHomeTimeline, getUserTimeline, getFilterTimeline, replyTweet, postTweet} from './services';
+import {renderTweetObj, renderedTimeline} from './elements';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ReactModal from 'react-modal';
