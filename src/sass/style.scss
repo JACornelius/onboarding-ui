@@ -224,10 +224,13 @@ button:hover {
 
 .inReplyToTweet {
 	margin-bottom: 20px;
-
-	button {
-		display: none;
+	.tweet {
+		border-bottom-color: white;
+		button {
+			display: none;
+		}
 	}
+	
 }
 
 .tweet {
