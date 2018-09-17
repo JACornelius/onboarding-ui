@@ -1,11 +1,8 @@
 import React from 'react';
 import {shallow, mount, render} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
-import {Timelines} from '../src/js/main.js';
-import {getHomeTimeline} from '../src/js/services';
-import {TimelineButton} from '../src/js/components';
 import {TimelineResultComponent} from '../src/js/components';
-import {renderedTimeline} from '../src/js/services';
+import {renderedTimeline} from '../src/js/elements';
 
 describe("TimelineResultComponent", () => {
 	const e = React.createElement;
