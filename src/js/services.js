@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import promise from 'es6-promise';
 import fetch from 'isomorphic-fetch';
 import 'babel-polyfill';
