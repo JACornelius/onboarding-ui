@@ -1,8 +1,4 @@
-import React from 'react';
-import promise from 'es6-promise';
 import fetch from 'isomorphic-fetch';
-import 'babel-polyfill';
-import _ from 'lodash';
 
 const getUserTimeline = () => {
 	return fetch('http://localhost:8080/api/1.0/twitter/timeline/user');
