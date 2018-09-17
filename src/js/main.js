@@ -106,8 +106,8 @@ class HomeTimeline extends React.Component {
 								  filter: this.state.value, 
 								  key: 'homeTimelineComp', 
 							 	  timelineType: 'Home', 
-								  buttonFunc: () => {this.handleGetHomeTimeline()}, 
-								  filterButtonFunc: () => {this.handleGetFilterTimeline(this.state.value)}, 
+								  buttonFunction: () => {this.handleGetHomeTimeline()}, 
+								  filterbuttonFunction: () => {this.handleGetFilterTimeline(this.state.value)}, 
 								  resultClass: this.homeTimelineResultClass(), 
 								  resultOutput: this.homeTimelineResultOutput()})
 	}
@@ -122,7 +122,6 @@ class ReplyTweetModal extends React.Component {
 	      isReplyTweetError: null
 	    };
 	    this.handleChange = this.handleChange.bind(this);
-	    this.handleKeyPress = this.handleKeyPress.bind(this);
 	    this.handleReplyTweet = this.handleReplyTweet.bind(this);
 	    this.replyTweetResultOutput = this.replyTweetResultOutput.bind(this);
 	    this.replyTweetResultClass = this.replyTweetResultClass.bind(this);
@@ -155,12 +154,6 @@ class ReplyTweetModal extends React.Component {
 		return renderTweetObj(tweetObj, 0, true);
 	}
 
-	handleKeyPress(event) {
-		if(event.key == 'Enter' && this.state.value != ' ') {
-			{this.handleReplyTweet(this.state.value, this.props.replyTweetId);}			
-		}
-	}
-
 	handleClickOutside(event) {
 		if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
 			this.props.onCloseFunc;
@@ -180,14 +173,14 @@ class ReplyTweetModal extends React.Component {
 	}
 
 	replyTweetResultClass() {
-		if(this.state.isPostTweetError) {
-			return "errorReply";
+		if(this.state.isReplyTweetError) {
+			return "feedback error reply";
 		}
 		else if(_.isNull(this.state.replyTweetMessage) && _.isNull(this.state.isReplyTweetError)) {
-			return "pending";
+			return "feedback pending reply";
 		}
 		else {
-			return "successReplyTweet";
+			return "feedback success reply";
 		}
 	}
 
@@ -200,12 +193,11 @@ class ReplyTweetModal extends React.Component {
 							  className: 'replyTweetModal',
 							  key: 'replyTweetModal'}, [
 					e('div', {className: 'inReplyToTweet', key: 'inReplyToTweet'}, this.renderingInReplyToTweet(this.props.tweetObject)),
-					e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
-									   onChangeButton: this.handleChange,
+					e(TweetComponent, {onChangeButton: this.handleChange,
 									   tweet: this.state.value,
 									   key: 'replyTweetComp',
 									   resultClass: this.replyTweetResultClass(),
-									   buttonFunc: () => this.handleReplyTweet(this.state.value, this.props.replyTweetId),
+									   buttonFunction: () => this.handleReplyTweet(this.state.value, this.props.replyTweetId),
 									   resultMessage: this.replyTweetResultOutput(),
 									   buttonTxt: 'Reply',
 									   container: 'replyTweetContainer',
@@ -260,7 +252,6 @@ class PostTweet extends React.Component {
 			value: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
-		this.handleKeyPress = this.handleKeyPress.bind(this);
 		this.handlePostTweet = this.handlePostTweet.bind(this);
 		this.postTweetResultClass = this.postTweetResultClass.bind(this);
 		this.postTweetResultOutput = this.postTweetResultOutput.bind(this);
@@ -288,12 +279,6 @@ class PostTweet extends React.Component {
 						  })
 	}
 
-	handleKeyPress(event) {
-		if(event.key == 'Enter' && this.state.value != ' ') {
-			{this.handlePostTweet(this.state.value);}			
-		}
-	}
-
 	postTweetResultOutput() {
 		if(this.state.isPostTweetError) {
 			return "There was problem on the server side, please try again later.";
@@ -308,25 +293,24 @@ class PostTweet extends React.Component {
 
 	postTweetResultClass() {
 		if(this.state.isPostTweetError) {
-			return "errorPost";
+			return "feedback error post";
 		}
 		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.isPostTweetError)) {
-			return "pending";
+			return "feedback pending post";
 		}
 		else {
-			return "successPostTweet";
+			return "feedback success post";
 		}
 	}
 
 	render() {
 		{this.postTweetResultOutput()}
 		{this.postTweetResultClass()}
-		return e(TweetComponent, {onKeyPressButton: this.handleKeyPress,
-								  onChangeButton: this.handleChange,
+		return e(TweetComponent, {onChangeButton: this.handleChange,
 								  tweet: this.state.value,
 								  key: 'postTweetComp',
 								  resultClass: this.postTweetResultClass(),
-								  buttonFunc: () => this.handlePostTweet(this.state.value),
+								  buttonFunction: () => this.handlePostTweet(this.state.value),
 								  resultMessage: this.postTweetResultOutput(),
 								  buttonTxt: 'Post Tweet',
 								  header: 'Post Tweet',
@@ -397,7 +381,7 @@ class UserTimeline extends React.Component {
 		{this.userTimelineResultOutput()};
 		return e(TimelineComponent, {key: 'userTimelineComp', 
 							 	  timelineType: 'User', 
-								  buttonFunc: () => {this.handleGetUserTimeline()}, 
+								  buttonFunction: () => {this.handleGetUserTimeline()}, 
 							 	  resultClass: this.userTimelineResultClass(), 
 							 	  resultOutput: this.userTimelineResultOutput()});	
 	}
