@@ -1,5 +1,5 @@
 import React from 'react';
-
+import _ from 'lodash';
 const e = React.createElement;
 
 class TimelineResultComponent extends React.Component {
@@ -36,14 +36,55 @@ class User extends React.Component {
 			]);
 	}
 }
+
+class Feedback extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+		}
+		this.handleFeedbackMsg = this.handleFeedbackMsg.bind(this);
+		this.handleFeedbackClass = this.handleFeedbackClass.bind(this);
+	}
+
+	handleFeedbackMsg() {
+		if(this.props.isError) {
+				return "There was problem on the server side, please try again later.";
+		}
+		else if (_.isNull(this.props.msg) && _.isNull(this.props.isError)) {
+				return "";
+			
+		}
+		else {
+				return "Tweet (" + this.props.msg + ") was successfully posted";
+		}
+	}
+
+	handleFeedbackClass() {
+		if(this.props.isError) {
+				return "error " + this.props.TweetType;
+		}
+		else if (_.isNull(this.props.msg) && _.isNull(this.props.isError)) {
+				return "pending " + this.props.TweetType;
+		}
+		else {
+				return "success " + this.props.TweetType;
+		}
+	}
+
+	render() {
+		return e('div', {className: this.handleFeedbackClass(), id: 'feedBack'}, this.handleFeedbackMsg());
+		
+	}
+}
+
 class TweetComponent extends React.Component {
 	render() {
 		return e('div', {className: 'TweetContainer ' + this.props.container, key: 'TweetCont'},
 					[e('h2', {className: 'header', key: 'tweetHeader'}, this.props.header),
 					 e(TweetInput, {autoFocus: this.props.autofocus, className: 'tweetInput', key: "tweetInput", onEnter: this.props.onKeyPressButton, onChangeValue: this.props.onChangeButton, inputValue: this.props.tweet}),
 					 e(ButtonComponent, {disabledButton: !this.props.tweet, className: 'tweetButton', key: 'postTweetButt', onClickFunc: this.props.buttonFunction, buttonText: this.props.buttonTxt}),
-					 e('div', {className: this.props.resultClass, id: 'feedbackMessage', key: 'feedbackMessage'}, this.props.resultMessage),
-					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length)
+					 e('div', {key: 'tweetCharacterCount', id: 'charCount'}, this.props.tweet.length),
+					 e(Feedback, {msg: this.props.msg, isError: this.props.isError, TweetType: this.props.TweetType})
 					]);
 	}	
 }
@@ -67,4 +108,4 @@ class TimelineComponent extends React.Component {
 					
 }
 
-export{TimelineResultComponent, ButtonComponent, User, TweetComponent, TimelineComponent, TweetInput, InputBox};
+export{TimelineResultComponent, ButtonComponent, User, TweetComponent, TimelineComponent, TweetInput, InputBox, Feedback};

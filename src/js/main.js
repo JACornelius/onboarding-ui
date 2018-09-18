@@ -124,8 +124,6 @@ class ReplyTweetModal extends React.Component {
 	    };
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleReplyTweet = this.handleReplyTweet.bind(this);
-	    this.replyTweetResultOutput = this.replyTweetResultOutput.bind(this);
-	    this.replyTweetResultClass = this.replyTweetResultClass.bind(this);
 	    this.renderingInReplyToTweet = this.renderingInReplyToTweet.bind(this);
 	}
 
@@ -167,33 +165,7 @@ class ReplyTweetModal extends React.Component {
 		}
 	}
 
-	replyTweetResultOutput() {
-		if(this.state.isReplyTweetError) {
-			return "There was problem on the server side, please try again later.";
-		}
-		else if (_.isNull(this.state.replyTweetMessage) && _.isNull(this.state.isReplyTweetError)) {
-			return  "";
-		}
-		else {
-			return "Tweet (" + this.state.replyTweetMessage + ") was successfully posted";
-		}
-	}
-
-	replyTweetResultClass() {
-		if(this.state.isReplyTweetError) {
-			return "feedback error reply";
-		}
-		else if(_.isNull(this.state.replyTweetMessage) && _.isNull(this.state.isReplyTweetError)) {
-			return "feedback pending reply";
-		}
-		else {
-			return "feedback success reply";
-		}
-	}
-
 	render() {
-		{this.replyTweetResultClass()}
-		{this.replyTweetResultOutput()}
 		return e(ReactModal, {isOpen: this.props.showMod, 
 							  shouldCloseOnOverlayClick: true,
 							  onRequestClose: this.props.onCloseFunc,
@@ -203,14 +175,14 @@ class ReplyTweetModal extends React.Component {
 					e(TweetComponent, {onChangeButton: this.handleChange,
 									   tweet: this.state.value,
 									   key: 'replyTweetComp',
-									   resultClass: this.replyTweetResultClass(),
 									   buttonFunction: () => this.handleReplyTweet(this.state.value, this.props.replyTweetId),
-									   resultMessage: this.replyTweetResultOutput(),
 									   buttonTxt: 'Reply',
 									   container: 'replyTweetContainer',
-									   autofocus: this.state.focus
+									   autofocus: this.state.focus,
+									   msg: this.state.replyTweetMessage, 
+									   isError: this.state.isReplyTweetError, 
+									   TweetType: 'reply'
 									  })
-					
 					]);
 		
 	}
@@ -261,8 +233,6 @@ class PostTweet extends React.Component {
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handlePostTweet = this.handlePostTweet.bind(this);
-		this.postTweetResultClass = this.postTweetResultClass.bind(this);
-		this.postTweetResultOutput = this.postTweetResultOutput.bind(this);
 	}
 
 	handleChange(event) {
@@ -287,42 +257,17 @@ class PostTweet extends React.Component {
 						  })
 	}
 
-	postTweetResultOutput() {
-		if(this.state.isPostTweetError) {
-			return "There was problem on the server side, please try again later.";
-		}
-		else if (_.isNull(this.state.postTweetMessage) && _.isNull(this.state.isPostTweetError)) {
-			return  "";
-		}
-		else {
-			return "Tweet (" + this.state.postTweetMessage + ") was successfully posted";
-		}
-	}
-
-	postTweetResultClass() {
-		if(this.state.isPostTweetError) {
-			return "feedback error post";
-		}
-		else if(_.isNull(this.state.postTweetMessage) && _.isNull(this.state.isPostTweetError)) {
-			return "feedback pending post";
-		}
-		else {
-			return "feedback success post";
-		}
-	}
-
 	render() {
-		{this.postTweetResultOutput()}
-		{this.postTweetResultClass()}
 		return e(TweetComponent, {onChangeButton: this.handleChange,
 								  tweet: this.state.value,
 								  key: 'postTweetComp',
-								  resultClass: this.postTweetResultClass(),
 								  buttonFunction: () => this.handlePostTweet(this.state.value),
-								  resultMessage: this.postTweetResultOutput(),
 								  buttonTxt: 'Post Tweet',
 								  header: 'Post Tweet',
-								  container: 'postTweetContainer'});
+								  container: 'postTweetContainer',
+								  msg: this.state.postTweetMessage, 
+								  isError: this.state.isPostTweetError, 
+								  TweetType: 'post'});
 	}
 }
 
