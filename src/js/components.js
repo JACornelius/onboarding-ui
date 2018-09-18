@@ -52,7 +52,6 @@ class Feedback extends React.Component {
 		}
 		else if (_.isNull(this.props.msg) && _.isNull(this.props.isError)) {
 				return "";
-			
 		}
 		else {
 				return "Tweet (" + this.props.msg + ") was successfully posted";
@@ -73,7 +72,6 @@ class Feedback extends React.Component {
 
 	render() {
 		return e('div', {className: this.handleFeedbackClass(), id: 'feedBack'}, this.handleFeedbackMsg());
-		
 	}
 }
 
@@ -88,6 +86,7 @@ class TweetComponent extends React.Component {
 					]);
 	}	
 }
+
 class TimelineComponent extends React.Component {
 	render() {
 		if(this.props.timelineType == 'User') {
