@@ -1,12 +1,12 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import {TweetComponent, TweetInput, ButtonComponent} from '../src/js/components';
+import {TweetComponent, TweetInput, ButtonComponent, Feedback} from '../src/js/components';
 
 describe("TweetComponent", () => {
 	let wrapper;
 	const e = React.createElement;
 	beforeEach(function() {
-		wrapper = mount(e(TweetComponent, {resultMessage: "test result msg", tweet: "testTweet"}));
+		wrapper = mount(e(TweetComponent, {tweet: "testTweet"}));
 	});
 
 	it("creates a header saying 'Post Tweet'", function() {
@@ -26,7 +26,7 @@ describe("TweetComponent", () => {
 
 	it("has feedback message", function() {
 		expect(wrapper.containsMatchingElement(
-			e('div', {id: 'feedbackMessage', key: 'feedbackMessage'}, "test result msg"))).toEqual(true);
+			e(Feedback))).toEqual(true);
 	});
 
 	it("has tweet char count", function() {
