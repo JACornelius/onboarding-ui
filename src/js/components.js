@@ -42,36 +42,30 @@ class Feedback extends React.Component {
 		super(props);
 		this.state = {
 		}
-		this.handleFeedbackMsg = this.handleFeedbackMsg.bind(this);
-		this.handleFeedbackClass = this.handleFeedbackClass.bind(this);
+		this.handleFeedback = this.handleFeedback.bind(this);
 	}
 
-	handleFeedbackMsg() {
+	handleFeedback() {
+		let feedback = {}; 
 		if(this.props.isError) {
-				return "There was problem on the server side, please try again later.";
+				feedback.message  = "There was problem on the server side, please try again later.";
+				feedback.class = "error " + this.props.TweetType;
 		}
 		else if (_.isNull(this.props.msg) && _.isNull(this.props.isError)) {
-				return "";
+				feedback.message = "";
+				feedback.class = "pending " + this.props.TweetType;
 		}
 		else {
-				return "Tweet (" + this.props.msg + ") was successfully posted";
+				feedback.message = "Tweet (" + this.props.msg + ") was successfully posted";
+				feedback.class = "success " + this.props.TweetType;
 		}
+		return feedback;
 	}
 
-	handleFeedbackClass() {
-		if(this.props.isError) {
-				return "error " + this.props.TweetType;
-		}
-		else if (_.isNull(this.props.msg) && _.isNull(this.props.isError)) {
-				return "pending " + this.props.TweetType;
-		}
-		else {
-				return "success " + this.props.TweetType;
-		}
-	}
+
 
 	render() {
-		return e('div', {className: this.handleFeedbackClass(), id: 'feedBack'}, this.handleFeedbackMsg());
+		return e('div', {className: this.handleFeedback().class, id: 'feedBack'}, this.handleFeedback().message);
 	}
 }
 
