@@ -1,11 +1,7 @@
 import React from 'react';
-import {shallow, mount, render} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {Timelines} from '../src/js/main.js';
-import {getHomeTimeline} from '../src/js/services';
-import {TimelineButton} from '../src/js/components';
+import {mount} from 'enzyme';
 import {TimelineResultComponent} from '../src/js/components';
-import {renderedTimeline} from '../src/js/services';
+import {renderedTimeline} from '../src/js/elements';
 
 describe("TimelineResultComponent", () => {
 	const e = React.createElement;
@@ -56,7 +52,7 @@ describe("TimelineResultComponent", () => {
 
 	it("contains all div components of the timeline table", function() {	
 		wrapper = mount(e(TimelineResultComponent, {timelineResult: renderedTimeline(mockHttpRespText)}));
-		expect(wrapper.find("div").length).toEqual(6);
+		expect(wrapper.find("div").length).toEqual(7);
 	});
 
 	it("contains userTimeline", function() {

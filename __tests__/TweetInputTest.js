@@ -1,6 +1,5 @@
 import React from 'react';
-import {shallow, mount, render} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
+import {mount} from 'enzyme';
 import {TweetInput} from '../src/js/components';
 
 describe("TweetInput", () => {

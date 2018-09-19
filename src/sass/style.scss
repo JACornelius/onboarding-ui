@@ -31,38 +31,47 @@
 	font-weight: bold;
 }
 
-.successPostTweet {
+.success {
 	color: green;
 }
 
-.errorPost {
+.error {
 	color: red;
 }
 
-.successPostTweet, .errorPost {
+.reply {
+	right: 50px;
 	position: absolute;
-	right: 80px;
 }
 
-.error, .emptyUserTimeline {
-	color: red;
+.post {
+	right: 90px;
+	position: absolute;
+}
+
+.emptyUserTimeline {
 	text-align: center;
 	padding: 10px 0px;
 	border-color: black;
 }
 
-#homeTimelineContainer {	
+#homeTimelineContainer {
+
 	.inputBox {
 		right: 45px;
-	}	
+	}
+
 	.filterButton {
 		right: 0px;
 	}
+
 	.inputBox, .filterButton, .homeTimelineButton {
 		position: absolute;
 		top: 60px;
 	}
+
 	#homeTimelinePlaceholder {
+
 		.tweet {
 			@include alternatingColors(#e8f5fd, #e9e9e9)
 		}
@@ -70,17 +79,13 @@
 }
 
 #userTimelineContainer {
+
 	#userTimelinePlaceholder {
+
 		.tweet {
 			@include alternatingColors(#f5f8fa, #1da1f2)
 		}
 	}
-}
-
-.tweetInput {
-	@include size(200px, 1000px);
-	resize: none;
-	position: relative;
 }
 
 .userTimelineButton, .homeTimelineButton {
@@ -97,7 +102,33 @@ button:hover {
 	display: block;
 }
 
+.replyButton {
+	float: right;
+}
+
+#replyButton{
+	background-color: Transparent;
+	outline: none;
+	border-width: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+
+.replyTweetModal {
+	position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    width: 35%;
+    text-align: center;
+}
+
 .react-tabs {
+
 	&__tab-list {
 		margin: auto;
 		width: 95%;
@@ -115,9 +146,11 @@ button:hover {
 		list-style: none;
 		padding: 6px 12px;
 		cursor: pointer;
+
 		&:hover {
 			background-color: white;
 		}
+
 		&--selected {
 			background: maroon;
 			color: black;
@@ -131,33 +164,78 @@ button:hover {
 		}
 	}
 }
-#postTweetContainer {
-	@include containerSizing()
-	.postTweetButton {
+
+.postTweetContainer {
+	width: 40%;
+	height: 300px;
+	.tweetButton {
+		right: 6px;
+	}
+}
+
+.replyTweetContainer {
+	width: 85%;
+	height: 250px;
+
+	.tweetButton {
+		right: 0px;
+		cursor: pointer;
+	}
+}
+
+.TweetContainer {
+	margin: auto;
+	position: relative;
+	
+	.tweetInput {
+		resize: none;
+		position: relative;
+		@include size(200px, 98.5%)
+	}
+
+	.tweetButton {
 		position: absolute;
-		right: -8px;
+		bottom: -20px;
 	}
 	#charCount {
 		position: absolute;
-		right: 5px;
-		top: 273px;
+		right: 10px;
+		bottom: 5px;
 	}
 }
 
 #homeTimelineContainer, #userTimelineContainer {
 	@include containerSizing()
+
 	#homeTimelinePlaceholder, #userTimelinePlaceholder {
 		margin-top: 10px;
 		width: 100%;
+
 		border: {
 			style: solid;
 			width: 1px;
 		}
 
-		.tweet {
+		
+	}
+}	
+
+.inReplyToTweet {
+	margin-bottom: 20px;
+	.tweet {
+		border-bottom-color: white;
+		button {
+			display: none;
+		}
+	}
+	
+}
+
+.tweet {
 			padding: 10px 0px;
 			height: 110px;
 			border-bottom: 1px solid lightgrey;
+
 			.rightColumn {
 				padding-top: 30px;
 				@include size(60px, 70%);
@@ -171,6 +249,7 @@ button:hover {
 					font-style: italic;
 				}	
 			}
+
 			.user {
 				padding: 10px 0px 0px 10px;
 				@include size(100px, 25%);
@@ -196,11 +275,7 @@ button:hover {
 					@include text(12px);
 				}
 			}
-		}
-	}
-}	
-
-	
+		}	
 
 
 
